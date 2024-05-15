@@ -2,17 +2,19 @@
     <div class="loginBox">
         <img src="../../../../assets/images/logo.png" alt="logo" class="logoImage">
         <div class="loginForm">
-            <div class="formInput" style="margin-top:0">
-                <label for="userID">User ID</label><br>
-                <input type="text" id="userID" name="userID"><br>
-            </div>
-            <div class="formInput">
-                <label for="password">Password</label><br>
-                <input type="password" id="password" name="password">
-            </div>
-            <div class="formInput formButton">
-                <input type="button" value="Login">
-            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <span class="p-float-label" style="margin-top:5%">
+                    <input pInputText id="userName" formControlName="userName" type="text"/>
+                    <label for="userID">User name</label>
+                </span>
+                <span class="p-float-label formInputCombo" style="margin-bottom: 15%;">
+                    <input pInputText id="password" formControlName="password" type="password"/>
+                    <label for="password">Password</label>
+                </span>
+                <div class="formInput formButton">
+                    <p-button pRipple label="Login" class="loginButton" type="submit" [disabled]="!loginForm.valid"></p-button>
+                </div>
+            </form>
         </div>
     </div>
 </body>

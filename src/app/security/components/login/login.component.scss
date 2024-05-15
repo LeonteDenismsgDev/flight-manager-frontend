@@ -1,10 +1,13 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
 body{
     margin:0;
     position:relative;
     height:100%;
     background: hsla(259, 66%, 31%, 1);
 
-    background: linear-gradient(135deg, hsla(259, 66%, 31%, 1) 0%, hsla(193, 58%, 61%, 1) 100%);
+    background: linear-gradient(135deg, #3c1b83 0%, #62bcd5 100%);
     background: -moz-linear-gradient(135deg, hsla(259, 66%, 31%, 1) 0%, hsla(193, 58%, 61%, 1) 100%);
     background: -webkit-linear-gradient(135deg, hsla(259, 66%, 31%, 1) 0%, hsla(193, 58%, 61%, 1) 100%);
 }
@@ -12,7 +15,7 @@ body{
 .loginBox{
     font-family: 'Roboto';
     width: 23%;
-    height: 30%;
+    height: 35%;
     background-color: white;
     /*Center it*/   
     position:absolute;
@@ -26,7 +29,7 @@ body{
 }
 
 .formInput{
-    margin:10% 0;
+    height:30px;
 }
 
 .logoImage{
@@ -40,6 +43,21 @@ body{
 
 .formButton{
     text-align: center;
-    background-color: white;
-    font-size:inherit
+    font-size:inherit;
+}
+
+.formInputCombo{
+    margin:15% 0;
+}
+
+::ng-deep{
+    .p-button{
+        background-color: #62bcd5;
+        border-color: #62bcd5;
+        width:50%;
+    }
+    .p-button:hover{
+        background-color: #3c1b83;
+        border-color: #3c1b83;
+    }
 }
