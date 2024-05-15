@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule} from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './home/components/home-page/home-page.component';
 import { LoginComponent } from './security/components/login/login.component';
-import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
 import { SecurityModule } from './security/security.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Interceptor } from './util/interceptor';
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 const appRoutes: Routes = [
   {path: 'home',component:HomePageComponent},
@@ -24,9 +26,13 @@ const appRoutes: Routes = [
     BrowserModule,
     AppRoutingModule,
     RouterModule.forRoot(appRoutes, {enableTracing:true}),
-    SecurityModule
+    SecurityModule,
+    BrowserAnimationsModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true},
+    MessageService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
