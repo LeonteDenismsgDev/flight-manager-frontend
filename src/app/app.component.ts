@@ -14,6 +14,9 @@ export class AppComponent  implements OnInit{
     if(!localStorage.getItem('token')){
       this.router.navigate(['/login'])
     }
+    else{
+      this.router.navigate(['/home'])
+    }
   }
   title = 'manager-frontend';
 }
