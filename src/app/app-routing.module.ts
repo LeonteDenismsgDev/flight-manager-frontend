@@ -7,6 +7,10 @@ const routes: Routes = [
     loadChildren:()=>import('../app/home/home.module').then(m=>m.HomeModule)
   },
   {
+    path:'login',
+    loadChildren:()=>import('../app/security/security.module').then(m=>m.SecurityModule)
+  },
+  {
     path:'',
     redirectTo:'home',
     pathMatch:'full'
