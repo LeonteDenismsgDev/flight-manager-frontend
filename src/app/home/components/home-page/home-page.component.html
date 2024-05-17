@@ -1,9 +1,21 @@
-<h1>Flight Manager</h1>
-<a routerLink="/home/users" routerLinkActive="active">Users</a>
-<a routerLink="/home/flights" routerLinkActive="active">Flights</a>
-<a routerLink="/home/planes" routerLinkActive="active">Planes</a>
-<a routerLink="/home/airports" routerLinkActive="active">Airports</a>
-<a routerLink="/home/itineraries" routerLinkActive="active">Itineraries</a>
-<a routerLink="/home/employees" routerLinkActive="active">Employees</a>
-<a routerLink="/home/companies" routerLinkActive="active">Companies</a>
+<p-tabMenu [model]="items" class="no-border">
+    <ng-template pTemplate="item" let-item>
+        <ng-container *ngIf="item.route; else elseBlock">
+            <a [routerLink]="item.route" class="p-menuitem-link">
+                <mat-icon aria-hidden="false" [fontIcon]=item.icon></mat-icon>
+                <span class="ml-2 def-font">
+                    {{ item.label }}
+                </span>
+            </a>
+        </ng-container>
+        <ng-template #elseBlock>
+            <a [href]="item.url" class="p-menuitem-link">
+                <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>
+                <span class="ml-2">
+                    {{ item.label }}
+                </span>
+            </a>
+        </ng-template>
+    </ng-template>
+</p-tabMenu>
 <router-outlet></router-outlet>
