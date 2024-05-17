@@ -8,7 +8,7 @@ import { LoginResponse } from '../models/login-response';
   providedIn: 'root'
 })
 export class LoginService {
-  url:string=environment.apiUrl+'login';
+  url:string=environment.apiUrl+'auth/login';
   constructor(public httpClient:HttpClient) { }
 
   login(loginRequest: LoginRequest){
