@@ -5,7 +5,7 @@ import { MenuItem } from 'primeng/api';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit{
   items: MenuItem[] | undefined;
@@ -23,5 +23,10 @@ export class HomePageComponent implements OnInit{
       { label: 'Employees', icon: 'transfer_within_a_station', route: '/home/employees' },
       { label: 'Companies', icon: 'ssid_chart', route: '/home/companies' }
     ]
+  }
+
+  logout(){
+    localStorage.clear();
+    this.router.navigate(['/login']);
   }
 }

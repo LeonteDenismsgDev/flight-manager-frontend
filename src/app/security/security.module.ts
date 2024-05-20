@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast' 
 import { MessageService } from 'primeng/api';
+import { CardModule } from 'primeng/card';
 import { SecurityRoutingModule } from './security-routing.module';
 
 @NgModule({
@@ -22,7 +23,8 @@ import { SecurityRoutingModule } from './security-routing.module';
     InputTextModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastModule
+    ToastModule,
+    CardModule
   ],
   providers:[
   ]

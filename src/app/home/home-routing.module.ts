@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { SecurityModule } from './../security/security.module';
 
 const routes: Routes = [
   {
@@ -45,6 +46,10 @@ const routes: Routes = [
         loadChildren:()=>import('./../company/company.module').then(m=>m.CompanyModule)
       }
     ]
+  },
+  {
+    path:'login',
+    loadChildren:()=>import('./../security/security.module').then(m=>SecurityModule)
   }
   //TODO: add login path here
 ];

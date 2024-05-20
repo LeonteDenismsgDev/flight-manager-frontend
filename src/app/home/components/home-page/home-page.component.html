@@ -1,3 +1,10 @@
+<header class="header">
+    <img src="./../../../../assets/images/logo.png" alt="Logo" class = "headerLogoImage">
+    <div class="loginBtns">
+            <p-button label="Logout" size="small" (onClick)="logout()"/>
+            <p-button label="My account" size="small"/>
+    </div>
+</header>
 <p-tabMenu [model]="items" class="no-border">
     <ng-template pTemplate="item" let-item>
         <ng-container *ngIf="item.route; else elseBlock">
