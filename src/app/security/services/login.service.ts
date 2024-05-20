@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environment';
 import { LoginRequest } from '../models/login-request';
@@ -12,6 +12,9 @@ export class LoginService {
   constructor(public httpClient:HttpClient) { }
 
   login(loginRequest: LoginRequest){
-    return this.httpClient.post<LoginResponse>(this.url,loginRequest);
+    const options={
+      headers: new HttpHeaders().append('Access-Control-Allow-Origin','*')
+    }
+    return this.httpClient.post<LoginResponse>(this.url,loginRequest,options);
   }
 }
