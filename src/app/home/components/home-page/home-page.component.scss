@@ -17,6 +17,12 @@
     position: absolute;
     top:0;
     left:0;
+    
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor:default;
+    pointer-events: none; 
 }
 
 .loginBtns{
