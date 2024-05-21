@@ -1,6 +1,6 @@
 export enum Role {
-    cr='CrewMember',
-    fm='FlightManager',
-    cm='CompanyManager',
-    ad='Admin'
+    cr='CREW_ROLE',
+    fm='FLIGHT_MANAGER_ROLE',
+    cm='COMPANY_MANAGER_ROLE',
+    ad='ADMINISTRATOR_ROLE'
 }

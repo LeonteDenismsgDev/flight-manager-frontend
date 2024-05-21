@@ -10,7 +10,7 @@ export class Interceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>,next:HttpHandler): Observable<HttpEvent<any>>{
         return next.handle(request).pipe(
             catchError((error:HttpErrorResponse)=>{
-                this.messageService.add({severity:'error',summary:'Error',detail:'Contact your admin',sticky:true});
+                this.messageService.add({severity:'error',summary:error.name,detail:error.error,life:10000});
                 return throwError(error);
             })
         );
