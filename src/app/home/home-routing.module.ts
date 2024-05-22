@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { SecurityModule } from './../security/security.module';
+import { masterGuard } from '../util/guards/master.guard';
+import { Role } from '../user/models/role';
 
 const routes: Routes = [
   {
@@ -19,31 +21,45 @@ const routes: Routes = [
       },
       {
         path:'users',
-        loadChildren:()=>import('./../user/user.module').then(m=>m.UserModule)
+        loadChildren:()=>import('./../user/user.module').then(m=>m.UserModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad]}
       },
       {
         path:'flights',
-        loadChildren:()=>import('./../flight/flight.module').then(m=>m.FlightModule)
+        loadChildren:()=>import('./../flight/flight.module').then(m=>m.FlightModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad, Role.fm]}
       },
       {
         path:'planes',
-        loadChildren:()=>import('./../plane/plane.module').then(m=>m.PlaneModule)
+        loadChildren:()=>import('./../plane/plane.module').then(m=>m.PlaneModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad,Role.cm]}
       },
       {
         path:'airports',
-        loadChildren:()=>import('./../airport/airport.module').then(m=>m.AirportModule)
+        loadChildren:()=>import('./../airport/airport.module').then(m=>m.AirportModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad,Role.cm]}
       },
       {
         path:'itineraries',
-        loadChildren:()=>import('./../itinerary/itinerary.module').then(m=>m.ItineraryModule)
+        loadChildren:()=>import('./../itinerary/itinerary.module').then(m=>m.ItineraryModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad, Role.cm]}
       },
       {
         path:'employees',
-        loadChildren:()=>import('./../employee/employee.module').then(m=>m.EmployeeModule)
+        loadChildren:()=>import('./../employee/employee.module').then(m=>m.EmployeeModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad,Role.cm]}
       },
       {
         path:'companies',
-        loadChildren:()=>import('./../company/company.module').then(m=>m.CompanyModule)
+        loadChildren:()=>import('./../company/company.module').then(m=>m.CompanyModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad]}
       }
     ]
   },
