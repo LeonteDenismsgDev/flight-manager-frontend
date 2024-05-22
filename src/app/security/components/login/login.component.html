@@ -1,0 +1,20 @@
+<body>
+    <p-card class="loginBox">
+        <img src="../../../../assets/images/logo.png" alt="logo" class="logoImage">
+        <div class="loginForm">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <span class="p-float-label" style="margin-top:10%">
+                    <input pInputText id="userName" formControlName="userName" type="text"/>
+                    <label for="userID">User name</label>
+                </span>
+                <span class="p-float-label formInputCombo" style="margin-bottom: 10%;">
+                    <input pInputText id="password" formControlName="password" type="password"/>
+                    <label for="password">Password</label>
+                </span>
+                <div class="formInput formButton">
+                    <p-button pRipple label="Login" class="loginButton" type="submit" [disabled]="!loginForm.valid"></p-button>
+                </div>
+            </form>
+        </div>
+    </p-card>
+</body>

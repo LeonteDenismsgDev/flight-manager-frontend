@@ -1,16 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AirportPageComponent } from './components/airport-page/airport-page.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {
     path:'',
-    component:AirportPageComponent
+    component:LoginComponent
   }
 ];
 
+//for commit
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AirportRoutingModule { }
+export class SecurityRoutingModule { }

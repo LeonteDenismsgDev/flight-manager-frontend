@@ -11,8 +11,11 @@ export class AppComponent  implements OnInit{
     
   }
   ngOnInit(){
-    if(!localStorage.getItem('token')){
+    if(localStorage.getItem('token')){
       this.router.navigate(['/home'])
+    }
+    else{
+      this.router.navigate(['/login'])
     }
   }
   title = 'manager-frontend';

@@ -1,0 +1,50 @@
+.def-font{
+    font-family: 'Roboto';
+}
+
+.p-tabmenu-nav .p-reset{
+    border-bottom: 0!important;
+    border-width: 0 0 0 0 !important;
+}
+.header{
+    height:50px;
+    width: 100vw;
+    position: relative;
+}
+
+.headerLogoImage{
+    max-height: fit-content;
+    position: absolute;
+    top:0;
+    left:0;
+    
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor:default;
+    pointer-events: none; 
+}
+
+.loginBtns{
+    height:50px;
+    top:0;
+    right:0;
+    position:absolute;
+}
+
+.loginBtns p-button{
+    margin-right:10px;
+    margin-top:50px;
+}
+
+::ng-deep{
+    .p-button{
+        margin-top:5px;
+        background-color: #62bcd5;
+        border-color: #62bcd5;
+    }
+    .p-button:hover{
+        background-color: #3c1b83;
+        border-color: #3c1b83;
+    }
+}

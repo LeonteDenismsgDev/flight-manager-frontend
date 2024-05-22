@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
+import { EmployeePageComponent } from './components/employee-page/employee-page.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [EmployeePageComponent],
   imports: [
     CommonModule,
     EmployeeRoutingModule
