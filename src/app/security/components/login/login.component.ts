@@ -36,10 +36,10 @@ onLogin(){
   this.service.login(loginRequest).subscribe((loginResponse:LoginResponse) =>{
     //check if token is null or blank
     if(!!loginResponse.token?.trim()){
-      sessionStorage.setItem("token",loginResponse.token);
-      sessionStorage.setItem("username",loginResponse.username);
-      sessionStorage.setItem("role",loginResponse.role);
-      this.messageService.add({severity:'success',summary:'Logged in',detail:'Log in successfull'})
+      localStorage.setItem("token",loginResponse.token);
+      localStorage.setItem("username",loginResponse.username);
+      localStorage.setItem("role",loginResponse.role);
+      this.messageService.add({severity:'success',summary:'Logged in',detail:'Log in successfull', life:1000})
       this.router.navigate(['/home']);
     }
   })

@@ -2,27 +2,29 @@
     <img src="./../../../../assets/images/logo.png" alt="Logo" class = "headerLogoImage">
     <div class="loginBtns">
             <p-button label="Logout" size="small" (onClick)="logout()"/>
-            <p-button label="My account" size="small"/>
+            <p-button label="My account" size="small" (onClick)="myAccount()"/>
     </div>
 </header>
 <p-tabMenu [model]="items" class="no-border">
     <ng-template pTemplate="item" let-item>
-        <ng-container *ngIf="item.route; else elseBlock">
-            <a [routerLink]="item.route" class="p-menuitem-link">
-                <mat-icon aria-hidden="false" [fontIcon]=item.icon></mat-icon>
-                <span class="ml-2 def-font">
-                    {{ item.label }}
-                </span>
-            </a>
+        <ng-container *ngIf="item.hasAccess">
+            <ng-container *ngIf="item.route; else elseBlock">
+                <a [routerLink]="item.route" class="p-menuitem-link">
+                    <mat-icon aria-hidden="false" [fontIcon]=item.icon></mat-icon>
+                    <span class="ml-2 def-font">
+                        {{ item.label }}
+                    </span>
+                </a>
+            </ng-container>
+            <ng-template #elseBlock>
+                <a [href]="item.url" class="p-menuitem-link">
+                    <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>
+                    <span class="ml-2">
+                        {{ item.label }}
+                    </span>
+                </a>
+            </ng-template>
         </ng-container>
-        <ng-template #elseBlock>
-            <a [href]="item.url" class="p-menuitem-link">
-                <mat-icon aria-hidden="false" fontIcon="home"></mat-icon>
-                <span class="ml-2">
-                    {{ item.label }}
-                </span>
-            </a>
-        </ng-template>
     </ng-template>
 </p-tabMenu>
 <router-outlet></router-outlet>
