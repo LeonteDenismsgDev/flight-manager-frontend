@@ -25,7 +25,6 @@ export class HomePageComponent implements OnInit{
   }
 
   ngOnInit(){
-    //this is SICK!!!
     this.items = [
       { label: 'Home', icon:'home',route:'/home', hasAccess:this.determineAccess([Role.ad,Role.cm,Role.fm,Role.cr])},
       { label: 'Users', icon: 'people_alt', route: '/home/users',hasAccess:this.determineAccess([Role.ad]) },
@@ -41,7 +40,7 @@ export class HomePageComponent implements OnInit{
   }
 
   logout(){
-    sessionStorage.clear();
+    localStorage.clear();
     this.router.navigate(['/login']);
   }
 

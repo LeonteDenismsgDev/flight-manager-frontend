@@ -54,16 +54,16 @@ body{
 }
 
 ::ng-deep{
-    .p-button{
+    .loginButton{
         background-color: #62bcd5;
         border-color: #62bcd5;
-        width:50%;
+        width: 50%;
     }
-    .p-button:hover{
+    .loginButton:hover{
         background-color: #3c1b83;
         border-color: #3c1b83;
     }
-    .p-inputtext{
+    .loginInput{
         width:100%;
     }
 }
