@@ -4,16 +4,24 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { CardModule } from 'primeng/card';
+import { MenuModule } from 'primeng/menu';
+import { GeneralComponent } from './components/settings/general/general.component';
+import { SecurityComponent } from './components/settings/security/security.component';
 
 
 @NgModule({
   declarations: [
     UserPageComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    GeneralComponent,
+    SecurityComponent,
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    CardModule,
+    MenuModule
   ]
 })
 export class UserModule { }
