@@ -27,6 +27,7 @@ export class SecurityComponent implements OnInit{
   ngOnInit(){
     this.userService.getUserData(new UserDataRequest(this.username)).subscribe((userDataResponse:UserDataResponse)=>{
       this.role = userDataResponse.role;
+      localStorage.setItem("role",this.role);
       this.company = userDataResponse.company;
     }); 
   }
