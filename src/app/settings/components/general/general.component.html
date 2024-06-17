@@ -15,10 +15,10 @@
             <input type="text" [(ngModel)]="address" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
         </div>
         <div *ngIf="contactData">
-            <div *ngFor="let pair of contactData">
+            <div *ngFor="let pair of this.contactData">
                 <div class="userDetail">
                     <p>{{pair.key[0].toLocaleUpperCase() + pair.key.slice(1)}}</p>
-                    <input type="text" [(ngModel)]="pair.value"[disabled]="!editMode" (input)="refreshSaveState()" pInputText />
+                    <input type="text" [(ngModel)]="pair.value" [disabled]="!editMode" (input)="refreshSaveState()" pInputText />
                     <div *ngIf="pair.key != 'email' && editMode">
                         <button pButton  icon="pi pi-trash" class = "deleteButt" (click)="deleteContactData(pair.key)"></button>
                     </div>
