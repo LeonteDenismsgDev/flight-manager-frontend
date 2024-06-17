@@ -10,6 +10,6 @@ import { environment } from "environment";
     constructor(private http:HttpClient){}
 
     resetPasswordRequest(newPassword:string, username:string){
-     this.http.put<string>(environment.apiUrl+"/user/password/update",new UpdatePasswordRequest(username, newPassword));   
+      return this.http.put<string>(environment.apiUrl+"user/password/update",new UpdatePasswordRequest(username, newPassword));   
     }
   }

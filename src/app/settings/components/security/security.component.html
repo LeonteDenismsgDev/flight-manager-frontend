@@ -26,11 +26,11 @@
             </div>
             <div class="updatePasswordField">
                 <p>New password</p>
-                <input pInputText [(ngModel)]="passwordFormPassword" (input)="refreshRegex()">
+                <input pInputText [(ngModel)]="passwordFormPassword" (input)="refreshRegex()" type="password">
             </div>
             <div class="updatePasswordField">
                 <p>Repeat new <br>password</p>
-                <input pInputText [(ngModel)]="passwordFormRPassword" (input)="refreshRegex()">
+                <input pInputText [(ngModel)]="passwordFormRPassword" (input)="refreshRegex()" type="password">
             </div>
             <div class="regex">
                 <p>Password must have at least 1 lowercase letter</p>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="updatePasswordBtns">
-            <button pButton [disabled]="passwordOK">Update</button>
+            <button pButton [disabled]="!passwordOK" (click)="changePassword()">Update</button>
         </div>
     </p-dialog>
 </div>
