@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { UpdatePasswordRequest } from "../models/UpdatePasswordRequest";
+import { UpdatePasswordRequest } from "../../user/models/UpdatePasswordRequest";
 import { environment } from "environment";
 
 @Injectable({

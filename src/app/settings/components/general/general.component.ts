@@ -3,8 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { EditUserRequest } from 'src/app/user/models/EditUserRequest';
 import { UserDataRequest } from 'src/app/user/models/UserDataRequest';
 import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
-import { EditModeService } from 'src/app/user/services/edit-mode.service';
-import { UserDataService } from 'src/app/user/services/user-data.service';
+import { EditModeService } from 'src/app/settings/services/edit-mode.service';
+import { UserDataService } from 'src/app/settings/services/user-data.service';
 
 @Component({
   selector: 'app-general',

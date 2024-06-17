@@ -12,11 +12,11 @@ export class UserDetailsComponent implements OnInit{
     this.menuItems = [
       {
         label:'User Informations',
-        route:'/home/users/details/settings/general'
+        route:'/home/settings/general'
       },
       {
         label:'Security',
-        route: '/home/users/details/settings/security'
+        route: '/home/settings/security'
       }
     ]
   }

@@ -9,6 +9,8 @@ export class SecurityComponent {
   role:string|null=localStorage.getItem("role");
   username:string|null=localStorage.getItem("username");
   company:string="";
+  passwordOK:boolean = false;
+  mainRegex= new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).+$');
 
   passwordFormUsername:string="";
   passwordFormPassword:string="";
@@ -18,5 +20,14 @@ export class SecurityComponent {
 
   beginPasswordChange(){
     this.passwordChangeRequested = true;
+    this.passwordFormUsername="";
+    this.passwordFormPassword="";
+    this.passwordFormRPassword="";
+  }
+
+  refreshRegex(){
+    if(!this.mainRegex.test(this.passwordFormPassword)) return;
+    if(this.passwordFormPassword != this.passwordFormRPassword) return;
+    this.passwordOK = true;
   }
 }

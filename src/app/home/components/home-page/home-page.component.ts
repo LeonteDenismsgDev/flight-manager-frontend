@@ -48,6 +48,6 @@ export class HomePageComponent implements OnInit{
   }
 
   myAccount(){
-    
+    this.router.navigate(['/home/settings/general']);
   }
 }

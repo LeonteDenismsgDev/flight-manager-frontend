@@ -1,9 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environment';
-import { UserDataRequest } from '../models/UserDataRequest';
-import { UserDataResponse } from '../models/UserDataResponse';
-import { EditUserRequest } from '../models/EditUserRequest';
+import { UserDataRequest } from '../../user/models/UserDataRequest';
+import { UserDataResponse } from '../../user/models/UserDataResponse';
+import { EditUserRequest } from '../../user/models/EditUserRequest';
 
 @Injectable({
   providedIn: 'root'

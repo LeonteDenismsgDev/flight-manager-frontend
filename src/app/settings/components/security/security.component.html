@@ -22,19 +22,26 @@
         <div class="updatePasswordMain">
             <div class="updatePasswordField">
                 <p>Username</p>
-                <input pInputText [(ngModel)]="passwordFormUsername">
+                <input pInputText [(ngModel)]="passwordFormUsername" (input)="refreshRegex()">
             </div>
             <div class="updatePasswordField">
                 <p>New password</p>
-                <input pInputText [(ngModel)]="passwordFormPassword">
+                <input pInputText [(ngModel)]="passwordFormPassword" (input)="refreshRegex()">
             </div>
             <div class="updatePasswordField">
                 <p>Repeat new <br>password</p>
-                <input pInputText [(ngModel)]="passwordFormRPassword">
+                <input pInputText [(ngModel)]="passwordFormRPassword" (input)="refreshRegex()">
+            </div>
+            <div class="regex">
+                <p>Password must have at least 1 lowercase letter</p>
+                <p>Password must have at least 1 uppercase letter</p>
+                <p>Password must have at least 1 number</p>
+                <p>Password must have at least 1 special character</p>
+                <p>Passwords must match</p>
             </div>
         </div>
         <div class="updatePasswordBtns">
-            <button pButton>Update</button>
+            <button pButton [disabled]="passwordOK">Update</button>
         </div>
     </p-dialog>
 </div>
