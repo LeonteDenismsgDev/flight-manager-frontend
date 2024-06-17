@@ -1,6 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { LoginService } from 'src/app/security/services/login.service';
 import { Role } from 'src/app/user/models/role';
 
 @Component({
@@ -11,7 +13,7 @@ import { Role } from 'src/app/user/models/role';
 export class HomePageComponent implements OnInit{
   items: MenuItem[] | undefined;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, public loginService:LoginService) {}
 
   determineAccess(roleList:Role[]){
     let currentRole:string|null = localStorage.getItem("role");
@@ -40,11 +42,12 @@ export class HomePageComponent implements OnInit{
   }
 
   logout(){
+    this.loginService.logout();
     localStorage.clear();
     this.router.navigate(['/login']);
   }
 
   myAccount(){
-    this.router.navigate(['home','users','details'])
+    
   }
 }

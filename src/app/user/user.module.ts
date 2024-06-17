@@ -5,10 +5,15 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserPageComponent } from './components/user-page/user-page.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { CardModule } from 'primeng/card';
+import { PanelModule} from 'primeng/panel';
 import { MenuModule } from 'primeng/menu';
+import { InputTextModule } from 'primeng/inputtext';
 import { GeneralComponent } from './components/settings/general/general.component';
 import { SecurityComponent } from './components/settings/security/security.component';
-
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { FormsModule } from '@angular/forms';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -19,9 +24,14 @@ import { SecurityComponent } from './components/settings/security/security.compo
   ],
   imports: [
     CommonModule,
+    InputTextModule,
     UserRoutingModule,
-    CardModule,
-    MenuModule
+    PanelModule,
+    MenuModule,
+    InputSwitchModule,
+    FormsModule,
+    ButtonModule,
+    DialogModule
   ]
 })
 export class UserModule { }

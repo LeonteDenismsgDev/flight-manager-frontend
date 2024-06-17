@@ -10,7 +10,12 @@ export class Interceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>,next:HttpHandler): Observable<HttpEvent<any>>{
         return next.handle(request).pipe(
             catchError((error:HttpErrorResponse)=>{
+                if(error.status != 200){
                 this.messageService.add({severity:'error',summary:error.name,detail:error.error,life:10000});
+                }
+                else{
+                    this.messageService.add({severity:'success', summary:"Success",life:2000});
+                }
                 return throwError(error);
             })
         );

@@ -1,5 +1,5 @@
 <div class = "contentCentered">
-    <p-card header="User Details">
+    <p-panel header="User Details and settings" class="userDetailsCard">
         <div class="userDetailsMain">
             <p-menu [model]="menuItems">
                 <ng-template pTemplate="item" let-item>
@@ -20,5 +20,5 @@
                 <router-outlet></router-outlet>
             </div>
         </div>
-    </p-card>
+    </p-panel>
 </div>

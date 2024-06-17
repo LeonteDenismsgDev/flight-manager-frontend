@@ -6,8 +6,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ButtonModule } from 'primeng/button';
 import {MatIconModule} from '@angular/material/icon';
-
-
+import { DialogModule} from 'primeng/dialog';
+import { UserModule } from '../user/user.module';
 @NgModule({
   declarations: [
     HomePageComponent
@@ -18,6 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
     TabMenuModule,
     ButtonModule,
     MatIconModule,
+    DialogModule,
+    UserModule
   ]
 })
 export class HomeModule { }

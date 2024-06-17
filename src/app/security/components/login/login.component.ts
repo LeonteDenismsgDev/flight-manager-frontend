@@ -36,7 +36,7 @@ onLogin(){
   this.service.login(loginRequest).subscribe((loginResponse:LoginResponse) =>{
     //check if token is null or blank
     if(!!loginResponse.token?.trim()){
-      localStorage.setItem("token",loginResponse.token);
+      localStorage.setItem("token",`Bearer ${loginResponse.token}`);
       localStorage.setItem("username",loginResponse.username);
       localStorage.setItem("role",loginResponse.role);
       this.messageService.add({severity:'success',summary:'Logged in',detail:'Log in successfull', life:1000})

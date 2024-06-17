@@ -12,7 +12,7 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        redirectTo:'users/details',
+        redirectTo:'users/details/settings/general',
         pathMatch:'full'
       },
       {
