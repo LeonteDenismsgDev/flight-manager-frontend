@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'environment';
 import { LoginRequest } from '../models/login-request';
 import { LoginResponse } from '../models/login-response';
+import { LogoutResponse } from '../models/logout-response';
 
 @Injectable({
   providedIn: 'root'
@@ -16,5 +17,9 @@ export class LoginService {
       headers: new HttpHeaders().append('Access-Control-Allow-Origin','*')
     }
     return this.httpClient.post<LoginResponse>(this.url,loginRequest,options);
+  }
+
+  logout(){
+    return this.httpClient.delete<LogoutResponse>(environment.apiUrl+"auth/logout");
   }
 }

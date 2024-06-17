@@ -1,0 +1,47 @@
+<div class="securityMain">
+    <p class="cardTitle">Security informations</p>
+    <div class="securityList">
+        <div class="security">
+            <p class = "securityKey">Username</p>
+            <p class = "securityValue">{{username}}</p>
+        </div>
+        <div class="security">
+            <p class = "securityKey">Role</p>
+            <p class = "securityValue">{{role}}</p>
+        </div>
+        <div class="security">
+            <p class = "securityKey">Company</p>
+            <p class = "securityValue">{{company}}</p>
+        </div>
+        <div class="security">
+            <p class = "securityKey" style="font-weight: bold;">Reset password</p>
+            <button pButton label="Reset Password" severity="danger" (click)="beginPasswordChange()"></button>
+        </div>
+    </div>
+    <p-dialog header="Update password" [modal]="true" [(visible)]="passwordChangeRequested" [style]="{ width: '25rem' }">
+        <div class="updatePasswordMain">
+            <div class="updatePasswordField">
+                <p>Username</p>
+                <input pInputText [(ngModel)]="passwordFormUsername" (input)="refreshRegex()">
+            </div>
+            <div class="updatePasswordField">
+                <p>New password</p>
+                <input pInputText [(ngModel)]="passwordFormPassword" (input)="refreshRegex()" type="password">
+            </div>
+            <div class="updatePasswordField">
+                <p>Repeat new <br>password</p>
+                <input pInputText [(ngModel)]="passwordFormRPassword" (input)="refreshRegex()" type="password">
+            </div>
+            <div class="regex">
+                <p>Password must have at least 1 lowercase letter</p>
+                <p>Password must have at least 1 uppercase letter</p>
+                <p>Password must have at least 1 number</p>
+                <p>Password must have at least 1 special character</p>
+                <p>Passwords must match</p>
+            </div>
+        </div>
+        <div class="updatePasswordBtns">
+            <button pButton [disabled]="!passwordOK" (click)="changePassword()">Update</button>
+        </div>
+    </p-dialog>
+</div>

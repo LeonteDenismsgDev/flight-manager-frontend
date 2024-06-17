@@ -1,0 +1,24 @@
+<div class = "contentCentered">
+    <p-panel header="User Details and settings" class="userDetailsCard">
+        <div class="userDetailsMain">
+            <p-menu [model]="menuItems">
+                <ng-template pTemplate="item" let-item>
+                    <ng-container *ngIf="item.route; else elseBlock">
+                        <a [routerLink]="item.route" class="p-menuitem-link">
+                            <span [class]="item.icon"></span>
+                            <span class="ml-2">{{ item.label }}</span>
+                        </a>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <a [href]="item.url" class="p-menuitem-link">
+                            <span [class]="item.icon"></span>
+                            <span class="ml-2">{{ item.label }}</span>
+                        </a>
+                    </ng-template>
+                </ng-template></p-menu>
+            <div class="userDetailsRouter">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </p-panel>
+</div>

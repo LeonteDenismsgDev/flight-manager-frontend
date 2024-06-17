@@ -17,7 +17,7 @@ const routes: Routes = [
       },
       {
         path:'landing',
-        loadChildren:()=>import('./../landing/landing.module').then(m=>m.LandingModule)
+        loadChildren:()=>import('./../landing/landing.module').then(m=>m.LandingModule),
       },
       {
         path:'users',
@@ -60,6 +60,10 @@ const routes: Routes = [
         loadChildren:()=>import('./../company/company.module').then(m=>m.CompanyModule),
         canActivate:[masterGuard],
         data:{activeGuards:[Role.ad]}
+      },
+      {
+        path:'settings',
+        loadChildren:()=>import('./../settings/settings.module').then(m=>m.SettingsModule),
       }
     ]
   },

@@ -1,0 +1,77 @@
+.securityMain{
+    width:100%;
+    height: 100%;
+}
+
+.cardTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.securityList{
+    width:100%;
+    height:80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.security{
+    display:flex;
+    flex-direction: row;
+    gap:50px;
+    align-items: center;
+}
+
+.security .securityKey{
+    margin:12px 0;
+    width:15%;
+}
+
+.security .securityValue{
+    font-weight: bold;
+}
+
+
+    .p-button{
+        margin-top:5px;
+        background-color: red;
+        border-color: red;
+    }
+    .p-button:hover{
+        background-color: rgb(223, 16, 16);
+        border-color: rgb(223, 16, 16);
+    }
+
+.updatePasswordMain{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: left;
+}
+
+.updatePasswordField{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.updatePasswordField p{
+    width:50%;
+    margin:0;
+}
+.updatePasswordField input{
+    width:50%;
+    height:30px;
+}
+
+.updatePasswordBtns{
+    margin-top:30px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.regex{
+    font-size: 13px;
+}

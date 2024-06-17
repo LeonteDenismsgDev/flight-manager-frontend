@@ -1,0 +1,46 @@
+
+<div class="userDetailsMain">
+    <p class="cardTitle">User informations</p>
+    <div class="userDetailList">
+        <div class="userDetail">
+            <p>First Name</p>
+            <input type="text" [(ngModel)]="firstName" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div class="userDetail">
+            <p>Last Name</p>
+            <input type="text" [(ngModel)]="lastName" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div class="userDetail">
+            <p>Address</p>
+            <input type="text" [(ngModel)]="address" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div *ngIf="contactData">
+            <div *ngFor="let pair of contactData">
+                <div class="userDetail">
+                    <p>{{pair.key[0].toLocaleUpperCase() + pair.key.slice(1)}}</p>
+                    <input type="text" [(ngModel)]="pair.value"[disabled]="!editMode" (input)="refreshSaveState()" pInputText />
+                    <div *ngIf="pair.key != 'email' && editMode">
+                        <button pButton  icon="pi pi-trash" class = "deleteButt" (click)="deleteContactData(pair.key)"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="userDetail newContact" *ngIf="addingContact">
+            <input type="text" [(ngModel)]="_newContactKey" [disabled]="!editMode" class = "contactAdd" pInputText/>
+            <input type="text" [(ngModel)]="_newContactValue" [disabled]="!editMode" pInputText/>
+            <div>
+                <button pButton  icon="pi pi-trash" class = "deleteButt" (click)="abortAddContact()"></button>
+                <button pButton icon="pi pi-check" class = "acceptButt" (click)="acceptNewContact()"></button>
+            </div>
+        </div>
+        <div class="userDetail newContact"*ngIf="!addingContact && editMode">
+        <button pButton label="Add contact information" (click)="enterAddContactMode()"></button>
+        </div>
+    </div>
+    <div class="userDetail" style="flex-direction: row-reverse;gap:10px">
+        <p-inputSwitch class="editModeSwitch" [(ngModel)]="editMode" (onChange)="onEditSwitch()"/>
+        <p>Edit mode</p>
+        <button pButton label="Save changes" [disabled]="!saveEnabled ? true:null" [hidden]="!editMode?true:null" (click)="onSaveButton($event)"></button>
+        <button pButton label="Revert changes" [disabled]="!saveEnabled ? true:null" [hidden]="!saveEnabled?true:null" (click)="revertChanges()"></button>
+    </div>
+</div>
