@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, Injectable, OnInit } from '@angular/core';
 
-import { InputTextModule } from 'primeng/inputtext';
-import { ButtonModule } from 'primeng/button';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LoginRequest } from '../../models/login-request';
@@ -44,5 +42,4 @@ onLogin(){
     }
   })
 }
-
 }

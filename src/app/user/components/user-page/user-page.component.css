@@ -1,3 +1,34 @@
-.userListWrapper{
-    padding:0 2%
+.round-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 15px 15px; 
+    transition: background-color 0.3s;
+    margin-left: 5px;
+    margin-right: 50px;
 }
+
+.round-button:hover {
+    background-color: lightgray;
+}
+
+.pagination_container{
+    display: flex;
+}
+
+.right_page_alignement{
+    margin-left: auto;
+    padding: 10px;
+}
+
+.fixed-bottom-right .p-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000;  
+}
+
+
+
