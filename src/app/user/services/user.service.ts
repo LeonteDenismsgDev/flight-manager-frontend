@@ -22,7 +22,6 @@ url:string=environment.apiUrl;
           .set('page', page.toString())
           .set('size', size.toString())
       };
-      console.log(options)
       return this.httpClient.post<UserDataResponse[]>(`${this.url}view/users?page=${page}&size=${size}`, filterOptions);
   }
 }

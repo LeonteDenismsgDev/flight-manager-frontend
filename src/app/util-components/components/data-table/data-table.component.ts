@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class DataTableComponent {
   @Input() viewData: any[] = [];
-  @Input() columns: string[] = [];
+  @Input() headers: string[] = [];
   @Input() keys: string[]=[];
   selectedData!: any;
 

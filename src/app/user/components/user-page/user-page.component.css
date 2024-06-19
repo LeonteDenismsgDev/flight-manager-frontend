@@ -14,6 +14,7 @@
 
 .pagination_container{
     display: flex;
+    padding:0 3%;
 }
 
 .right_page_alignement{
@@ -30,5 +31,11 @@
     z-index: 1000;  
 }
 
+.filterInput{
+    padding:2% 0;
+}
 
-
+.ui-multiselect-label {
+    max-width: 150px;
+    white-space: nowrap;
+}

@@ -5,7 +5,7 @@
     <h1>Users</h1>
     <p-button (click)="sidebarVisible = true" icon="pi pi-filter-fill" class="right_page_alignement"/>
 </div>
-<app-data-table [viewData]="user_list" [columns]="columns" [keys]="keys"></app-data-table>
+<app-data-table [viewData]="user_list" [headers]="columns" [keys]="keys"></app-data-table>
 <div class="flex align-items-center justify-content-end pagination_container">
         <span class="mx-1 text-color right_page_alignement">Items per page: </span>
         <p-dropdown [options]="options"/>
@@ -15,20 +15,28 @@
 <div class="card flex justify-content-center">
     <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem">
         <ng-template pTemplate="header">
-            <span class="font-semibold text-xl">Filter options</span>
+            <h2>Filter Options</h2>
         </ng-template>
-        <h2>Search</h2>
         
-<div class="flex flex-column gap-2">
-    <label for="fullName">User name</label>
-    <input pInputText id="fullName"/>
-    <label for="company"> Company </label>
-    <input pInputText id="company"/>
-    <label for="company"> User role </label>
-    <p-multiSelect
-    [options]="options" 
-    optionLabel="name" 
-    placeholder="Select Cities" />
-</div>
+        <div class="flex flex-column gap-2">
+            <div class="filterInput">
+                <label for="fullName">User name</label>
+                <input pInputText id="fullName"/>
+            </div>
+            <div class="filterInput">
+                <label for="company"> Company </label>
+                <input pInputText id="company"/>
+            </div>
+            <div class="filterInput">
+                <label for="company"> User role </label><br>
+                <p-multiSelect
+                [options]="roles"
+                [filter]="false"
+                optionLabel="label"
+                display="chip" 
+                placeholder="Select Role"
+                [style]="{'width':'90%'}"/>
+            </div>
+        </div>
     </p-sidebar>
 </div>

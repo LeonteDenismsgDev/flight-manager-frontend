@@ -17,6 +17,12 @@ options = [
   {label: 20, value: 20},
   {label: 50, value: 50}
 ]
+roles:{}[]=[
+  {label:"Crew",value:"ROLE_CREW"},
+  {label:"Flight Manager",value:"ROLE_FLIGHT_MANAGER"},
+  {label:"Company Manager",value:"ROLE_COMPANY_MANAGER"},
+  {label:"Administrator",value:"ROLE_ADMINISTRATOR"},
+]
 
 keys:string[]=[
   "firstName","lastName","address","company","email"
@@ -30,7 +36,6 @@ constructor(private userService: UserService){}
 ngOnInit(): void {
 this.userService.getUsersList(this.filterOptions,this.page,this.size).subscribe(
   (usersList:UserDataResponse[]) =>{
-    console.log(usersList)
     if(usersList){
       this.user_list = usersList
     }

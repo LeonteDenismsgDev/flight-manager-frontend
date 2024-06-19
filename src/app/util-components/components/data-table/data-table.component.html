@@ -2,7 +2,7 @@
     <p-table [value]="viewData" id="data-table" selectionMode="single"  [(selection)]="selectedData" (onRowSelect)="onRowSelected($event)">
     <ng-template pTemplate="header">
         <tr>
-            <th *ngFor="let col of columns">
+            <th *ngFor="let col of headers">
                 {{col}}
             </th>
         </tr>
