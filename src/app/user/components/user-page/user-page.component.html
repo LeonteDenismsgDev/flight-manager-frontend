@@ -21,22 +21,24 @@
         <div class="flex flex-column gap-2">
             <div class="filterInput">
                 <label for="fullName">User name</label>
-                <input pInputText id="fullName"/>
+                <input pInputText [(ngModel)]="filterOptions.fullName"/>
             </div>
             <div class="filterInput">
                 <label for="company"> Company </label>
-                <input pInputText id="company"/>
+                <input pInputText [(ngModel)]="filterOptions.company"/>
             </div>
             <div class="filterInput">
                 <label for="company"> User role </label><br>
                 <p-multiSelect
                 [options]="roles"
                 [filter]="false"
-                optionLabel="label"
-                display="chip" 
+                [(ngModel)]="filterOptions.roles"
                 placeholder="Select Role"
                 [style]="{'width':'90%'}"/>
             </div>
+            <button pButton
+            [style]="{'width':'90%'}"
+            label="Filter" (click)="filter()"></button>
         </div>
     </p-sidebar>
 </div>
