@@ -8,10 +8,15 @@ import { Component, Input } from '@angular/core';
 export class DataTableComponent {
   @Input() viewData: any[] = [];
   @Input() columns: string[] = [];
+  @Input() keys: string[]=[];
   selectedData!: any;
 
-  getFieldValue(item: any, column: string): any{
-    return item[column]
+  getFieldValue(item: any, key: string): any{
+    if(key === "email"){
+        return item["contactData"].email
+    }else{
+      return item[key]
+    }
   }
   onRowSelected(evenet : any){
     //to do redirect to users page

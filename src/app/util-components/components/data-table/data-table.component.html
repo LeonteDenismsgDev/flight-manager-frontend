@@ -9,8 +9,8 @@
     </ng-template>
     <ng-template pTemplate="body" let-data>
         <tr [pSelectableRow]="data">
-            <td *ngFor="let col of columns">
-                {{getFieldValue(data,col)}}
+            <td *ngFor="let key of keys">
+                {{getFieldValue(data,key)}}
             </td>
         </tr>
     </ng-template>
