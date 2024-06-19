@@ -5,7 +5,7 @@
     <h1>Users</h1>
     <p-button (click)="sidebarVisible = true" icon="pi pi-filter-fill" class="right_page_alignement"/>
 </div>
-<app-data-table [viewData]="user_list" [columns]="columns"></app-data-table>
+<app-data-table [viewData]="user_list" [columns]="columns" [keys]="keys"></app-data-table>
 <div class="flex align-items-center justify-content-end pagination_container">
         <span class="mx-1 text-color right_page_alignement">Items per page: </span>
         <p-dropdown [options]="options"/>

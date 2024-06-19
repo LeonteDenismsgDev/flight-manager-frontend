@@ -11,11 +11,15 @@ import { UserDataResponse } from '../../models/UserDataResponse';
 })
 export class UserPageComponent {
  user_list:UserDataResponse[]= [];
-columns = ["id","name","email"]
+columns = ["First name","Last name","Address","Company","Email"]
 options = [
   {label: 10, value: 10},
   {label: 20, value: 20},
   {label: 50, value: 50}
+]
+
+keys:string[]=[
+  "firstName","lastName","address","company","email"
 ]
 page:number=0;
 size:number=10;
@@ -26,6 +30,7 @@ constructor(private userService: UserService){}
 ngOnInit(): void {
 this.userService.getUsersList(this.filterOptions,this.page,this.size).subscribe(
   (usersList:UserDataResponse[]) =>{
+    console.log(usersList)
     if(usersList){
       this.user_list = usersList
     }
