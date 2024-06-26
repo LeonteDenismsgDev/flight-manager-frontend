@@ -12,7 +12,7 @@ import { StandaloneSettingsComponent } from 'src/app/settings/components/standal
 })
 export class UserPageComponent {
   @ViewChild(StandaloneSettingsComponent) dialog!:StandaloneSettingsComponent;
-  
+  lastPage:boolean = false;
   editable:boolean = false;
   user_list:UserDataResponse[]= [];
   columns = ["Username","First name","Last name","Address","Company","Email", "Role"]
@@ -38,13 +38,7 @@ export class UserPageComponent {
   constructor(private userService: UserService){}
 
   ngOnInit(): void {
-    this.userService.getUsersList(this.filterOptions,this.page,this.size).subscribe(
-      (usersList:UserDataResponse[]) =>{
-        if(usersList){
-          this.user_list = usersList
-        }
-      }
-    )
+    this.refreshTable();
   } 
 
 
@@ -85,6 +79,7 @@ export class UserPageComponent {
 
   addPage(){
     //add max page constraint
+    if(this.lastPage) return;
     this.page+=1;
     this.refreshTable();
   }
@@ -94,6 +89,16 @@ export class UserPageComponent {
       (usersList:UserDataResponse[]) =>{
         if(usersList){
           this.user_list = usersList
+        }
+      }
+    )
+    this.userService.getUsersList(this.filterOptions,this.page+1,this.size).subscribe(
+      (usersList:UserDataResponse[]) =>{
+        if(usersList.length === 0){
+          this.lastPage = true;
+        }
+        else{
+          this.lastPage = false;
         }
       }
     )
