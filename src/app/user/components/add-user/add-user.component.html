@@ -1,0 +1,45 @@
+<div class="settingsMain">
+    <h1 style="padding-left:4%">General Informations</h1>
+    <div class="userDetailList">
+        <div class="userDetail">
+            <p>First Name</p>
+            <input type="text" [(ngModel)]="data.firstName" (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div class="userDetail">
+            <p>Last Name</p>
+            <input type="text" [(ngModel)]="data.lastName"  (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div class="userDetail">
+            <p>Address</p>
+            <input type="text" [(ngModel)]="data.address"  (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div class="userDetail">
+            <p>Email</p>
+            <input type="text" [(ngModel)]="email"  (input)="refreshSaveState()" pInputText/>
+        </div>
+    </div>
+    <div class="securityMain">
+        <h1 style="padding-left:4%">Security Informations</h1>
+        <div class="securityList">
+            <div class="security">
+                <p class = "securityKey">Role</p>
+                <p-dropdown
+                [options]="roles"
+                [filter]="false"
+                [(ngModel)]="data.role"
+                placeholder="Select Role"
+                [style]="{height:'30px'}"
+                appendTo="body"
+                (onChange)="refreshSaveState()"
+                />
+            </div>
+            <div class="security">
+                <p class = "securityKey">Company</p>
+                <input type="text" [(ngModel)]="data.company" (input)="refreshSaveState()" pInputText/>
+            </div>
+        </div>  
+        <div class="userDetail" style="flex-direction: row-reverse;gap:10px">
+            <button pButton label="Save changes" [disabled]="!saveEnabled ? true:null" (click)="onSaveButton($event)" style="font-size:14px"></button>
+        </div>
+    </div>
+</div>

@@ -14,6 +14,12 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { UtilComponentsModule } from '../util-components/util-components.module';
+import { PaginatorModule } from 'primeng/paginator';
+import { SidebarModule } from 'primeng/sidebar';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { SettingsModule } from '../settings/settings.module';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +27,7 @@ import { DialogModule } from 'primeng/dialog';
     UserDetailsComponent,
     GeneralComponent,
     SecurityComponent,
+    AddUserComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +38,12 @@ import { DialogModule } from 'primeng/dialog';
     InputSwitchModule,
     FormsModule,
     ButtonModule,
-    DialogModule
+    DialogModule,
+    UtilComponentsModule,
+    PaginatorModule,
+    SidebarModule,
+    MultiSelectModule,
+    SettingsModule
   ]
 })
 export class UserModule { }
