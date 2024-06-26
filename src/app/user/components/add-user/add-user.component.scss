@@ -1,0 +1,175 @@
+.settingsMain{
+    width:30vw;
+    height:100%;
+    /* border:solid 1px; */
+    overflow-x:hidden;
+}
+
+
+.userDetailList{
+    width:100%;
+    margin-bottom: 10%;
+}
+
+.cardTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.userDetail{
+    display:flex;
+    flex-direction: row;
+    gap:20px;
+    align-items: center;
+}
+
+.userDetail p{
+    margin:12px 0;
+    width:25%;
+}
+.userDetail input{
+    height:30px;
+    width:50%;
+}
+
+.editModeSwitch{
+    margin-right: 5%;
+}
+
+.deleteButt{
+    background-color: red;
+    padding:4px;
+    border-color: red;
+    width:30px;
+    height:30px;
+}
+
+.acceptButt{
+    margin-left: 20px;
+    background-color: rgb(36, 233, 6);
+    padding:4px;
+    border-color: rgb(36, 233, 6);
+    width:30px;
+    height:30px;
+}
+
+[hidden] {
+    display: none !important;
+  }
+
+.contactAdd{
+    width:25% !important;
+}
+
+.newContact input{
+    width:50%;
+}
+
+.securityMain{
+    height:28%;
+    width:100%;
+}
+
+.cardTitle{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+.securityList{
+    width:100%;
+    height:80%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.security{
+    display:flex;
+    flex-direction: row;
+    gap:20px;
+    align-items: center;
+}
+
+.security .securityKey{
+    margin:12px 0;
+    width:25% !important;
+}
+
+.security .securityValue{
+    font-weight: bold;
+    width:50%;
+}
+
+.security .securityValue .p-dropdown{
+    width:50% !important;
+}
+
+
+.updatePasswordMain> .p-button{
+        margin-top:5px;
+        background-color: red !important;
+        border-color: red !important;
+    }
+.updatePasswordMain > .p-button:hover{
+        background-color: rgb(223, 16, 16) !important;
+        border-color: rgb(223, 16, 16) !important;
+    }
+
+    .security> .p-button{
+        margin-top:5px;
+        background-color: red !important;
+        border-color: red !important;
+    }
+.security > .p-button:hover{
+        background-color: rgb(223, 16, 16) !important;
+        border-color: rgb(223, 16, 16) !important;
+    }
+
+.updatePasswordMain{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    align-items: left;
+}
+
+.updatePasswordField{
+    display: flex;
+    flex-direction: row;
+    
+}
+
+.updatePasswordField p{
+    width:50%;
+    margin:0;
+}
+.updatePasswordField input{
+    width:50%;
+    height:30px;
+}
+
+.updatePasswordBtns{
+    margin-top:30px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.regex{
+    font-size: 13px;
+}
+
+.security input{
+    height:30px;
+    width:50%;
+}
+
+.security > p-dropdown{
+    height:30px;
+    width:50%;
+}
+
+::ng-deep{
+.p-dropdown-label{
+    padding :5px !important;
+}
+}

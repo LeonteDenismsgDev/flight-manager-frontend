@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-data-table',
@@ -9,7 +9,11 @@ export class DataTableComponent {
   @Input() viewData: any[] = [];
   @Input() headers: string[] = [];
   @Input() keys: string[] = [];
+  @Input() toggleable: boolean = false;
+  @Output() onRowClick= new EventEmitter<any>();
+
   selectedData!: any;
+  constructor(private cdr:ChangeDetectorRef){}
 
   getFieldValue(item: any, key: string): any{
     if(key === "email"){
@@ -18,7 +22,13 @@ export class DataTableComponent {
       return item[key]
     }
   }
-  onRowSelected(evenet : any){
-    //to do redirect to users page
+
+  callback(){
+    this.onRowClick.emit(this.selectedData);
+    if(!this.toggleable){
+      this.selectedData = null;
+      this.cdr.detectChanges();
+    }
   }
+
 }

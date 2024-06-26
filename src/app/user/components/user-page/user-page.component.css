@@ -4,8 +4,13 @@
     border-radius: 50%;
     padding: 15px 15px; 
     transition: background-color 0.3s;
-    margin-left: 5px;
-    margin-right: 50px;
+    margin:0 5px;
+}
+
+.tableContainer{
+    overflow: auto;
+    max-height:67vh;
+    margin:10px 50px;
 }
 
 .round-button:hover {
@@ -15,6 +20,7 @@
 .pagination_container{
     display: flex;
     padding:0 3%;
+    margin-top:20px;
 }
 
 .right_page_alignement{
@@ -38,4 +44,8 @@
 .ui-multiselect-label {
     max-width: 150px;
     white-space: nowrap;
+}
+
+.addUserBtn{
+    margin-right: 10px;
 }

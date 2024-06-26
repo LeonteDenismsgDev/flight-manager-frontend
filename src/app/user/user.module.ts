@@ -18,6 +18,8 @@ import { UtilComponentsModule } from '../util-components/util-components.module'
 import { PaginatorModule } from 'primeng/paginator';
 import { SidebarModule } from 'primeng/sidebar';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { SettingsModule } from '../settings/settings.module';
+import { AddUserComponent } from './components/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     UserDetailsComponent,
     GeneralComponent,
     SecurityComponent,
+    AddUserComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +42,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     UtilComponentsModule,
     PaginatorModule,
     SidebarModule,
-    MultiSelectModule
+    MultiSelectModule,
+    SettingsModule
   ]
 })
 export class UserModule { }

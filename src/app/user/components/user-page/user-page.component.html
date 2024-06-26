@@ -3,17 +3,31 @@
         <i class="pi pi-user" style="font-size: 2.5rem"></i>
     </p>
     <h1>Users</h1>
-    <p-button (click)="sidebarVisible = true" icon="pi pi-filter-fill" class="right_page_alignement"/>
+    <div class="right_page_alignement">
+        
+        <p-button (click)="addUserDialog = true" icon="pi pi-user-plus" class="addUserBtn"/>
+        <p-button (click)="sidebarVisible = true" icon="pi pi-filter-fill" />
+    </div>
 </div>
-<app-data-table [viewData]="user_list" [headers]="columns" [keys]="keys"></app-data-table>
+<div class="tableContainer">
+    <app-data-table [viewData]="user_list" [headers]="columns" [keys]="keys" (onRowClick)="onRowClick($event)"></app-data-table>
+</div>
 <div class="flex align-items-center justify-content-end pagination_container">
         <span class="mx-1 text-color right_page_alignement">Items per page: </span>
-        <p-dropdown [options]="options"/>
-        <button class="round-button">>></button>
+        <div>    
+            <button class="round-button" 
+                [disabled] = "page === 0" 
+                (click)= "removePage()"><<</button>
+            <p-dropdown [options]="options" 
+                [(ngModel)] = "size"
+                (onChange)="changePaginator()"/>
+            <button class="round-button"
+            (click)= "addPage()">>></button>
+        </div>
 </div>
 
 <div class="card flex justify-content-center">
-    <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem">
+    <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem" (onHide)="filter()">
         <ng-template pTemplate="header">
             <h2>Filter Options</h2>
         </ng-template>
@@ -28,17 +42,26 @@
                 <input pInputText [(ngModel)]="filterOptions.company"/>
             </div>
             <div class="filterInput">
-                <label for="company"> User role </label><br>
+                <label for="role"> User role </label><br>
                 <p-multiSelect
                 [options]="roles"
                 [filter]="false"
                 [(ngModel)]="filterOptions.roles"
                 placeholder="Select Role"
-                [style]="{'width':'90%'}"/>
+                [style]="{'width':'90%'}"
+                appendTo="body"/>
             </div>
             <button pButton
             [style]="{'width':'90%'}"
             label="Filter" (click)="filter()"></button>
         </div>
     </p-sidebar>
+
+    <p-dialog [(visible)]="visibleDialog" [modal]="true" [draggable]="false" header="User settings" (onHide)="turnOffEditMode()">
+            <app-standalone-settings [data]="dialogUserData"></app-standalone-settings>
+    </p-dialog>
+
+    <p-dialog [(visible)]="addUserDialog" [modal]="true" [draggable]="false" header="Add new user" [contentStyle]="{'height':'60vh'}">
+            <app-add-user> </app-add-user>
+    </p-dialog>
 </div>
