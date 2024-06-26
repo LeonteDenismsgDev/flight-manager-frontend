@@ -8,6 +8,7 @@ export class EditUserRequestAdmin{
         public contactData:{[key:string]:string},
         public address:string,
         public role:string,
-        public company:string
+        public company:string,
+        public enabled:boolean = true
     ){}
 }

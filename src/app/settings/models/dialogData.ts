@@ -9,6 +9,7 @@ export class DialogData{
         public contactData:{
             key:string,
             value:string
-        }[]
+        }[],
+        public enabled:boolean = true
     ){}
 }

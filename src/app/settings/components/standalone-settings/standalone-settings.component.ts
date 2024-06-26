@@ -23,6 +23,8 @@ export class StandaloneSettingsComponent {
 
   roles:string[]=["CREW_ROLE","FLIGHT_MANAGER_ROLE","COMPANY_MANAGER_ROLE","ADMINISTRATOR_ROLE"];
 
+  enabled:boolean = true;
+
   //default values
   _firstName:string="";
   _lastName:string="";
@@ -30,10 +32,20 @@ export class StandaloneSettingsComponent {
   _contactData:{key:string,value:string}[] = [];
   _company:string="";
   _role:string="";
+  _enabled:boolean = true;
 
   _newContactKey:string="";
   _newContactValue:string="";
   saveEnabled:boolean= false;
+
+  passwordOK:boolean = false;
+  mainRegex= new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W{!_}]).+$');
+
+  passwordFormUsername:string="";
+  passwordFormPassword:string="";
+  passwordFormRPassword:string="";
+
+  passwordChangeRequested:boolean=false;
   
 
   constructor(private userDataService:UserDataService, private editModeService:EditModeService, private cdr:ChangeDetectorRef, private securityService:SecurityService){}
@@ -52,6 +64,7 @@ export class StandaloneSettingsComponent {
       this._contactData = JSON.parse(JSON.stringify(this.data.contactData));
       this._company = this.data.company;
       this._role = this.data.role;
+      this._enabled = this.data.enabled
     }
     this.addingContact = false;
     this.cdr.markForCheck();
@@ -66,7 +79,7 @@ export class StandaloneSettingsComponent {
       c_map[key] = this.data.contactData[i].value;
     }
     
-    this.userDataService.editUserDataAdmin(new EditUserRequestAdmin(this.data.username,this.data.firstName,this.data.lastName,c_map,this.data.address,this.data.role,this.data.company)).subscribe(
+    this.userDataService.editUserDataAdmin(new EditUserRequestAdmin(this.data.username,this.data.firstName,this.data.lastName,c_map,this.data.address,this.data.role,this.data.company,this.data.enabled)).subscribe(
       ()=>{
         this._address = this.data.address;
         this._firstName = this.data.firstName;
@@ -74,6 +87,7 @@ export class StandaloneSettingsComponent {
         this._company = this.data.company;
         this._role = this.data.role;
         this._contactData = JSON.parse(JSON.stringify(this.data.contactData));
+        this._enabled = this.data.enabled;
         this.cdr.detectChanges();}
     );
   }
@@ -94,7 +108,8 @@ export class StandaloneSettingsComponent {
       this.data.address !== this._address ||
       !this.compareMaps(this.data.contactData,this._contactData)) ||
       this.data.company  !== this._company || 
-      this.data.role !== this._role;
+      this.data.role !== this._role
+      this.data.enabled !== this._enabled;
   }
 
   deleteContactData(key:string){
@@ -119,6 +134,7 @@ export class StandaloneSettingsComponent {
     this.data.contactData = JSON.parse(JSON.stringify(this._contactData));
     this.data.company = this._company;
     this.data.role = this._role;
+    this.data.enabled = this._enabled;
     this.refreshSaveState();
     this.cdr.markForCheck();
   }
@@ -154,15 +170,6 @@ export class StandaloneSettingsComponent {
     this.abortAddContact();
     this.cdr.detectChanges();
   }
-
-  passwordOK:boolean = false;
-  mainRegex= new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W{!_}]).+$');
-
-  passwordFormUsername:string="";
-  passwordFormPassword:string="";
-  passwordFormRPassword:string="";
-
-  passwordChangeRequested:boolean=false;
 
   beginPasswordChange(){
     this.passwordChangeRequested = true;

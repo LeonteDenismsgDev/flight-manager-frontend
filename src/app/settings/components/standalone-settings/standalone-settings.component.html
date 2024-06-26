@@ -61,7 +61,15 @@
             </div>
             <div class="security">
                 <p class = "securityKey" style="font-weight: bold;">Reset password</p>
-                <button pButton label="Reset Password" severity="danger" (click)="beginPasswordChange()"></button>
+                <button pButton label="Reset Password" severity="danger" (click)="beginPasswordChange()" [disabled]="!editMode"></button>
+            </div>
+            <div class="security">
+                <p class = "securityKey" style="font-weight: bold;">User Status: </p>
+                <p *ngIf="enabled" class="enabled">ENABLED</p>
+                <p *ngIf="!enabled" class="disabled">DISABLED</p>
+                <p-inputSwitch [(ngModel)]="enabled"
+                [disabled]="!editMode"
+                (onChange)="refreshSaveState()"></p-inputSwitch>
             </div>
         </div>  
         <div class="userDetail" style="flex-direction: row-reverse;gap:10px">
