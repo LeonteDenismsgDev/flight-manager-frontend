@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent {
-
+  firstName:string="Denis"
+  lastName:string="Leonte"
 }
