@@ -1,6 +1,7 @@
 .landingMain{
     padding:50px;
     background-image:url('./../../../../assets/images/background.jpg');
+    background-size:100%;
     width: 100vw;
     height: 100vh;
 }
