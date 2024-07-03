@@ -1,0 +1,108 @@
+<div class="settingsMain">
+    <h1 style="padding-left:4%">General Settings</h1>
+    <div class="userDetailList">
+        <div class="userDetail">
+            <p>First Name</p>
+            <input type="text" [(ngModel)]="data.firstName" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div class="userDetail">
+            <p>Last Name</p>
+            <input type="text" [(ngModel)]="data.lastName" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div class="userDetail">
+            <p>Address</p>
+            <input type="text" [(ngModel)]="data.address" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+        </div>
+        <div *ngIf="data.contactData">
+            <div *ngFor="let pair of data.contactData">
+                <div class="userDetail">
+                    <p>{{pair.key[0].toLocaleUpperCase() + pair.key.slice(1)}}</p>
+                    <input type="text" [(ngModel)]="pair.value" [disabled]="!editMode" (input)="refreshSaveState()" pInputText />
+                    <div *ngIf="pair.key != 'email' && editMode">
+                        <button pButton  icon="pi pi-trash" class = "deleteButt" (click)="deleteContactData(pair.key)"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="userDetail newContact" *ngIf="addingContact">
+            <input type="text" [(ngModel)]="_newContactKey" [disabled]="!editMode" class = "contactAdd" pInputText/>
+            <input type="text" [(ngModel)]="_newContactValue" [disabled]="!editMode" pInputText/>
+            <div>
+                <button pButton  icon="pi pi-trash" class = "deleteButt" (click)="abortAddContact()"></button>
+                <button pButton icon="pi pi-check" class = "acceptButt" (click)="acceptNewContact()"></button>
+            </div>
+        </div>
+        <div class="userDetail newContact"*ngIf="!addingContact && editMode">
+        <button pButton label="Add contact information" (click)="enterAddContactMode()"></button>
+        </div>
+    </div>
+    <div class="securityMain">
+        <p class="cardTitle">Security informations</p>
+        <div class="securityList">
+            <div class="security">
+                <p class = "securityKey">Username</p>
+                <p class = "securityValue">{{data.username}}</p>
+            </div>
+            <div class="security">
+                <p class = "securityKey">Role</p>
+                <p-dropdown
+                [options]="roles"
+                [filter]="false"
+                [(ngModel)]="data.role"
+                placeholder="Select Role"
+                [disabled]="!editMode"
+                [style]="{height:'30px'}"
+                (onChange)="refreshSaveState()"
+                />
+            </div>
+            <div class="security">
+                <p class = "securityKey">Company</p>
+                <input type="text" [(ngModel)]="data.company" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+            </div>
+            <div class="security">
+                <p class = "securityKey" style="font-weight: bold;">Reset password</p>
+                <button pButton label="Reset Password" severity="danger" (click)="beginPasswordChange()" [disabled]="!editMode"></button>
+            </div>
+            <div class="security">
+                <p class = "securityKey" style="font-weight: bold;">User Status: </p>
+                <p *ngIf="data.enabled" class="enabled">ENABLED</p>
+                <p *ngIf="!data.enabled" class="disabled">DISABLED</p>
+                <p-inputSwitch [(ngModel)]="data.enabled"
+                [disabled]="!editMode"
+                (onChange)="refreshSaveState()"></p-inputSwitch>
+            </div>
+        </div>  
+        <div class="userDetail" style="flex-direction: row-reverse;gap:10px">
+            <p-inputSwitch class="editModeSwitch" [(ngModel)]="editMode" (onChange)="onEditSwitch()"/>
+            <p>Edit mode</p>
+            <button pButton label="Save changes" [disabled]="!saveEnabled ? true:null" [hidden]="!editMode?true:null" (click)="onSaveButton($event)" style="font-size:14px"></button>
+            <button pButton label="Revert changes" [disabled]="!saveEnabled ? true:null" [hidden]="!saveEnabled?true:null" (click)="revertChanges()"></button>
+        </div>
+        <p-dialog header="Update password" [modal]="true" [draggable]="false" [(visible)]="passwordChangeRequested" [style]="{ width: '25rem',overflow:'hidden' }">
+            <div class="updatePasswordMain">
+                <div class="updatePasswordField">
+                    <p>Username</p>
+                    <input pInputText [(ngModel)]="passwordFormUsername" (input)="refreshRegex()">
+                </div>
+                <div class="updatePasswordField">
+                    <p>New password</p>
+                    <input pInputText [(ngModel)]="passwordFormPassword" (input)="refreshRegex()" type="password">
+                </div>
+                <div class="updatePasswordField">
+                    <p>Repeat new <br>password</p>
+                    <input pInputText [(ngModel)]="passwordFormRPassword" (input)="refreshRegex()" type="password">
+                </div>
+                <div class="regex">
+                    <p>Password must have at least 1 lowercase letter</p>
+                    <p>Password must have at least 1 uppercase letter</p>
+                    <p>Password must have at least 1 number</p>
+                    <p>Password must have at least 1 special character</p>
+                    <p>Passwords must match</p>
+                </div>
+            </div>
+            <div class="updatePasswordBtns">
+                <button pButton [disabled]="!passwordOK" (click)="changePassword()">Update</button>
+            </div>
+        </p-dialog>
+    </div>
+</div>

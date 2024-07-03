@@ -1,1 +1,69 @@
-<p>user-page works!</p>
+<div class="pagination_container">
+    <p>
+        <i class="pi pi-user" style="font-size: 2.5rem"></i>
+    </p>
+    <h1>Users</h1>
+    <div class="right_page_alignement">
+        
+        <p-button (click)="addUserDialog = true" icon="pi pi-user-plus" class="addUserBtn"/>
+        <p-button (click)="sidebarVisible = true" icon="pi pi-filter-fill" />
+    </div>
+</div>
+<div class="tableContainer">
+    <app-data-table [viewData]="user_list" [headers]="columns" [keys]="keys" (onRowClick)="onRowClick($event)"></app-data-table>
+    <!-- <app-standalone-settings></app-standalone-settings> -->
+</div>
+<div class="flex align-items-center justify-content-end pagination_container">
+        <span class="mx-1 text-color right_page_alignement">Items per page: </span>
+        <div>    
+            <button class="round-button" 
+                [disabled] = "page === 0" 
+                (click)= "removePage()"><<</button>
+            <p-dropdown [options]="options" 
+                [(ngModel)] = "size"
+                (onChange)="changePaginator()"/>
+            <button class="round-button"
+                [disabled]="page >= max_page"
+                (click)= "addPage()">>></button>
+        </div>
+</div>
+
+<div class="card flex justify-content-center">
+    <p-sidebar [(visible)]="sidebarVisible" styleClass="w-30rem" (onHide)="filter()">
+        <ng-template pTemplate="header">
+            <h2>Filter Options</h2>
+        </ng-template>
+        
+        <div class="flex flex-column gap-2">
+            <div class="filterInput">
+                <label for="fullName">User name</label>
+                <input pInputText [(ngModel)]="filterOptions.fullName"/>
+            </div>
+            <div class="filterInput">
+                <label for="company"> Company </label>
+                <input pInputText [(ngModel)]="filterOptions.company"/>
+            </div>
+            <div class="filterInput">
+                <label for="role"> User role </label><br>
+                <p-multiSelect
+                [options]="roles"
+                [filter]="false"
+                [(ngModel)]="filterOptions.roles"
+                placeholder="Select Role"
+                [style]="{'width':'90%'}"
+                appendTo="body"/>
+            </div>
+            <button pButton
+            [style]="{'width':'90%'}"
+            label="Filter" (click)="filter()"></button>
+        </div>
+    </p-sidebar>
+
+    <p-dialog [(visible)]="visibleDialog" [modal]="true" [draggable]="false" header="User settings" (onHide)="turnOffEditMode()" appendTo="body">
+            <app-standalone-settings [data]="dialogUserData"></app-standalone-settings>
+    </p-dialog>
+
+    <p-dialog [(visible)]="addUserDialog" [modal]="true" [draggable]="false" header="Add new user" [contentStyle]="{'height':'60vh'}">
+            <app-add-user> </app-add-user>
+    </p-dialog>
+</div>

@@ -34,6 +34,7 @@ export class GeneralComponent implements OnInit{
   
 
   constructor(private userDataService:UserDataService, private editModeService:EditModeService, private cdr:ChangeDetectorRef){}
+
   ngOnInit(){
     this.editModeService.editMode$.subscribe((value)=>
     {
@@ -62,6 +63,11 @@ export class GeneralComponent implements OnInit{
 
   onEditSwitch() {
     this.editModeService.switchEditMode(this.editMode);
+    if(!this.editMode){
+      this.revertChanges();
+      this.abortAddContact();
+      this.cdr.detectChanges();
+    }
     this.addingContact = false;
     this.cdr.markForCheck();
   }
@@ -80,19 +86,19 @@ export class GeneralComponent implements OnInit{
   }
 
   compareMaps(map1:{key:string,value:string}[],map2:{key:string,value:string}[]):boolean{
-    if(map1.length != map2.length) return false;
+    if(map1.length !== map2.length) return false;
     for(let i = 0; i < map1.length; i++){
       let pair1 = map1[i],pair2=map2[i];
-      if(!(pair1.key == pair2.key && pair1.value == pair2.value)) return false;
+      if(!(pair1.key === pair2.key && pair1.value === pair2.value)) return false;
     }
     return true;
   }
 
   refreshSaveState(){
-    this.saveEnabled= this.editMode &&(
-    this.firstName!=this._firstName || 
-    this.lastName != this._lastName ||
-    this.address != this._address ||
+    this.saveEnabled = this.editMode &&(
+    this.firstName !==this._firstName || 
+    this.lastName !== this._lastName ||
+    this.address !== this._address ||
     !this.compareMaps(this.contactData,this._contactData));
   }
 
@@ -115,7 +121,7 @@ export class GeneralComponent implements OnInit{
     this.firstName = this._firstName;
     this.lastName = this._lastName;
     this.address = this._address;
-    this.contactData = this._contactData;
+    this.contactData = JSON.parse(JSON.stringify(this._contactData));
     this.refreshSaveState();
     this.cdr.markForCheck();
   }
@@ -127,6 +133,8 @@ export class GeneralComponent implements OnInit{
 
   abortAddContact(){
     this.addingContact = false;
+    this._newContactKey = "";
+    this._newContactValue = "";
   }
 
   acceptNewContact(){

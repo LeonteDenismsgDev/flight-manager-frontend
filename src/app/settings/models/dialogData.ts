@@ -1,4 +1,4 @@
-export class UserDataResponse{
+export class DialogData{
     constructor(
         public username:string,
         public firstName:string,
@@ -6,9 +6,10 @@ export class UserDataResponse{
         public address:string,
         public company:string,
         public role:string,
-        public enabled:boolean,
         public contactData:{
-            [key:string]:string
-        }
+            key:string,
+            value:string
+        }[],
+        public enabled:boolean,
     ){}
 }

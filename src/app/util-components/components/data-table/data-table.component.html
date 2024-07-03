@@ -1,0 +1,18 @@
+<div class="card" id="table-card">
+    <p-table [value]="viewData" id="data-table" selectionMode="single"  [(selection)]="selectedData">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngFor="let col of headers">
+                {{col}}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr [pSelectableRow]="data" (click)="callback()">
+            <td *ngFor="let key of keys">
+                {{getFieldValue(data,key)}}
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+</div>
