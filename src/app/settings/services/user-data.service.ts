@@ -27,4 +27,8 @@ export class UserDataService {
   addNewUser(request:AddUserRequest){
     return this.httpClient.post<string>(environment.apiUrl + "user/register", request);
   }
+
+  switchEnabled(username:string){
+    return this.httpClient.put(environment.apiUrl+`user/enable/update?username=`+ username,"");
+  }
 }

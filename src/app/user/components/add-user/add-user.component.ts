@@ -10,7 +10,7 @@ import { AddUserRequest } from '../../models/AddUserResquest';
 })
 export class AddUserComponent {
   roles:string[]=["CREW_ROLE","FLIGHT_MANAGER_ROLE","COMPANY_MANAGER_ROLE","ADMINISTRATOR_ROLE"];
-  data:DialogData = new DialogData("","","","","","",[])
+  data:DialogData = new DialogData("","","","","","",[], false)
   saveEnabled:boolean=false;
   email:string=""
 

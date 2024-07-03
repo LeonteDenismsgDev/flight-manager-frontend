@@ -3,6 +3,7 @@ import { environment } from 'environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {FilterOptions} from '../models/FilterOptions'
 import { UserDataResponse } from '../models/UserDataResponse';
+import { UserTableResponse } from '../models/UserTableResponse';
 
 @Injectable({
     providedIn: 'root'
@@ -22,6 +23,6 @@ url:string=environment.apiUrl;
           .set('page', page.toString())
           .set('size', size.toString())
       };
-      return this.httpClient.post<UserDataResponse[]>(`${this.url}view/users?page=${page}&size=${size}`, filterOptions);
+      return this.httpClient.post<UserTableResponse>(`${this.url}view/users?page=${page}&size=${size}`, filterOptions);
   }
 }

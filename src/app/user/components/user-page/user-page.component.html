@@ -23,7 +23,7 @@
                 [(ngModel)] = "size"
                 (onChange)="changePaginator()"/>
             <button class="round-button"
-                [disabled]="lastPage"
+                [disabled]="page >= max_page"
                 (click)= "addPage()">>></button>
         </div>
 </div>

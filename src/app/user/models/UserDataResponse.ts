@@ -6,6 +6,7 @@ export class UserDataResponse{
         public address:string,
         public company:string,
         public role:string,
+        public enabled:boolean,
         public contactData:{
             [key:string]:string
         }

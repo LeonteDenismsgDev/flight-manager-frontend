@@ -4,6 +4,7 @@ import { FilterOptions } from '../../models/FilterOptions';
 import { UserDataResponse } from '../../models/UserDataResponse';
 import { DialogData } from 'src/app/settings/models/dialogData';
 import { StandaloneSettingsComponent } from 'src/app/settings/components/standalone-settings/standalone-settings.component';
+import { UserTableResponse } from '../../models/UserTableResponse';
 
 @Component({
   selector: 'app-user-page',
@@ -16,7 +17,7 @@ export class UserPageComponent {
   editable:boolean = false;
   user_list:UserDataResponse[]= [];
   columns = ["Username","First name","Last name","Address","Company","Email", "Role"]
-  dialogUserData:DialogData=new DialogData("","","","","","",[]);
+  dialogUserData:DialogData=new DialogData("","","","","","",[], false);
   options = [
     {label: 10, value: 10},
     {label: 20, value: 20},
@@ -28,6 +29,8 @@ export class UserPageComponent {
   keys:string[]=[
     "username","firstName","lastName","address","company","email","role"
   ]
+  max_users:number = 0;
+  max_page:number = 0;
   page:number=0;
   size:number=10;
   filterOptions:FilterOptions = new FilterOptions('','',[]);
@@ -44,9 +47,10 @@ export class UserPageComponent {
 
   filter(){
     this.userService.getUsersList(this.filterOptions,this.page,this.size).subscribe(
-      (usersList:UserDataResponse[]) =>{
-        if(usersList){
-          this.user_list = usersList
+      (usersList:UserTableResponse) =>{
+        if(usersList.usersCount > 0){
+          this.user_list = usersList.page;
+          this.max_users = usersList.usersCount;
         }
       }
     )
@@ -55,13 +59,14 @@ export class UserPageComponent {
   onRowClick(data: UserDataResponse){
 
     this.visibleDialog = true;
-    this.dialogUserData=new DialogData("","","","","","",[]);
+    this.dialogUserData=new DialogData("","","","","","",[], false);
     this.dialogUserData.username = data.username;
     this.dialogUserData.lastName = data.lastName;
     this.dialogUserData.address = data.address;
     this.dialogUserData.company = data.company;
     this.dialogUserData.firstName = data.firstName;
     this.dialogUserData.role = data.role;
+    this.dialogUserData.enabled = data.enabled;
     Object.keys(data.contactData).forEach(key => {
       const value = data.contactData[key];
       this.dialogUserData.contactData.push({key,value})
@@ -79,26 +84,18 @@ export class UserPageComponent {
 
   addPage(){
     //add max page constraint
-    if(this.lastPage) return;
+    if(this.page >= this.max_page) return;
     this.page+=1;
     this.refreshTable();
   }
 
   refreshTable(){
     this.userService.getUsersList(this.filterOptions,this.page,this.size).subscribe(
-      (usersList:UserDataResponse[]) =>{
-        if(usersList){
-          this.user_list = usersList
-        }
-      }
-    )
-    this.userService.getUsersList(this.filterOptions,this.page+1,this.size).subscribe(
-      (usersList:UserDataResponse[]) =>{
-        if(usersList.length === 0){
-          this.lastPage = true;
-        }
-        else{
-          this.lastPage = false;
+      (usersList:UserTableResponse) =>{
+        if(usersList.usersCount > 0){
+          this.user_list = usersList.page;
+          this.max_users = usersList.usersCount;
+          this.max_page = Math.ceil(usersList.usersCount/((this.page+1)*this.size));
         }
       }
     )

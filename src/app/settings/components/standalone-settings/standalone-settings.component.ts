@@ -16,7 +16,7 @@ import { SecurityService } from '../../services/security.service';
 })
 export class StandaloneSettingsComponent {
   
-  @Input() data:DialogData = new DialogData("","","","","","",[]);
+  @Input() data:DialogData = new DialogData("","","","","","",[],false);
   @Input() editMode:boolean = false;
 
   addingContact:boolean=false;
@@ -68,6 +68,7 @@ export class StandaloneSettingsComponent {
     }
     this.addingContact = false;
     this.cdr.markForCheck();
+    console.log(this.data)
   }
 
   onSaveButton(event:Event){
@@ -90,6 +91,11 @@ export class StandaloneSettingsComponent {
         this._enabled = this.data.enabled;
         this.cdr.detectChanges();}
     );
+    if(this._enabled != this.data.enabled){
+      this.userDataService.switchEnabled(this.data.username).subscribe(()=>{
+        
+      })
+    }
   }
 
   compareMaps(map1:{key:string,value:string}[],map2:{key:string,value:string}[]):boolean{
@@ -108,7 +114,7 @@ export class StandaloneSettingsComponent {
       this.data.address !== this._address ||
       !this.compareMaps(this.data.contactData,this._contactData)) ||
       this.data.company  !== this._company || 
-      this.data.role !== this._role
+      this.data.role !== this._role ||
       this.data.enabled !== this._enabled;
   }
 

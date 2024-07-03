@@ -10,6 +10,6 @@ export class DialogData{
             key:string,
             value:string
         }[],
-        public enabled:boolean = true
+        public enabled:boolean,
     ){}
 }

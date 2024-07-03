@@ -65,9 +65,9 @@
             </div>
             <div class="security">
                 <p class = "securityKey" style="font-weight: bold;">User Status: </p>
-                <p *ngIf="enabled" class="enabled">ENABLED</p>
-                <p *ngIf="!enabled" class="disabled">DISABLED</p>
-                <p-inputSwitch [(ngModel)]="enabled"
+                <p *ngIf="data.enabled" class="enabled">ENABLED</p>
+                <p *ngIf="!data.enabled" class="disabled">DISABLED</p>
+                <p-inputSwitch [(ngModel)]="data.enabled"
                 [disabled]="!editMode"
                 (onChange)="refreshSaveState()"></p-inputSwitch>
             </div>
