@@ -83,7 +83,6 @@ export class UserPageComponent {
   }
 
   addPage(){
-    //add max page constraint
     if(this.page >= this.max_page) return;
     this.page+=1;
     this.refreshTable();
@@ -95,7 +94,7 @@ export class UserPageComponent {
         if(usersList.usersCount > 0){
           this.user_list = usersList.page;
           this.max_users = usersList.usersCount;
-          this.max_page = Math.ceil(usersList.usersCount/((this.page+1)*this.size));
+          this.max_page = Math.ceil(usersList.usersCount/(this.size));
         }
       }
     )

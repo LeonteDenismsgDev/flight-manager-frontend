@@ -1,0 +1,19 @@
+<div class="flightTemplateWrapper">
+    <h1>Flight template</h1>
+    <div class="tableContainer">
+        <app-data-table [viewData]="flightTemplateList" [headers]="columns" [keys]="keys"></app-data-table>
+    </div>
+    <div class="flex align-items-center justify-content-end pagination_container">
+        <span class="mx-1 text-color right_page_alignement">Items per page: </span>
+        <div>    
+            <button class="round-button" 
+                [disabled] = "page === 0"
+                (click)= "removePage()"><<</button>
+            <p-dropdown [options]="size_options" 
+                [(ngModel)] = "size"/>
+            <button class="round-button"
+                [disabled]="page >= max_page"
+                (click)= "addPage()">>></button>
+        </div>
+</div>
+</div>

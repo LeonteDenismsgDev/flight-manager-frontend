@@ -1,0 +1,46 @@
+.flightTemplateWrapper{
+    padding:0 4%;
+}
+
+
+.tableContainer{
+}
+
+.round-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 15px 15px; 
+    transition: background-color 0.3s;
+    margin:0 5px;
+}
+
+.tableContainer{
+    overflow: auto;
+    height:61vh;
+    margin:10px 50px;
+}
+
+.round-button:hover {
+    background-color: lightgray;
+}
+
+.right_page_alignement{
+    margin-left: auto;
+    padding: 10px;
+}
+
+.fixed-bottom-right .p-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000;  
+}
+
+.pagination_container{
+    display: flex;
+    padding:0 3%;
+    margin-top:20px;
+}

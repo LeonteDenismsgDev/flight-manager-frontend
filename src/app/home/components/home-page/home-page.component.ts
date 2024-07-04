@@ -32,6 +32,7 @@ export class HomePageComponent implements OnInit{
       { label: 'Users', icon: 'people_alt', route: '/home/users',hasAccess:this.determineAccess([Role.ad]) },
       { label: 'Upcoming Flights', icon: 'flight_takeoff', route:'/home/flights', hasAccess:this.determineAccess([Role.cr])},
       { label: 'Flights', icon: 'flight_takeoff', route: '/home/flights', hasAccess:this.determineAccess([Role.ad,Role.fm,Role.cm])},
+      { label: 'Flight Templates', icon:'border_clear', route: '/home/flightTemplates', hasAccess:this.determineAccess([Role.ad,Role.cm,Role.fm])},
       { label: 'Planes', icon: 'airplanemode_on', route: '/home/planes',hasAccess:this.determineAccess([Role.ad,Role.cm]) },
       { label: 'Airports', icon: 'connecting_airports', route: '/home/airports',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
       { label: 'Itineraries', icon: 'mode_of_travel', route: '/home/itineraries',hasAccess:this.determineAccess([Role.ad, Role.cm]) },

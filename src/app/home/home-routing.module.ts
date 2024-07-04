@@ -32,6 +32,12 @@ const routes: Routes = [
         data:{activeGuards:[Role.ad, Role.fm]}
       },
       {
+        path:'flightTemplates',
+        loadChildren:()=>import('./../flight-template/flight-template.module').then(m=>m.FlightTemplateModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad, Role.fm, Role.cm]}
+      },
+      {
         path:'planes',
         loadChildren:()=>import('./../plane/plane.module').then(m=>m.PlaneModule),
         canActivate:[masterGuard],
