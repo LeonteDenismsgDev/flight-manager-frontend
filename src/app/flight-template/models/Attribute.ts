@@ -8,3 +8,16 @@ export class Attribute{
         public description:string,
     ){}
 }
+
+export class ViewAttributes{
+    constructor(
+        public id:string,
+        public label:string,
+        public name:string,
+        public required:boolean,
+        public type:string,
+        public defaultValue:Object,
+        public searchKeyWords:string[],
+        public description:string
+    ){}
+}

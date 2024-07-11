@@ -1,0 +1,88 @@
+<ng-container [ngSwitch]="rule.inputType">
+    <div *ngSwitchCase="'text'" class="validation-op">
+        <label [for]="rule.name + 'input'">Text reference :</label>
+        <br>
+        <div class="widget-content">
+        <input class="validation-input" [id]="rule.name + 'input'" type="text"/>
+        <p-dropdown 
+        [options]="selectedAttributes" 
+        placeholder="Attribute reference" 
+        [editable]="true" 
+        optionLabel="label" />
+        <p-button icon="pi pi-check" />
+        </div>
+    </div>
+    <div *ngSwitchCase="'array'" class="validation-op">
+        <label>Possible values</label>
+        <div class="widget-content">
+            <p-tag [rounded]="true" *ngFor="let tag of possibleValues[rule.name]">{{tag}}</p-tag>
+        </div>
+        <div class="widget-content">
+        <input class="validation-input" (keydown.enter)="onInputEnter($event,rule)">
+        <p-dropdown 
+        [options]="selectedAttributes" 
+        placeholder="Attribute reference" 
+        [editable]="true" 
+        optionLabel="label" />
+        <p-button icon="pi pi-check" />
+        </div>
+    </div>
+    <div *ngSwitchCase="'number'" class="validation-op">
+        <label [for]="rule.name + 'input'">Number reference :</label>
+        <br>
+        <div class="widget-content">
+            <p-inputNumber 
+            inputId="rule.name + 'input'"
+            /> 
+        <p-dropdown 
+        [options]="selectedAttributes" 
+        placeholder="Attribute reference" 
+        [editable]="true" 
+        optionLabel="label" />
+        <p-button icon="pi pi-check" />
+        </div>
+    </div>
+    <div *ngSwitchCase="'precision-number'" class="validation-op">
+        <label [for]="rule.name + 'input'">Number reference :</label>
+        <br>
+        <div class="widget-content">
+            <p-inputNumber 
+            inputId="rule.name + 'input'"
+            mode="decimal" 
+            [minFractionDigits]="2" 
+            [maxFractionDigits]="5" /> 
+        <p-dropdown 
+        [options]="selectedAttributes" 
+        placeholder="Attribute reference" 
+        [editable]="true" 
+        optionLabel="label" />
+        <p-button icon="pi pi-check" />
+        </div>
+    </div>
+    <div *ngSwitchCase="'date'" class="validation-op">
+        <label [for]="rule.name + 'input'">Date reference:</label>
+        <br>
+        <div class="widget-content">
+            <p-calendar 
+            [showIcon]="true" 
+            [showOnFocus]="false" 
+            inputId="rule.name + 'date_input'"
+            />
+            <p-calendar 
+            [showIcon]="true" 
+            [timeOnly]="true" 
+            inputId="rule.name + 'time_input'"
+            >
+            <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+                <i class="pi pi-user pointer-events-none" (click)="clickCallBack($event)"></i>
+            </ng-template>
+            </p-calendar>
+        <p-dropdown 
+        [options]="selectedAttributes" 
+        placeholder="Attribute reference" 
+        [editable]="true" 
+        optionLabel="label" />
+        <p-button icon="pi pi-check" />
+        </div>
+    </div>
+</ng-container>

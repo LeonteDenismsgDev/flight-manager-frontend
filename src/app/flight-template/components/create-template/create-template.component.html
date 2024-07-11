@@ -1,0 +1,69 @@
+<div class="widget-content">
+    <input type="text" pInputText [(ngModel)]="value" class="template-title" />
+    <p-button label="Success" [raised]="true"/>
+</div>
+<div class="widget-content template-container">
+    <div id="attributes-widget">
+        <div id="widget-header">
+            <p id="widget-label">Attributes</p>
+            <div class="image-filed">
+                <button class="search-button"><i class="pi pi-search"></i></button>
+                <input 
+                type="text" 
+                pInputText 
+                class="search-input"
+                variant="filled" />
+            </div>
+        </div>
+        <div class="widget-content">
+            <div class="attributes-list">
+                <button class="new-button">New</button>
+                <ul class="list-none flex flex-column gap-2 p-0 m-0">
+                    <li *ngFor="let attribute of avialableAttributes" class="p-2 border-round shadow-1" pDraggable
+                        (onDragStart)="dragStart(attribute)" (onDragEnd)="dragEnd()">
+                        <div class="collapsible">
+                            <p>{{attribute.label}}</p><button (click)="toggle($event)"class="collapsible-button">+</button>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>{{attribute.description}}</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="slected-zone" pDroppable (onDrop)="drop()">
+                <ul class="list-none flex flex-column gap-2 p-0 m-0" *ngIf="selectedAttributes.length>0">
+                    <li *ngFor="let attribute of selectedAttributes" class="p-2 border-round shadow-1">
+                       <div (click)="selectAttribute(attribute)">
+                        <div class="collapsible">
+                            <p>{{attribute.label}}</p>
+                            <button (click)="toggle($event)" class="collapsible-button">+</button>
+                            <button (click)="unselectAttribute(attribute)" class="unselect_button">X</button>
+                        </div>
+                        <div class="collapsible-content">
+                            <p>{{attribute.description}}</p>
+                        </div>
+                       </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="selectAttribute" *ngIf="selectedAttributes.length===0">
+                <i class="pi pi-upload"></i>
+                <p>Drag&Drop attributes here</p>
+            </div>
+        </div>
+    </div>
+    <div class="functinal-widget">
+        <div class="validation-section">
+            <p class="validation-header" *ngIf="selectedAttribute">{{selectedAttribute?.label}}:{{selectedAttribute?.type}}</p>
+            <div>
+                <div *ngFor=" let rule of getValidations()" class="validation-rule">
+                    <div class="collapsible">
+                        <p>{{rule.label}}</p><button (click)="toggle($event)"
+                            class="collapsible-button">+</button>
+                    </div>
+                    <app-validation-rule [rule]="rule"[selectedAttributes]="selectedAttributes" attributeType="selectAttribute.type"></app-validation-rule>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

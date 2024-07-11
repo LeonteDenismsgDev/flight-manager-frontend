@@ -2,6 +2,14 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FlightTemplateService } from '../../services/flight-template.service';
 import { FlightTemplateTableResponse } from '../../models/FlightTemplateTableResponse';
 import { FlightTemplate } from '../../models/FlightTemplate';
+import { REQUIRED_ATTRIBUTES } from '../../models/RequiredAttributes';
+
+interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
 
 @Component({
   selector: 'app-flight-template',
@@ -10,23 +18,16 @@ import { FlightTemplate } from '../../models/FlightTemplate';
 })
 export class FlightTemplateComponent implements OnInit{
   flightTemplateList:FlightTemplate[]=[];
-  columns=["Origin","Destination","Departure Time", "Arrival Time", "Plane"]
-  keys=["origin","destination",'departureTime',"arrivalTime","plane"]
+  mondatory_attributes=REQUIRED_ATTRIBUTES;
 
   page:number = 0;
-  size:number = 10;
+  size:number = 4;
   max_page:number = 0;
 
-  size_options=[
-    {label: 10, value: 10},
-    {label: 20, value: 20},
-    {label: 50, value: 50}
-  ]
-
-  constructor(private flightTemplateService:FlightTemplateService, private cdr:ChangeDetectorRef){}
+  constructor(private flightTemplateService:FlightTemplateService){}
 
   ngOnInit(){
-    //refreshTable();
+    this.refreshTable();
   }
 
   refreshTable(){
@@ -43,7 +44,7 @@ export class FlightTemplateComponent implements OnInit{
     this.refreshTable()
   }
 
-  addPage(){
+  addPage(event : PageEvent) {
     if(this.page >= this.max_page) return;
     this.page+=1;
     this.refreshTable();
