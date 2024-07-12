@@ -1,1 +1,36 @@
-<p>company-page works!</p>
+<div class="companyPageWrapper">
+    <div class="companyPageHeader">
+        <h1>Company list</h1>
+        <p-button label="Create a new company" class="createCompanyButton" (click)="initNewCompany()"></p-button>
+    </div>
+    <div class="grid">
+        <div class="card-rows" *ngFor="let company of data">
+            <p-card class="card" header={{company.name}}>
+                Fleet: {{company.fleet}}<br>
+                Crew members: {{company.crews}}
+                <div *ngIf="company.contactData">
+                    <div *ngFor="let pair of company.contactData">
+                        {{pair.key}}: {{pair.value}}<br>
+                    </div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <div>
+                        <p-button label="Delete" (click)="deleteCompany(company)" />
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+    <p-dialog [(visible)]="addCompanyDialog" [modal]="true" [draggable]="false" header="Create a new company">
+        <div class="createCompanyDialogWrapper">
+            <div class="createCompanyInput">
+                <p>Name:</p> <input pInput [(ngModel)]="newCompanyName" (change)="refreshSaveState()">
+            </div>
+            <div class="createCompanyInput">
+                <p>Email:</p> <input pInput [(ngModel)]="newCompanyEmail" (change)="refreshSaveState()">
+            </div>
+            <p-button label="Create" (click)="createNewCompany()" [disabled]="!saveEnabled"></p-button>
+            
+        </div>
+    </p-dialog>
+</div>

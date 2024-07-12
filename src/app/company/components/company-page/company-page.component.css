@@ -1,0 +1,65 @@
+.companyPageWrapper{
+    padding:4%;
+    padding-top:2%;
+    overflow-y: auto;
+    height: 90vh;
+}
+
+.companyPageWrapper h1{
+    margin:0;
+}
+
+ 
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left:50px;
+  }
+  
+  .card-rows {
+    margin: 10px;
+    width: 22%;
+  }
+
+.attr-rep{
+    font-size: 12px;
+}
+
+.w-full{
+    margin: 25px;
+}
+
+.card{
+    height: 100%;
+}
+
+.companyPageHeader{
+    position: relative;
+    margin-bottom: 2%;
+}
+.companyPageHeader .createCompanyButton{
+    align-self: right;
+    position:absolute;
+    right:0;
+    top:-20%;
+}
+
+.createCompanyDialogWrapper{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+}
+
+.createCompanyInput{
+    width:100%;
+}
+
+.createCompanyInput input{
+    width:70%;
+}
+.createCompanyInput p{
+    width: 30%;
+    margin:0;
+    display: inline-block;
+}
