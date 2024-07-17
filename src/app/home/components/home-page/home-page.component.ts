@@ -36,8 +36,9 @@ export class HomePageComponent implements OnInit{
       { label: 'Airports', icon: 'connecting_airports', route: '/home/airports',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
       { label: 'Itineraries', icon: 'mode_of_travel', route: '/home/itineraries',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
       { label: 'Employees', icon: 'transfer_within_a_station', route: '/home/employees',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
-      { label: 'My Company', icon: 'ssid_chart', route:'/home/companies',hasAccess:this.determineAccess([Role.cr,Role.fm,Role.cm])},
-      { label: 'Companies', icon: 'ssid_chart', route: '/home/companies',hasAccess:this.determineAccess([Role.ad]) }
+      { label: 'My Company', icon: 'ssid_chart', route:'/home/company/mycompany',hasAccess:this.determineAccess([Role.cr,Role.fm])},
+      { label: 'Companies', icon: 'ssid_chart', route: '/home/company/admin',hasAccess:this.determineAccess([Role.ad]) },
+      { label: 'Manage Company', icon: 'ssid_chart', route: '/home/company/manage',hasAccess:this.determineAccess([Role.cm]) }
     ]
   }
 

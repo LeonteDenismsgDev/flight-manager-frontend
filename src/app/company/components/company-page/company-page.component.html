@@ -24,10 +24,10 @@
     <p-dialog [(visible)]="addCompanyDialog" [modal]="true" [draggable]="false" header="Create a new company">
         <div class="createCompanyDialogWrapper">
             <div class="createCompanyInput">
-                <p>Name:</p> <input pInput [(ngModel)]="newCompanyName" (change)="refreshSaveState()">
+                <p>Name:</p> <input pInputText [(ngModel)]="newCompanyName" (change)="refreshSaveState()">
             </div>
             <div class="createCompanyInput">
-                <p>Email:</p> <input pInput [(ngModel)]="newCompanyEmail" (change)="refreshSaveState()">
+                <p>Email:</p> <input pInputText [(ngModel)]="newCompanyEmail" (change)="refreshSaveState()">
             </div>
             <p-button label="Create" (click)="createNewCompany()" [disabled]="!saveEnabled"></p-button>
             

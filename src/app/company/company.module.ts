@@ -8,10 +8,14 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { FormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { MyCompanyComponent } from './components/my-company/my-company.component';
+import { ManageCompanyComponent } from './components/manage-company/manage-company.component';
+import { PanelModule } from 'primeng/panel';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 @NgModule({
-  declarations: [CompanyPageComponent],
+  declarations: [CompanyPageComponent, MyCompanyComponent, ManageCompanyComponent],
   imports: [
     CommonModule,
     CompanyRoutingModule,
@@ -19,7 +23,9 @@ import { DialogModule } from 'primeng/dialog';
     FormsModule,
     ScrollPanelModule,
     ButtonModule,
-    DialogModule
+    DialogModule,
+    PanelModule,
+    InputSwitchModule
   ]
 })
 export class CompanyModule { }

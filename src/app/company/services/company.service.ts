@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Company } from '../models/company';
 import { environment } from 'environment';
+import { UpdateCompany } from '../models/UpdateCompany';
 
 @Injectable({
   providedIn: 'root'
@@ -20,5 +21,13 @@ export class CompanyService {
 
   deleteCompany(name:string){
     return this.http.delete<string>(environment.apiUrl+"company/delete?name="+name);
+  }
+
+  getDataCurrent(){
+    return this.http.get<Company>(environment.apiUrl+"company/view/current");
+  }
+
+  editCompany(oldName:string,request:UpdateCompany){
+    return this.http.post<string>(environment.apiUrl+"company/update?name="+request.name,request);
   }
 }

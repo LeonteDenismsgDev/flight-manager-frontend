@@ -9,7 +9,6 @@ import { CompanyDataModel } from '../../models/CompanyDataModel';
   styleUrls: ['./company-page.component.css']
 })
 export class CompanyPageComponent implements OnInit{
-
   data:CompanyDataModel[]=[]
   addCompanyDialog:boolean = false;
   newCompanyName:string="";
@@ -33,6 +32,7 @@ export class CompanyPageComponent implements OnInit{
         data_.fleet = companyData.fleet;
         Object.keys(companyData.contactData).forEach(key => {
           const value = companyData.contactData[key];
+          
           data_.contactData.push({key,value})
         });
         this.data.push(data_)
