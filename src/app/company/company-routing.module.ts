@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CompanyPageComponent } from './components/company-page/company-page.component';
-import { MyCompanyComponent } from './components/my-company/my-company.component';
 import { masterGuard } from '../util/guards/master.guard';
 import { Role } from '../user/models/role';
 import { ManageCompanyComponent } from './components/manage-company/manage-company.component';
+import { MyCompanyComponent } from './components/my-company/my-company.component';
 
 const routes: Routes = [
   {
