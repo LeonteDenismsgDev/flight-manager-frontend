@@ -62,6 +62,12 @@ const routes: Routes = [
         data:{activeGuards:[Role.ad]}
       },
       {
+        path:'company',
+        loadChildren:()=>import('./../company/company.module').then(m=>m.CompanyModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad,Role.cm,Role.fm,Role.cr]}
+      },
+      {
         path:'settings',
         loadChildren:()=>import('./../settings/settings.module').then(m=>m.SettingsModule),
       }

@@ -37,14 +37,20 @@
     margin-top:50px;
 }
 
+
+
 ::ng-deep{
-    .p-button{
+    .header .p-button{
         margin-top:5px;
-        background-color: #62bcd5;
-        border-color: #62bcd5;
+        margin-left:10px
     }
     .p-button:hover{
         background-color: #3c1b83;
         border-color: #3c1b83;
+    }
+
+    .p-button{
+        background-color: #62bcd5;
+        border-color: #62bcd5;
     }
 }

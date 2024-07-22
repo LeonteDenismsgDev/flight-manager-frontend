@@ -1,0 +1,101 @@
+.manageCompanyWrapper{
+    display:flex;
+    width:100%;
+    height: 75%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.companySettingsEntry p{
+    display: inline-block;
+    width:40%;
+    margin-left:10%;
+    margin-top:0;
+    margin-bottom:0;
+}
+.companySettingsEntry .buttons{
+    width:15%;
+}
+.companySettingsEntry input{
+    width:50%;
+    height:30px;
+}
+
+.companySettingsEntry{
+    margin:10px 0;
+}
+
+.contacts p{
+    margin: 0 !important;
+}
+
+.companySettingsEntry .newKey{
+    width:25%;
+    margin-right:15%;
+    margin-left:10%;
+}
+
+.companyCard{
+    width:43vw;
+    height:50vh;
+}
+
+.companyCardBody{
+    height: 40vh;
+}
+.companyFooter{
+    display:flex;
+    gap:10px;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.buttons{
+    display: flex;
+    gap:10px;
+    margin-left: 10%;
+    margin-top:10px;
+}
+
+.companyFooter p{
+    margin: 0;
+}
+
+::ng-deep{
+    .companyFooter p-inputSwitch{
+        margin-top:3px;
+    }
+}
+
+.deleteButt{
+    background-color: red;
+    padding:4px;
+    border-color: red;
+    width:30px;
+    height:30px;
+}
+
+.acceptButt{
+    background-color: rgb(36, 233, 6);
+    padding:4px;
+    border-color: rgb(36, 233, 6);
+    width:30px;
+    height:30px;
+}
+
+.deleteButtonWrapper{
+    height: 30px !important;
+    display:inline-flex;
+    align-items: center;
+    width:50%;
+    padding-left:4%;
+}
+
+.deleteButtonWrapper .deleteButt{
+    margin-right:4%;
+}
+
+[hidden]{
+    visibility: hidden!important;
+}

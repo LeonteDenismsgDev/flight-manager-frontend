@@ -1,0 +1,30 @@
+<div class="manageCompanyWrapper">
+    <p-panel header="Company settings" class="companyCard">
+        <div class="companyCardBody">
+            <div class="companySettingsEntry">
+                <p>Name:</p><input pInputText [(ngModel)]="this.data.name" [disabled]="!editMode" (input)="refreshSaveState()">
+            </div>
+            <div class="companySettingsEntry contacts" *ngFor="let pair of this.data.contactData">
+                <div class="deleteButtonWrapper"><button pButton  icon="pi pi-trash" class = "deleteButt" [hidden]="!editMode || pair.key == 'email'" (click)="deleteContact(pair.key)"></button>
+                <p>{{pair.key[0].toLocaleUpperCase() + pair.key.slice(1)}}:</p></div>
+                <input pInputText [(ngModel)]="pair.value" [disabled]="!editMode" (input)="refreshSaveState()">
+            </div>
+            <div *ngIf="addingContact">
+                <div class="companySettingsEntry">
+                    <input pInputText [(ngModel)]="newContactKey" class="newKey" [disabled]="!editMode"><input pInputText [(ngModel)]="newContactValue" class="newValue" [disabled]="!editMode">
+                </div>
+                <div class="buttons">
+                    <button pButton  icon="pi pi-trash" class = "deleteButt"></button>
+                    <button pButton icon="pi pi-check" class = "acceptButt" (click)="addContact()"></button>
+                </div>
+            </div>
+        </div>
+            <div class="companyFooter">
+                <p-button label="Save" [disabled]="!canSave" (click)="editCompany()"/>
+                <p-button label="Revert Changes" [disabled]="!canSave" (click)="revert()"/>
+                <p-button label="Add new contact" (click)="enableAddingContact()" [disabled]="!editMode"/>
+                <p-inputSwitch [(ngModel)]="editMode" (ngModelChange)="editModeSwitch()"></p-inputSwitch>
+                <p>Edit Mode</p>
+            </div>
+    </p-panel>
+</div>

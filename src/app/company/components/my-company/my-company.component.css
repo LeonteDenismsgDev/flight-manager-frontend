@@ -1,0 +1,9 @@
+.myCompanyWrapper{
+    height: 100%;
+    width: 100%;
+    padding:4%;
+}
+
+.myCompanyWrapper h1{
+    margin: 0;
+}
