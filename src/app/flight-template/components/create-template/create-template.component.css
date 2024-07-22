@@ -9,6 +9,11 @@
     border-bottom-width: 1px;
 }
 
+.edit_attr_btn{
+ margin-left: 70%;
+ height: 5%;
+}
+
 
 #attributes-widget{
     width: 50%;
@@ -126,7 +131,7 @@ li{
 
 .attributes-list{
     height: 80px;
-    overflow-y: auto;
+    overflow-x: auto;
     padding-top: 0px !important;
     margin-right: 10px;
     height: 100%;
@@ -148,9 +153,6 @@ li{
 .slected-zone{
     margin-top:10px;
     width: 100%;
-    border-style: dashed;
-    border-color: dimgray;
-    border-radius: 25px;
 }
 
 
@@ -164,7 +166,7 @@ li{
     margin-right: 8px;
     margin-left: auto;
     margin-bottom: 6px;
-    border-radius: 3px;
+    border-radius: 10px;
     border-width: 1px;
     border-style: solid;
     border-color: dimgray;
@@ -177,10 +179,12 @@ li{
     height: 100%;
 }
 
-.search-button{
-    background-color: transparent;
+.active, .search-input:focus{
     border-color: transparent;
-    height: 100%;
+}
+
+.search-button{
+    margin:6px
 }
 
 .functinal-widget{
@@ -218,4 +222,19 @@ li{
     border-radius: 5px;
     border-color: transparent;
     background-color: transparent;
+}
+
+.select-label{
+    border-radius: 10px;
+    border-style: dashed;
+    border-width: 2.5px;
+    border-color: dimgray;
+    padding: 30%;
+    font-weight: bold;
+    color: dimgray;
+    text-align: center;
+}
+
+.upload-icon{
+    font-size: large;
 }

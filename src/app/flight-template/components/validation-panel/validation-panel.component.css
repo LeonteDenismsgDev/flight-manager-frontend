@@ -1,0 +1,63 @@
+.object_attribute{
+    width: 100%;
+}
+
+.attribute-btn{
+    height: 60px;
+    font-size: 20px;
+    background-color: aquamarine;
+}
+
+.validation-rule{
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+.collapsible {
+    background-color: #f5f9ff;
+    color: black;
+    cursor: pointer;
+    padding-left: 10px;
+    padding-top: 5px;
+    width: 100%;
+    border-style: solid;
+    border-width: 1px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-color: transparent;
+    display: flex;
+    outline: none;
+    font-weight: 450;
+    border-bottom-color:dimgray;
+    border-bottom-width: 1px;
+  }
+
+  .collapsible-button{
+    margin-left: auto;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    padding-right: 15px;
+    font-size: 14px;
+    width: 15%;
+    border-color: transparent;
+    border-style: solid;
+    border-radius: 3px;
+    background-color: transparent;
+    display: block;
+  }
+  
+.active, .collapsible-button:hover, .search-button:hover{
+    background-color: #62bcd5;
+    border-color: transparent;
+}
+  
+  .collapsible-content {
+    padding: 10px 20px;
+    display: none;
+    overflow: hidden;
+    background-color: #f5f9ff;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: dimgray;
+    height: 900px;
+  }

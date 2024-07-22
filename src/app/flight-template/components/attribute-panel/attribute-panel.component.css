@@ -1,0 +1,44 @@
+.input_attribute{
+    border-color: transparent;
+    border-bottom-color: dimgray;
+    border-bottom-width: 1px;
+    font-size: 20px;
+}
+
+.attr_panel{
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    height: 95%;
+    overflow-x: auto;
+}
+
+.element{
+    margin-bottom: 15px;
+}
+
+.check_label{
+    margin-left:20%;
+    margin-right: 5px;
+}
+
+.attr_desc{
+    font-size: 15px;
+}
+
+.attributes{
+    margin-left: 10px;
+}
+
+.submitt-attr-btn{
+    margin-top: 20px;
+    margin-left:77%;
+}
+
+.err_msg{
+    color: red;
+    font-weight: 200;
+    font-style: oblique;
+    margin: 1px;
+    width: 50%;
+}

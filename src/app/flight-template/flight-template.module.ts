@@ -16,16 +16,27 @@ import { PanelModule } from 'primeng/panel';
 import { TagModule } from 'primeng/tag';
 import { ValidationRuleComponent } from './components/validation-rule/validation-rule.component';
 import { CalendarModule } from 'primeng/calendar';
-
+import { ValidationPanelComponent } from './components/validation-panel/validation-panel.component';
+import { AttributePanelComponent } from './components/attribute-panel/attribute-panel.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { AttributePanelDefaultComponent } from './components/attribute-panel-default/attribute-panel-default.component';
+import { DisplyObjectPanelComponent } from './components/disply-object-panel/disply-object-panel.component';
+import { DisplayArrayPanelComponent } from './components/display-array-panel/display-array-panel.component';
 
 
 @NgModule({
   declarations: [
     FlightTemplateComponent,
     CreateTemplateComponent,
-    ValidationRuleComponent
+    ValidationRuleComponent,
+    ValidationPanelComponent,
+    AttributePanelComponent,
+    AttributePanelDefaultComponent,
+    DisplyObjectPanelComponent,
+    DisplayArrayPanelComponent
   ],
   imports: [
+    CheckboxModule,
     CalendarModule,
     CommonModule,
     FlightTemplateRoutingModule,

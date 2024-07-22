@@ -11,33 +11,82 @@ import { VALIDATION_RULES } from '../../models/ValidationRules';
 export class CreateTemplateComponent {
  value:string = "Template Name"
  draggedAttribute: ViewAttributes | null= null
+ attributeList : ViewAttributes[] = []
  avialableAttributes : ViewAttributes[] =[]
  selectedAttributes : ViewAttributes[] =[]
  selectedAttribute : ViewAttributes | null = null
- validationRules : any= VALIDATION_RULES
+ validationRules : any[] = []
  templateRules = []
+ searchText : string = ""
+ createAttribute: boolean = false
+ operation : string = "Save Attribute"
 
  constructor(private flightTemplateService:FlightTemplateService){}
 
+ deleteAttribute(attribute: ViewAttributes){
+  this.flightTemplateService.deleteAttribute(attribute.id).subscribe((response: string) =>{
+    this.getAttributes()
+  })
+ }
+
+ newAttribute(){
+  this.createAttribute = true
+  this.selectedAttribute = null
+  this.operation = "Save Attribute"
+ }
+
+ serchAttribute(event :Event){
+  let keyEvent = event as KeyboardEvent
+  const input = event.target as HTMLInputElement
+  if (keyEvent.key  === 'Enter') {
+   let text = input.value
+   this.filterAttribute(text)
+  }
+   if(keyEvent.key==="Backspace" && input.value===""){
+    this.attributeList = this.avialableAttributes
+   }
+ }
+
+ filterAttribute(key: string){
+  this.attributeList = []
+  this.attributeList = this.avialableAttributes.filter(attribute =>{
+   return this.keycontainedInSerchKeywords(key,attribute.searchKeyWords)
+  })
+ }
+
+keycontainedInSerchKeywords(key: string, keys:string[]):boolean{
+  for (let index in keys) {
+    if(keys[index].includes(key)){
+      return true
+    }
+  }
+return false
+}
+
 ngOnInit(): void {
+  this.getAttributes()
+}
+
+attributeChanges($event :any){
+  this.getAttributes()
+}
+
+getAttributes(){
   this.flightTemplateService.getAvailableAttributes().subscribe(
     (result:ViewAttributes[])=>{
-      console.log(result)
       this.avialableAttributes = result
+      if(this.searchText !== ""){
+        this.filterAttribute(this.searchText)
+      }else{
+        this.attributeList = result
+      }
     });
 }
 
-getValidations(){
-  const type: string = this.selectedAttribute?.type ?? "";
-  if(type == null){
-    return []
-  }
-  return this.validationRules[type]
-}
-
-selectAttribute(attribute : ViewAttributes):void{
+selectAttribute(attribute : ViewAttributes, enableCreate: boolean):void{
   this.selectedAttribute = attribute;
-  console.log(this.selectAttribute)
+  this.createAttribute=enableCreate
+  this.operation =  "Update Attribute"
 }
 
 toggle(event : Event) : void{
@@ -45,7 +94,6 @@ toggle(event : Event) : void{
  const collasible = toggleButton.parentElement;
  if(parent){
   const collapsibleContent = collasible?.nextElementSibling as HTMLElement;
-  console.log(collapsibleContent)
   if(collapsibleContent){
     if(collapsibleContent.style.display === "block"){
       collapsibleContent.style.display = "none"
@@ -58,15 +106,16 @@ toggle(event : Event) : void{
 
 drop() {
 if(this.draggedAttribute !== null){
-  this.selectedAttributes.push(this.draggedAttribute as ViewAttributes)
-   this.avialableAttributes = this.avialableAttributes.filter(attribute => attribute.id !== this.draggedAttribute?.id)
+  this.selectedAttributes = [...this.selectedAttributes,this.draggedAttribute]
+   this.attributeList = this.attributeList.filter(attribute => attribute.id !== this.draggedAttribute?.id)
   this.draggedAttribute = null
 }
 }
 
 unselectAttribute(attribute : ViewAttributes){
-this.avialableAttributes.push(attribute)
+this.attributeList.push(attribute)
 this.selectedAttributes = this.selectedAttributes.filter(attr => attribute.id !== attr.id)
+this.selectedAttribute = null
 }
 
 dragEnd() {
@@ -74,5 +123,10 @@ this.draggedAttribute=null
 }
 dragStart(attribute: ViewAttributes) {
 this.draggedAttribute=attribute
+}
+
+addValidationRule($event : any){
+this.validationRules = [...this.validationRules,$event]
+console.log(this.validationRules)
 }
 }

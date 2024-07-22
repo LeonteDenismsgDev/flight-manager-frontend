@@ -1,0 +1,23 @@
+<div class="validation-section">
+    <p class="validation-header" *ngIf="selectedAttribute">{{getAttribute("label")}}:{{getAttribute("type")}}</p>
+    <ng-container [ngSwitch]="attributeTypePanel()"> 
+        <div *ngSwitchCase="'predefined_object'" class="flex-column">
+        <button (click)="chnage_selcted(attribute)" class="attribute-btn" *ngFor="let attribute of getObjectAttributes()" class="object_attribute">{{attribute.label}}</button>
+        </div>
+        <div *ngSwitchCase="'object'" class="flex-column">
+            <button (click)="chnage_selcted(attribute)" class="attribute-btn" *ngFor="let attribute of getObjectAttributes()" class="object_attribute">{{attribute}}</button>
+            </div>
+        <div *ngSwitchCase="'base_attribute'" class="validation-op">
+        <div *ngFor=" let rule of getValidations()" class="validation-rule">
+            <div class="collapsible">
+                <p>{{rule.label}}</p><button (click)="toggle($event)"
+                    class="collapsible-button">+</button>
+            </div>
+            <app-validation-rule (addValidationRule)="addValidationRule($event)" class="collapsible-content" [templateSelectedAttribute]="getAttribute('name')" [rule]="rule"[selectedAttributes]="selectedAttributes" attributeType="selectAttribute.type"></app-validation-rule>
+        </div>
+        </div>
+        <div *ngSwitchCase="'error'" class="flex-column">
+           <p>Unknown attribute</p>
+        </div>
+    </ng-container>    
+</div>

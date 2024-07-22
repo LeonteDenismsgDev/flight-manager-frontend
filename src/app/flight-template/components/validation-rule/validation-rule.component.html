@@ -1,74 +1,122 @@
+<div>
 <ng-container [ngSwitch]="rule.inputType">
     <div *ngSwitchCase="'text'" class="validation-op">
         <label [for]="rule.name + 'input'">Text reference :</label>
         <br>
+        <p *ngIf="text_err_msg">*Empty text reference</p>
         <div class="widget-content">
-        <input class="validation-input" [id]="rule.name + 'input'" type="text"/>
-        <p-dropdown 
-        [options]="selectedAttributes" 
-        placeholder="Attribute reference" 
-        [editable]="true" 
-        optionLabel="label" />
-        <p-button icon="pi pi-check" />
+        <input class="validation-input" (input)="changeToText()" [(ngModel)]="textReference" [autocomplete]="'off'" [id]="rule.name + 'input'" type="text"/>
+        <div class="dropdown">
+            <button class="dropbtn">
+                <p *ngIf="selectedAttribute != undefined; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                <ng-template #buttonIconTemplate>
+                  <p *ngIf="finalSelectedAttribute; else btnTemplate">{{finalSelectedAttribute}}</p>
+                  <ng-template #btnTemplate>
+                    <i class="pi pi-book"></i>
+                  </ng-template>
+                </ng-template>
+            </button>
+            <div class="dropdown-content">
+              <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+            </div>
+          </div>
+          <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
         </div>
     </div>
     <div *ngSwitchCase="'array'" class="validation-op">
         <label>Possible values</label>
+        <p *ngIf="array_err_msg">*Empty values references</p>
         <div class="widget-content">
-            <p-tag [rounded]="true" *ngFor="let tag of possibleValues[rule.name]">{{tag}}</p-tag>
+            <p-tag [rounded]="true" *ngFor="let tag of possibleValues[rule.name]">
+                {{tag}}
+                <button (click)="removePossibleValue(tag)" class="rmv_tag_btn">x</button>
+            </p-tag>
         </div>
         <div class="widget-content">
-        <input class="validation-input" (keydown.enter)="onInputEnter($event,rule)">
-        <p-dropdown 
-        [options]="selectedAttributes" 
-        placeholder="Attribute reference" 
-        [editable]="true" 
-        optionLabel="label" />
-        <p-button icon="pi pi-check" />
+        <input class="validation-input" [(ngModel)]="arrayTextReference" (keydown.enter)="onInputEnter($event,rule)">
+        <div class="dropdown">
+            <button class="dropbtn">
+                <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                <ng-template #buttonIconTemplate>
+                  <i class="pi pi-book"></i>
+                </ng-template>
+            </button>
+            <div class="dropdown-content">
+              <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+            </div>
+          </div>
+          <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
         </div>
     </div>
     <div *ngSwitchCase="'number'" class="validation-op">
         <label [for]="rule.name + 'input'">Number reference :</label>
         <br>
+        <p *ngIf="number_err_msg">*Empty number reference</p>
         <div class="widget-content">
             <p-inputNumber 
+            [(ngModel)]="numberReference"
+            (onInput)="changeToText()"
             inputId="rule.name + 'input'"
             /> 
-        <p-dropdown 
-        [options]="selectedAttributes" 
-        placeholder="Attribute reference" 
-        [editable]="true" 
-        optionLabel="label" />
-        <p-button icon="pi pi-check" />
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                    <ng-template #buttonIconTemplate>
+                      <i class="pi pi-book"></i>
+                    </ng-template>
+                </button>
+                <div class="dropdown-content">
+                  <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                </div>
+              </div>
+              <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
         </div>
     </div>
-    <div *ngSwitchCase="'precision-number'" class="validation-op">
+    <div *ngSwitchCase="'precision_number'" class="validation-op">
         <label [for]="rule.name + 'input'">Number reference :</label>
         <br>
+        <p *ngIf="number_err_msg">*Empty number reference</p>
         <div class="widget-content">
             <p-inputNumber 
+            [(ngModel)]="numberReference"
+            (onInput)="changeToText()"
             inputId="rule.name + 'input'"
             mode="decimal" 
             [minFractionDigits]="2" 
             [maxFractionDigits]="5" /> 
-        <p-dropdown 
-        [options]="selectedAttributes" 
-        placeholder="Attribute reference" 
-        [editable]="true" 
-        optionLabel="label" />
-        <p-button icon="pi pi-check" />
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                    <ng-template #buttonIconTemplate>
+                      <i class="pi pi-book"></i>
+                    </ng-template>
+                </button>
+                <div class="dropdown-content">
+                  <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                </div>
+              </div>
+              <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
         </div>
     </div>
     <div *ngSwitchCase="'date'" class="validation-op">
         <label [for]="rule.name + 'input'">Date reference:</label>
         <br>
+        <div *ngIf="date_err_msg">
+            <p *ngIf="time_err_msg">*Empty time reference</p>
+            <p *ngIf="date_err_msg">*Empty date reference</p>
+        </div>
         <div class="widget-content">
+            <diV>
             <p-calendar 
+            [(ngModel)]="dateReference"
+            (onSelect)="changeToText()"
             [showIcon]="true" 
             [showOnFocus]="false" 
             inputId="rule.name + 'date_input'"
             />
             <p-calendar 
+            [(ngModel)]="timeReference"
+            (onSelect)="changeToText()"
             [showIcon]="true" 
             [timeOnly]="true" 
             inputId="rule.name + 'time_input'"
@@ -77,12 +125,106 @@
                 <i class="pi pi-user pointer-events-none" (click)="clickCallBack($event)"></i>
             </ng-template>
             </p-calendar>
-        <p-dropdown 
-        [options]="selectedAttributes" 
-        placeholder="Attribute reference" 
-        [editable]="true" 
-        optionLabel="label" />
-        <p-button icon="pi pi-check" />
+        </diV>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                    <ng-template #buttonIconTemplate>
+                      <i class="pi pi-book"></i>
+                    </ng-template>
+                </button>
+                <div class="dropdown-content">
+                  <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                </div>
+              </div>
+              <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
         </div>
     </div>
+    <div *ngSwitchCase="'interval'" class="validation-op">
+        <label [for]="rule.name + 'input'">Start Date:</label>
+        <br>
+        <div *ngIf="start_date_err_msg">
+            <p *ngIf="start_time_err_msg">*Empty start time reference</p>
+            <p *ngIf="start_dt_err_msg">*Empty start date reference</p>
+        </div>
+        <div class="widget-content">
+            <diV>
+            <p-calendar 
+            [(ngModel)]="startDateReference"
+            (onSelect)="changeToText()"
+            [showIcon]="true" 
+            [showOnFocus]="false" 
+            inputId="rule.name + 'date_input'"
+            />
+            <p-calendar 
+            [(ngModel)]="startTimeReference"
+            (onSelect)="changeToText()"
+            [showIcon]="true" 
+            [timeOnly]="true" 
+            inputId="rule.name + 'time_input'"
+            >
+            <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+                <i class="pi pi-user pointer-events-none" (click)="clickCallBack($event)"></i>
+            </ng-template>
+            </p-calendar>
+        </diV>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <p *ngIf="startSelectedAttribute; else buttonIconTemplate">{{startSelectedAttribute.label}}</p>
+                    <ng-template #buttonIconTemplate>
+                      <i class="pi pi-book"></i>
+                    </ng-template>
+                </button>
+                <div class="dropdown-content">
+                  <p (click)="selectStartAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                </div>
+              </div>
+            </div>
+              <label [for]="rule.name + 'input'">End Date:</label>
+        <br>
+        <div *ngIf="end_date_err_msg">
+            <p *ngIf="end_time_err_msg">*Empty time reference</p>
+            <p *ngIf="end_dt_err_msg">*Empty date reference</p>
+        </div>
+        <div class="widget-content">
+            <diV>
+            <p-calendar 
+            [(ngModel)]="endDateReference"
+            (onSelect)="changeToText()"
+            [showIcon]="true" 
+            [showOnFocus]="false" 
+            inputId="rule.name + 'date_input'"
+            />
+            <p-calendar 
+            [(ngModel)]="endTimeReference"
+            (onSelect)="changeToText()"
+            [showIcon]="true" 
+            [timeOnly]="true" 
+            inputId="rule.name + 'time_input'"
+            >
+            <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
+                <i class="pi pi-user pointer-events-none" (click)="clickCallBack($event)"></i>
+            </ng-template>
+            </p-calendar>
+        </diV>
+            <div class="dropdown">
+                <button class="dropbtn">
+                    <p *ngIf="endSelectedAttribute; else buttonIconTemplate">{{endSelectedAttribute.label}}</p>
+                    <ng-template #buttonIconTemplate>
+                      <i class="pi pi-book"></i>
+                    </ng-template>
+                </button>
+                <div class="dropdown-content">
+                  <p (click)="selectEndAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                </div>
+              </div>
+              </div>
+              <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
+        </div>
 </ng-container>
+<div *ngIf="selectedObject">
+  <button (click)="selectAttr(attribute)" *ngFor="let attribute of selectedObjectKeys()">
+    {{attribute}}:{{selectedObjecValueType(attribute)}}
+  </button>
+</div>
+</div>

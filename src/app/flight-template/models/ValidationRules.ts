@@ -37,9 +37,9 @@ export const VALIDATION_RULES={
             label:"Part of the list :"
         },
     ],
-    precison_number:[
+    precision_number:[
         {
-            inputType:"ptrcision_number",
+            inputType:"precision_number",
             name:"min",
             label:"Less than :"
         },{
@@ -70,7 +70,7 @@ export const VALIDATION_RULES={
             name:"after",
             label:"After :"
         },{
-            inputType:"intreval",
+            inputType:"interval",
             name:"start,end",
             label:"In the intreval of time :"
         }

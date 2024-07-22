@@ -1,0 +1,36 @@
+.obj_attr_edt{
+    margin-left: 70%;
+}
+
+.obj_attr_ed{
+    margin-left: 86%;
+}
+
+.element {
+    display: flex;
+    flex-direction: row;
+    padding: 1%;
+}
+
+.element:hover{
+    background-color: aliceblue;
+}
+
+.obj_elem{
+    background-color:transparent;
+}
+
+.obj_elem:hover{
+    background-color: aliceblue;
+}
+
+.attr_btn{
+    height: 40px;
+    border-radius: 5px;
+    margin-right: 2%;
+    border-color: transparent;
+    background-color:#62bcd5;
+    padding: 10px;
+    margin-top : 1%;
+    background-color: #fff;
+}

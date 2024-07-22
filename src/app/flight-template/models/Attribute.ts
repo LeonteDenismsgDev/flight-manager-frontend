@@ -18,6 +18,19 @@ export class ViewAttributes{
         public type:string,
         public defaultValue:Object,
         public searchKeyWords:string[],
-        public description:string
+        public description:string,
+        public editable:boolean,
+        public globalVisibility:boolean
+    ){}
+}
+
+export class RegisterAttribute{
+    constructor(
+        public name:string,
+        public isGlobal:boolean,
+        public isRequired:boolean,
+        public type:string,
+        public defaultValue:Object,
+        public description:string,
     ){}
 }

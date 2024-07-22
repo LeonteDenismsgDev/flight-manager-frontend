@@ -7,8 +7,10 @@
         <div id="widget-header">
             <p id="widget-label">Attributes</p>
             <div class="image-filed">
-                <button class="search-button"><i class="pi pi-search"></i></button>
-                <input 
+                <i class="pi pi-search search-button"></i>
+                <input
+                [(ngModel)]="searchText"
+                (keydown)="serchAttribute($event)"
                 type="text" 
                 pInputText 
                 class="search-input"
@@ -17,23 +19,29 @@
         </div>
         <div class="widget-content">
             <div class="attributes-list">
-                <button class="new-button">New</button>
+                <button (click)="newAttribute()" class="new-button">New</button>
                 <ul class="list-none flex flex-column gap-2 p-0 m-0">
-                    <li *ngFor="let attribute of avialableAttributes" class="p-2 border-round shadow-1" pDraggable
+                    <li *ngFor="let attribute of attributeList" class="p-2 border-round shadow-1" pDraggable
                         (onDragStart)="dragStart(attribute)" (onDragEnd)="dragEnd()">
                         <div class="collapsible">
                             <p>{{attribute.label}}</p><button (click)="toggle($event)"class="collapsible-button">+</button>
                         </div>
                         <div class="collapsible-content">
                             <p>{{attribute.description}}</p>
+                            <p-button (onClick)="selectAttribute(attribute,true)" class="edit_attr_btn" *ngIf="attribute.editable" icon="pi pi-pencil"/>
+                            <p-button (onClick)="deleteAttribute(attribute)" class="edit_attr_btn" *ngIf="attribute.editable">Delete Attribute</p-button>
                         </div>
                     </li>
                 </ul>
             </div>
-            <div class="slected-zone" pDroppable (onDrop)="drop()">
+            <div class="slected-zone flex-column" pDroppable (onDrop)="drop()">
+                <div class="select-label" *ngIf="selectedAttributes.length===0">
+                    <i class="pi pi-upload upload-icon"></i>
+                    <p>Drag&Drop attributes here</p>
+                </div>
                 <ul class="list-none flex flex-column gap-2 p-0 m-0" *ngIf="selectedAttributes.length>0">
                     <li *ngFor="let attribute of selectedAttributes" class="p-2 border-round shadow-1">
-                       <div (click)="selectAttribute(attribute)">
+                       <div (click)="selectAttribute(attribute, false)">
                         <div class="collapsible">
                             <p>{{attribute.label}}</p>
                             <button (click)="toggle($event)" class="collapsible-button">+</button>
@@ -46,24 +54,10 @@
                     </li>
                 </ul>
             </div>
-            <div class="selectAttribute" *ngIf="selectedAttributes.length===0">
-                <i class="pi pi-upload"></i>
-                <p>Drag&Drop attributes here</p>
-            </div>
         </div>
     </div>
     <div class="functinal-widget">
-        <div class="validation-section">
-            <p class="validation-header" *ngIf="selectedAttribute">{{selectedAttribute?.label}}:{{selectedAttribute?.type}}</p>
-            <div>
-                <div *ngFor=" let rule of getValidations()" class="validation-rule">
-                    <div class="collapsible">
-                        <p>{{rule.label}}</p><button (click)="toggle($event)"
-                            class="collapsible-button">+</button>
-                    </div>
-                    <app-validation-rule [rule]="rule"[selectedAttributes]="selectedAttributes" attributeType="selectAttribute.type"></app-validation-rule>
-            </div>
-        </div>
+        <app-attribute-panel (attributeChanges)="attributeChanges($event)" [operation]="operation" *ngIf="createAttribute === true" [name]="selectedAttribute?.label" [type]="selectedAttribute?.type" [description]="selectedAttribute?.description" [defaultValue]="this.selectedAttribute?.defaultValue" [isRequired]="this.selectedAttribute?.required" [isGlobal]="this.selectedAttribute?.globalVisibility" [selectedAttribute]="selectedAttribute"></app-attribute-panel>
+        <app-validation-panel (addRule)="addValidationRule($event)" *ngIf="selectedAttribute && createAttribute === false" [selectedAttribute]="selectedAttribute" [selectedAttributes]="selectedAttributes"></app-validation-panel>
     </div>
-</div>
 </div>

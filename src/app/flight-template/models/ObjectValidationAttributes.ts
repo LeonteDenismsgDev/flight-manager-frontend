@@ -1,0 +1,26 @@
+export const OBJECTS_VALIDATION_ATTRIBUTES={
+    user:[
+        {
+            name:"address",
+            label:"Address",
+            type:"text"
+        },
+        {
+            name:"company",
+            label:"Company",
+            type:"text"
+        },
+        {
+            name:"role",
+            label:"Role",
+            type:"text"
+        }
+    ],
+    company:[
+        {
+            name:"name",
+            label:"Name",
+            type:"text"
+        }
+    ]
+}
