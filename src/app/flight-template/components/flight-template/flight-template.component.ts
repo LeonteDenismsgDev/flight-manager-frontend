@@ -1,8 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FlightTemplateService } from '../../services/flight-template.service';
 import { FlightTemplateTableResponse } from '../../models/FlightTemplateTableResponse';
 import { FlightTemplate } from '../../models/FlightTemplate';
 import { REQUIRED_ATTRIBUTES } from '../../models/RequiredAttributes';
+import { Router } from '@angular/router';
 
 interface PageEvent {
   first: number;
@@ -24,7 +25,7 @@ export class FlightTemplateComponent implements OnInit{
   size:number = 4;
   max_page:number = 0;
 
-  constructor(private flightTemplateService:FlightTemplateService){}
+  constructor(private flightTemplateService:FlightTemplateService, private router:Router){}
 
   ngOnInit(){
     this.refreshTable();
@@ -48,5 +49,9 @@ export class FlightTemplateComponent implements OnInit{
     if(this.page >= this.max_page) return;
     this.page+=1;
     this.refreshTable();
+  }
+
+  goToNewTemplatePage(){
+    this.router.navigate(['/home/flightTemplates/create']);
   }
 }

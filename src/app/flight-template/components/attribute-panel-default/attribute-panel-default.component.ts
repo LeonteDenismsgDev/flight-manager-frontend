@@ -208,7 +208,7 @@ reciveValue($event :any){
 }
 
 addValueToArray(){
-  if( this.childValue !== undefined || this.childValue !== null){
+  if( this.childValue !== undefined && this.childValue !== null){
   this.arrayContent= [...this.arrayContent, this.childValue]
   console.log(this.childValue)
   console.log({

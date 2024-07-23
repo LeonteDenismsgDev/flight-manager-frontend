@@ -87,9 +87,15 @@ arrayMessage(element : any) :string{
           message+= this.objectToString(arrayElement)+", "
       })
        }else{
-        element["values"].forEach((arrayElement: any)=>{
-          message+= arrayElement+", "
-      })
+        if(element.constructor.name == "Array"){
+          element.forEach((arrayElement: any)=>{
+            message+= arrayElement+", "
+        })}
+        else{
+          element["values"].forEach((arrayElement: any)=>{
+            message+= arrayElement+", "
+        })
+        }
        }
     }
     }
