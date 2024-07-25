@@ -13,7 +13,7 @@
                 <p>{{rule.label}}</p><button (click)="toggle($event)"
                     class="collapsible-button">+</button>
             </div>
-            <app-validation-rule (addValidationRule)="addValidationRule($event)" class="collapsible-content" [templateSelectedAttribute]="getAttribute('name')" [rule]="rule"[selectedAttributes]="selectedAttributes" attributeType="selectAttribute.type"></app-validation-rule>
+            <app-validation-rule [attributeName]="this.selectedAttribute?.name" (changeAlreadyExistent)="changeExistent()" [alreadyExsitentRule]="alreadExistentRule" (rmvRule)="removeRule($event)" [attrType]="sendType()" [attributeValidations]="attributesValidations" (addValidationRule)="addValidationRule($event)" class="collapsible-content" [templateSelectedAttribute]="getAttribute('name')" [rule]="rule"[selectedAttributes]="selectedAttributes" attributeType="selectAttribute.type"></app-validation-rule>
         </div>
         </div>
         <div *ngSwitchCase="'error'" class="flex-column">

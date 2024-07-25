@@ -10,6 +10,7 @@ export const VALIDATION_RULES={
         label:"Same with :"
         },{
             inputType:"array",
+            of:"text",
             name:"values",
             label:"Part of the list:"
         }
@@ -33,6 +34,7 @@ export const VALIDATION_RULES={
             label:"Greater or equal with :"
         },{
             inputType:"array",
+            of:"number",
             name:"values",
             label:"Part of the list :"
         },
@@ -56,6 +58,7 @@ export const VALIDATION_RULES={
             label:"Greater or equal with :"
         },{
             inputType:"array",
+            of:"precision_number",
             name:"values",
             label:"Part of the list :"
         }
@@ -69,7 +72,8 @@ export const VALIDATION_RULES={
             inputType:"date",
             name:"after",
             label:"After :"
-        },{
+        },
+        {
             inputType:"interval",
             name:"start,end",
             label:"In the intreval of time :"
@@ -77,7 +81,7 @@ export const VALIDATION_RULES={
     ],
     array:[
         {
-            inputType:"object",
+            inputType:"attribute",
             name:"contained",
             label:"Conatines :"
         },{

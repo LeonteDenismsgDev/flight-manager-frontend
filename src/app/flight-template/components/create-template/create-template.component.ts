@@ -20,6 +20,7 @@ export class CreateTemplateComponent {
  searchText : string = ""
  createAttribute: boolean = false
  operation : string = "Save Attribute"
+ alreadExistentRule : boolean = false
 
  constructor(private flightTemplateService:FlightTemplateService){}
 
@@ -126,7 +127,62 @@ this.draggedAttribute=attribute
 }
 
 addValidationRule($event : any){
-this.validationRules = [...this.validationRules,$event]
-console.log(this.validationRules)
+  let isAlreadyInList = false
+  this.validationRules.forEach((rule: any)=>{
+    let keys = Object.keys($event)
+    let containesAllKeys : boolean = true
+    keys.forEach((key)=>{
+      if(rule[key] === undefined){
+        containesAllKeys = false
+      }
+    })
+    if(containesAllKeys){
+      let allKeysEquals = true
+      keys.forEach((key)=>{
+        if(rule[key] !== $event[key]){
+            allKeysEquals = false
+        }
+      })
+      if(allKeysEquals){
+        isAlreadyInList = true
+      }
+    }
+  })
+  if(!isAlreadyInList){
+    this.validationRules = [...this.validationRules,$event]
+  }else{
+    this.alreadExistentRule = true
+  }
+}
+
+removeRule($event : any ){
+   this.validationRules = this.validationRules.filter((rule)=>{
+    let keys = Object.keys($event)
+    let containesAllKeys : boolean = true
+    keys.forEach((key)=>{
+      if(rule[key] === undefined){
+        containesAllKeys = false
+      }
+    })
+    if(containesAllKeys){
+      let allKeysEquals = true
+      keys.forEach((key)=>{
+        if(rule[key] !== $event[key]){
+            allKeysEquals = false
+        }
+      })
+      if(allKeysEquals){
+        return false
+      }else{
+        return true
+      }
+    }else{
+      return true
+    }
+   })
+}
+
+changeExistent(){
+  this.alreadExistentRule = false
 }
 }

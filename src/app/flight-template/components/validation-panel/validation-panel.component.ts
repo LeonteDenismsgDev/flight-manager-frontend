@@ -13,11 +13,28 @@ export class ValidationPanelComponent{
 selectedAttribute : ViewAttributes | null = null
 @Input()
 selectedAttributes : ViewAttributes[] =[]
+@Input ()
+attributesValidations : any[] = []
 @Output()
 addRule = new EventEmitter<any>()
+@Output()
+rmvRule = new EventEmitter<any>()
+@Output()
+changeAlreadyExistent = new EventEmitter<void>()
+@Input()
+alreadExistentRule : boolean = false
 validationRules : any= VALIDATION_RULES
 objectValidationRules : any = OBJECTS_VALIDATION_ATTRIBUTES
 customValidationRules : any[] =[]
+
+changeExistent(){
+this.changeAlreadyExistent.emit()
+}
+
+sendType(): string{
+  let defValue : any = this.selectedAttribute?.defaultValue
+  return defValue["of"]
+}
 
 attributeTypePanel(): string{
   if(this.selectedAttribute === null){
@@ -121,6 +138,10 @@ attributeType(attribute:string) : string{
     }
   }
   return "undefined"
+}
+
+removeRule($event: any){
+this.rmvRule.emit($event)
 }
 
 getValidations(){

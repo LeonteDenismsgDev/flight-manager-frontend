@@ -57,7 +57,7 @@
         </div>
     </div>
     <div class="functinal-widget">
-        <app-attribute-panel (attributeChanges)="attributeChanges($event)" [operation]="operation" *ngIf="createAttribute === true" [name]="selectedAttribute?.label" [type]="selectedAttribute?.type" [description]="selectedAttribute?.description" [defaultValue]="this.selectedAttribute?.defaultValue" [isRequired]="this.selectedAttribute?.required" [isGlobal]="this.selectedAttribute?.globalVisibility" [selectedAttribute]="selectedAttribute"></app-attribute-panel>
-        <app-validation-panel (addRule)="addValidationRule($event)" *ngIf="selectedAttribute && createAttribute === false" [selectedAttribute]="selectedAttribute" [selectedAttributes]="selectedAttributes"></app-validation-panel>
+        <app-attribute-panel  (attributeChanges)="attributeChanges($event)" [operation]="operation" *ngIf="createAttribute === true" [name]="selectedAttribute?.label" [type]="selectedAttribute?.type" [description]="selectedAttribute?.description" [defaultValue]="this.selectedAttribute?.defaultValue" [isRequired]="this.selectedAttribute?.required" [isGlobal]="this.selectedAttribute?.globalVisibility" [selectedAttribute]="selectedAttribute"></app-attribute-panel>
+        <app-validation-panel (changeAlreadyExistent)="changeExistent()" [alreadExistentRule]="alreadExistentRule" (rmvRule)="removeRule($event)" (addRule)="addValidationRule($event)" [attributesValidations]="validationRules" *ngIf="selectedAttribute && createAttribute === false" [selectedAttribute]="selectedAttribute" [selectedAttributes]="selectedAttributes"></app-validation-panel>
     </div>
 </div>

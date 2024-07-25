@@ -1,4 +1,11 @@
 <div>
+  <div *ngFor="let vrule of getValidationRules()">
+    <p>
+      {{getRuleValue(vrule)}}
+    </p>
+    <button (click)="removeRule(vrule)">X</button>
+  </div>
+  <p *ngIf="alreadyExsitentRule">There is aleady a similiar rule for the attribute</p>
 <ng-container [ngSwitch]="rule.inputType">
     <div *ngSwitchCase="'text'" class="validation-op">
         <label [for]="rule.name + 'input'">Text reference :</label>
@@ -36,9 +43,12 @@
         <input class="validation-input" [(ngModel)]="arrayTextReference" (keydown.enter)="onInputEnter($event,rule)">
         <div class="dropdown">
             <button class="dropbtn">
-                <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                <p *ngIf="selectedAttribute != undefined; else buttonIconTemplate">{{selectedAttribute.label}}</p>
                 <ng-template #buttonIconTemplate>
-                  <i class="pi pi-book"></i>
+                  <p *ngIf="finalSelectedAttribute; else btnTemplate">{{finalSelectedAttribute}}</p>
+                  <ng-template #btnTemplate>
+                    <i class="pi pi-book"></i>
+                  </ng-template>
                 </ng-template>
             </button>
             <div class="dropdown-content">
@@ -60,10 +70,13 @@
             /> 
             <div class="dropdown">
                 <button class="dropbtn">
-                    <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
-                    <ng-template #buttonIconTemplate>
+                  <p *ngIf="selectedAttribute != undefined; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                  <ng-template #buttonIconTemplate>
+                    <p *ngIf="finalSelectedAttribute; else btnTemplate">{{finalSelectedAttribute}}</p>
+                    <ng-template #btnTemplate>
                       <i class="pi pi-book"></i>
                     </ng-template>
+                  </ng-template>
                 </button>
                 <div class="dropdown-content">
                   <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
@@ -86,10 +99,13 @@
             [maxFractionDigits]="5" /> 
             <div class="dropdown">
                 <button class="dropbtn">
-                    <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
-                    <ng-template #buttonIconTemplate>
+                  <p *ngIf="selectedAttribute != undefined; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                  <ng-template #buttonIconTemplate>
+                    <p *ngIf="finalSelectedAttribute; else btnTemplate">{{finalSelectedAttribute}}</p>
+                    <ng-template #btnTemplate>
                       <i class="pi pi-book"></i>
                     </ng-template>
+                  </ng-template>
                 </button>
                 <div class="dropdown-content">
                   <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
@@ -103,7 +119,7 @@
         <br>
         <div *ngIf="date_err_msg">
             <p *ngIf="time_err_msg">*Empty time reference</p>
-            <p *ngIf="date_err_msg">*Empty date reference</p>
+            <p *ngIf="dt_err_msg">*Empty date reference</p>
         </div>
         <div class="widget-content">
             <diV>
@@ -128,10 +144,13 @@
         </diV>
             <div class="dropdown">
                 <button class="dropbtn">
-                    <p *ngIf="selectedAttribute; else buttonIconTemplate">{{selectedAttribute.label}}</p>
-                    <ng-template #buttonIconTemplate>
+                  <p *ngIf="selectedAttribute != undefined; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                  <ng-template #buttonIconTemplate>
+                    <p *ngIf="finalSelectedAttribute; else btnTemplate">{{finalSelectedAttribute}}</p>
+                    <ng-template #btnTemplate>
                       <i class="pi pi-book"></i>
                     </ng-template>
+                  </ng-template>
                 </button>
                 <div class="dropdown-content">
                   <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
@@ -151,14 +170,14 @@
             <diV>
             <p-calendar 
             [(ngModel)]="startDateReference"
-            (onSelect)="changeToText()"
+            (onSelect)="changeToText('start')"
             [showIcon]="true" 
             [showOnFocus]="false" 
             inputId="rule.name + 'date_input'"
             />
             <p-calendar 
             [(ngModel)]="startTimeReference"
-            (onSelect)="changeToText()"
+            (onSelect)="changeToText('start')"
             [showIcon]="true" 
             [timeOnly]="true" 
             inputId="rule.name + 'time_input'"
@@ -170,13 +189,16 @@
         </diV>
             <div class="dropdown">
                 <button class="dropbtn">
-                    <p *ngIf="startSelectedAttribute; else buttonIconTemplate">{{startSelectedAttribute.label}}</p>
-                    <ng-template #buttonIconTemplate>
-                      <i class="pi pi-book"></i>
-                    </ng-template>
+                <p *ngIf="startSelectedAttribute !== undefined; else startButtonIconTemplate">{{startSelectedAttribute.label}}</p>
+                <ng-template #startButtonIconTemplate>
+                  <p *ngIf="finalStartSelectedAttribute; else btnTemplate">{{finalStartSelectedAttribute}}</p>
+                  <ng-template #btnTemplate>
+                    <i class="pi pi-book"></i>
+                  </ng-template>
+                </ng-template>
                 </button>
                 <div class="dropdown-content">
-                  <p (click)="selectStartAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                  <p (click)="selectStartAttribute(attribute,'start')" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
                 </div>
               </div>
             </div>
@@ -190,14 +212,14 @@
             <diV>
             <p-calendar 
             [(ngModel)]="endDateReference"
-            (onSelect)="changeToText()"
+            (onSelect)="changeToText('end')"
             [showIcon]="true" 
             [showOnFocus]="false" 
             inputId="rule.name + 'date_input'"
             />
             <p-calendar 
             [(ngModel)]="endTimeReference"
-            (onSelect)="changeToText()"
+            (onSelect)="changeToText('end')"
             [showIcon]="true" 
             [timeOnly]="true" 
             inputId="rule.name + 'time_input'"
@@ -209,22 +231,61 @@
         </diV>
             <div class="dropdown">
                 <button class="dropbtn">
-                    <p *ngIf="endSelectedAttribute; else buttonIconTemplate">{{endSelectedAttribute.label}}</p>
-                    <ng-template #buttonIconTemplate>
-                      <i class="pi pi-book"></i>
-                    </ng-template>
+                    <p *ngIf="endSelectedAttribute !== undefined; else endButtonIconTemplate">{{endSelectedAttribute.label}}</p>
+                <ng-template #endButtonIconTemplate>
+                  <p *ngIf="finalEndSelctedAttribute; else btnTemplate">{{finalEndSelctedAttribute}}</p>
+                  <ng-template #btnTemplate>
+                    <i class="pi pi-book"></i>
+                  </ng-template>
+                </ng-template>
                 </button>
                 <div class="dropdown-content">
-                  <p (click)="selectEndAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                  <p (click)="selectEndAttribute(attribute,'end')" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
                 </div>
               </div>
               </div>
               <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
         </div>
+        <div *ngSwitchCase="'attribute'" class="validation-op">
+          <label [for]="rule.name + 'input'">Attribute refrenece :</label>
+          <br>
+          <div class="widget-content">
+            <app-attribute-panel-default [slectedType]="attrType" [attributTypes]="attributeTypes" (defaultValue)="reciveValue($event)"></app-attribute-panel-default>
+              <div class="dropdown">
+                  <button class="dropbtn">
+                    <p *ngIf="selectedAttribute != undefined; else buttonIconTemplate">{{selectedAttribute.label}}</p>
+                    <ng-template #buttonIconTemplate>
+                      <p *ngIf="finalSelectedAttribute; else btnTemplate">{{finalSelectedAttribute}}</p>
+                      <ng-template #btnTemplate>
+                        <i class="pi pi-book"></i>
+                      </ng-template>
+                    </ng-template>
+                  </button>
+                  <div class="dropdown-content">
+                    <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
+                  </div>
+                </div>
+                <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
+          </div>
+      </div>
 </ng-container>
 <div *ngIf="selectedObject">
   <button (click)="selectAttr(attribute)" *ngFor="let attribute of selectedObjectKeys()">
     {{attribute}}:{{selectedObjecValueType(attribute)}}
   </button>
 </div>
+<div *ngIf="endSelctedObject">
+  <p>End:</p>
+  <button (click)="selectAttr(attribute,'end')" *ngFor="let attribute of selectedObjectKeys('end')">
+    {{attribute}}:{{selectedObjecValueType(attribute,"end")}}
+  </button>
+</div>
+<div *ngIf="startSelectedObject">
+  <p>Start:</p>
+  <button (click)="selectAttr(attribute,'start')" *ngFor="let attribute of selectedObjectKeys('start')">
+    {{attribute}}:{{selectedObjecValueType(attribute,"start")}}
+  </button>
+</div>
+<p *ngIf="emptySelectedObject">The object doesn't have any {{this.rule.inputType}} attributes</p>
+<p *ngIf="inv_array_err">Invalid array type</p>
 </div>
