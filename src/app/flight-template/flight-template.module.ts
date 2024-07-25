@@ -22,6 +22,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { AttributePanelDefaultComponent } from './components/attribute-panel-default/attribute-panel-default.component';
 import { DisplyObjectPanelComponent } from './components/disply-object-panel/disply-object-panel.component';
 import { DisplayArrayPanelComponent } from './components/display-array-panel/display-array-panel.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { DisplayArrayPanelComponent } from './components/display-array-panel/dis
     PaginatorModule,
     DragDropModule,
     PanelModule,
-    TagModule
+    TagModule,
+    RouterModule
   ]
 })
 export class FlightTemplateModule { }
