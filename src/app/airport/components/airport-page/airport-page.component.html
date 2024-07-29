@@ -1,1 +1,56 @@
-<p>airport-page works!</p>
+<div class="airportMainContainer">
+    <div class="airportHeader">
+        <h1>Airports</h1>
+        <div class="airportInput">
+            <p>Search:</p>
+            <input>
+            <p-button [style]="{'align-self':'center'}" (onClick)="showAddDialog()">Add new Airport </p-button>
+        </div>
+    </div>
+        <app-data-table [headers]="headers" [viewData]="data" [keys]="keys"></app-data-table>
+    <div class="airportFooter">
+        <span class="mx-1 text-color right_page_alignement">Items per page: </span>
+        <div>    
+            <button class="round-button" 
+                [disabled] = "page === 0" 
+                (click) = "removePage()"
+                ><<</button>
+            <p-dropdown [options]="size_options" 
+                [(ngModel)] = "size"
+                (onChange)="refreshTable()"/>
+            <button class="round-button"
+                [disabled]="page >= max_page"
+                (click) = "addPage()"
+                >>></button>
+        </div>
+</div>
+    <p-dialog [modal]="true" [draggable]="false" (onHide)="abortAddAirport()" header="Add new airport" [(visible)]="addAirport">
+        <div class="addAirportDialogBody">
+            <div class="dialogEntry">
+                <div class="airportCode">
+                    <p>ICAO:</p>
+                    <input [(ngModel)]="icao" (ngModelChange)="refreshSubmitState()">
+                </div>
+                <div class="airportCode">
+                    <p>IATA:</p>
+                    <input [(ngModel)]="iata" (ngModelChange)="refreshSubmitState()">
+                </div>
+            </div>
+            <div class="dialogEntry">
+                <p>Name:</p>
+                <input [(ngModel)]="name" (ngModelChange)="refreshSubmitState()">
+            </div>
+            <div class="dialogEntry">
+                <p>Location:</p>
+                <input [(ngModel)]="location" (ngModelChange)="refreshSubmitState()">
+            </div>
+            <div class="dialogEntry">
+                <p>Email:</p>
+                <input [(ngModel)]="email" (ngModelChange)="refreshSubmitState()">
+            </div>
+            <div class="dialogEntry">
+                <p-button [style]="{'align-self':'center', 'justify-self':'center'}" [disabled]="!submitEnabled" (onClick)="submit()">Add Airport</p-button>
+            </div>
+        </div>
+    </p-dialog>
+</div>

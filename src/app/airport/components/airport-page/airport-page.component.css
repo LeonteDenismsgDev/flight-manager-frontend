@@ -1,0 +1,95 @@
+.airportMainContainer{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    padding:2% 4%;
+    height:80vh;
+}
+
+.airportMainContainer h1{
+    margin: 0;
+}
+
+app-data-table{
+    border:solid 0.5px lightgray;
+    margin-top:1%;
+    max-height: 80%;
+    overflow: auto;
+}
+
+.airportHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.airportInput{
+    display: flex;
+    gap:10px;
+}
+
+.airportInput input{
+    height:30px;
+    align-self: center;
+}
+
+.addAirportDialogBody{
+    height:35vh;
+    width:20vw;
+    display: flex;
+    flex-direction: column;
+    gap:7px;
+}
+.airportCode{
+    width: 50%;
+    display: inline-flex;
+    justify-content: space-between;
+    
+}
+.airportCode input{
+    height: 30px;
+    align-self: center;
+}
+
+.dialogEntry{
+    display: flex;
+    gap:10px;
+    justify-content: space-between;
+}
+
+.dialogEntry input{
+    height: 30px;
+    align-self: center;
+    width:70%;
+}
+
+.dialogEntry p-button{
+    align-self: center;
+    justify-self: center;
+}
+
+.airportFooter{
+    width:100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-top:2%;
+}
+
+.round-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 15px 15px; 
+    transition: background-color 0.3s;
+    margin:0 5px;
+}
+
+.round-button:hover {
+    background-color: lightgray;
+}
+
+.airportTableWrapper{
+    height: 60vh;
+    overflow-y: scroll;
+}
