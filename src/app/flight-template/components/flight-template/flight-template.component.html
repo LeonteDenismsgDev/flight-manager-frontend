@@ -1,10 +1,11 @@
 <div class="pagination_container">
     <h1>Flight templates</h1>
     <div class="right_page_alignement">
-        <p-button class="addUserBtn" label="New Template" (click) = "goToNewTemplatePage()"/>
+        <p-button  class="addUserBtn" label="New Template" (click) = "goToNewTemplatePage()"/>
     </div>
 </div>
 <div class="flightTemplateWrapper">
+    <button (click)="addPage()" class="view-button btn-left" *ngIf="page < max_page-1"> < </button>
     <div class="grid">
             <div class="card-rows" *ngFor="let template of flightTemplateList">
                 <p-card class="card" header={{template.name}}>
@@ -18,11 +19,12 @@
                     </p-scrollPanel>
                     <ng-template pTemplate="footer">
                         <div>
-                            <p-button label="Delete" severity="secondary" class="w-full" styleClass="w-full" />
-                            <p-button label="Edit" class="w-full" styleClass="w-full" />
+                            <p-button (onClick)="deleteTemplate(template)" label="Delete" severity="secondary" class="w-full" styleClass="w-full" />
+                            <p-button (onClick)="navigateToEdit(template.name)" label="Edit" class="w-full" styleClass="w-full" />
                         </div>
                     </ng-template>
                 </p-card>
             </div>
     </div>
+    <button (click)="removePage()" class="view-button btn-right" *ngIf="page !== 0" > > </button>
 </div>

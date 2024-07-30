@@ -68,7 +68,7 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
   finalStartSelectedAttribute : string | undefined
   finalEndSelctedAttribute : string | undefined
   emptySelectedObject : boolean = false
-  predefineAttributes = OBJECTS_VALIDATION_ATTRIBUTES
+  predefineAttributes : any = OBJECTS_VALIDATION_ATTRIBUTES
   childValue : any
 
   reciveValue($event: any){
@@ -159,6 +159,9 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
 
  createRuleValueMessage(ruleValue : any){
   if(ruleValue instanceof Object){
+    if(ruleValue instanceof Date){
+      return ruleValue
+    }
     if(ruleValue["time"] != undefined){
       let time: Date  = ruleValue["time"] as Date
       let date : Date = ruleValue["date"] as Date
@@ -353,6 +356,14 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
         this.endDateReference = undefined
         this.startTimeReference = undefined
         this.endTimeReference = undefined
+        this.startSelectedAttribute = undefined
+        this.endSelectedAttribute = undefined
+        this.finalEndSelctedAttribute = undefined
+        this.endRuleObjectText = ""
+        this.endSelctedObject = undefined
+        this.finalStartSelectedAttribute = undefined
+        this.startRuleObjectText = ""
+        this.startSelectedObject = undefined
         this.changeToText()
         this.addValidationRule.emit({
           start:startTime,
@@ -448,6 +459,10 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
             }else{
               if(this.rule.inputType === "attribute" && defaultValue[key]["value"][obj_key]["type"] === this.attrType){
                 contains_attrs = true
+              }else{
+                if(defaultValue[key]["value"][obj_key]["type"] === "user" ||  defaultValue[key]["value"][obj_key]["type"] === "company"){
+                  contains_attrs = true
+                }
               }
             }
           })
@@ -480,6 +495,16 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
           obj[key] = defaultValue[key]
           this.emptySelectedObject = false
         }
+        if(defaultValue[key]["type"] === "user" || defaultValue[key]["type"] ==="company"){
+          let type: string = defaultValue[key]["type"]
+          let attrs : any[] = this.predefineAttributes[type]
+          attrs.forEach((attr) =>{
+            if(attr.type === this.rule.inputType || (this.rule.inputType === "attribute" && attr.type === this.attrType) || (this.rule.inputType === "interval" && attr.type ==="date")){
+              obj[key] = defaultValue[key]
+              this.emptySelectedObject = false
+            }
+          })
+        }
       }
      }
      )
@@ -505,14 +530,26 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
     }
     if(attribute.type === "user" || attribute.type === "company"){
       let attrs : any[] = this.predefineAttributes[attribute.type]
-      this,this.emptySelectedObject  = true
+      this.emptySelectedObject  = true
       attrs.forEach((attr) => {
         if(attr.type === this.rule.inputType || attr.type === "object" || attr.type=== "user" || attr.type === "company"){
           obj[attr.name] = attr
           this.emptySelectedObject = false
+        }else{
+          if(this.rule.inputType === "interval" && attr.type === "date"){
+            obj[attr.name] = attr
+          this.emptySelectedObject = false
+          }else{
+            if(this.rule.inputType === "attribute" && this.attrType === attr.type){
+              obj[attr.name] = attr
+              this.emptySelectedObject = false
+            }
+          }
         }
       })
       this.selectedObject = obj
+      this.finalSelectedAttribute =undefined
+      this.ruleObjectText = attribute.name
       return true
   }
   return false
@@ -522,8 +559,13 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
    let type =  this.selectedObjecValueType(attribute,inp_type)
    if( type !== "object"){
     if(type==="array"){
+      if(this.rule.inputType ==="attribute" && this.attrType === "array"){
+        this.ruleObjectText += "." + attribute
+        this.selectedObject = undefined
+        this.finalSelectedAttribute = attribute
+        this.inv_array_err = false
+      }else{
       if(this.selectedObject[attribute]["value"]["of"] === this.rule.of){
-        let rule_name : string  = this.rule.name
         this.ruleObjectText += "." + attribute
         this.selectedObject = undefined
         this.finalSelectedAttribute = attribute
@@ -531,7 +573,26 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
       }else{
         this.inv_array_err = true
       }
+    }
     }else{
+      if(type === "user" || type === "company"){
+          let obj : any =  {}
+          let attrs : any[] = this.predefineAttributes[type]
+          this.emptySelectedObject = true
+          attrs.forEach((attr) =>{
+            if(attr.type === this.rule.inputType || (this.rule.inputType === "attribute" && attr.type === this.attrType) || (this.rule.inputType === "interval" && attr.type ==="date")){
+              let name = attr.name
+              obj[name] = attr
+              this.emptySelectedObject = false
+            }
+          }
+          )
+          this.selectedObject = obj
+          this.ruleObjectText += "."+ attribute
+          if(this.rule.inputType === "attribute"){
+            this.finalSelectedAttribute = attribute
+          }
+      }else{
       if(inp_type !== undefined){
           if(inp_type === "start"){
             this.startRuleObjectText +="." +attribute
@@ -548,6 +609,7 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
         this.selectedObject = undefined
         this.finalSelectedAttribute = attribute
       }
+    }
     }
    }else{
       let obj : any = {}
@@ -576,8 +638,12 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
                 if(this.rule.inputType === "interval" && attr_obj[attr_key]["type"] === "date"){
                   contains_attrs = true
                 }else{
-                  if(this.rule.inputType === "attribute" && attr_obj[attr_key][type = this.attrType]){
+                  if(this.rule.inputType === "attribute" && attr_obj[attr_key]["type"] === this.attrType){
                     contains_attrs = true
+                  }else{
+                    if(attr_obj[attr_key]["type"] === "user" || attr_obj[attr_key]["type"] === "company"){
+                      contains_attrs = true
+                    }
                   }
                 }
               }
@@ -596,7 +662,9 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
           }else{
             obj[key] = atrr[key]
             this.emptySelectedObject = false
+            if(!this.ruleObjectText.includes(attribute)){
             this.ruleObjectText += "."+ attribute
+            }
           }
         }else{
           if(this.rule.inputType ==="interval" && atrr[key]["type"] === "date"){
@@ -608,6 +676,20 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
             obj[key] = atrr[key]
             this.emptySelectedObject = false
             this.setSelectedObject(attribute)
+          }
+          if(atrr[key]["type"] === "user" || atrr[key]["type"] === "company"){
+            let attrs : any[] = this.predefineAttributes[atrr[key]["type"]]
+            let doesntConatinesAttr = true
+            attrs.forEach((attr) =>{
+            if(attr.type === this.rule.inputType || (this.rule.inputType === "attribute" && attr.type === this.attrType) || (this.rule.inputType === "interval" && attr.type ==="date")){
+              doesntConatinesAttr = false
+            }
+           }
+          )
+          if(!doesntConatinesAttr){
+            obj[key] = atrr[key]
+            this.emptySelectedObject = false
+          }
           }
         }
       })
@@ -638,12 +720,18 @@ export class ValidationRuleComponent implements OnInit, OnChanges{
 setSelectedObject( atrribute: string,inp_type? : string){
   if(  inp_type !== undefined){
     if( inp_type === "start"){
+      if(!this.startRuleObjectText.includes(atrribute)){
       this.startRuleObjectText += "."+ atrribute
+      }
     }else{
+      if(!this.endRuleObjectText.includes(atrribute)){
       this.endRuleObjectText += "."+ atrribute
+      }
     }
   }else{
+    if(!this.ruleObjectText.includes(atrribute)){
     this.ruleObjectText += "."+ atrribute
+    }
   }
 }
    
@@ -672,10 +760,10 @@ selectStartAttribute(attribute: ViewAttributes,int_btn_type?:string){
     this.startSelectedObject = undefined
     this.finalStartSelectedAttribute = undefined
     this.ruleObjectText = ""
+    this.emptySelectedObject = false
   }else{
     this.startSelectedAttribute = undefined
   }
-  this.emptySelectedObject = false
   this.startTimeReference = undefined
   this.startDateReference = undefined
   this.start_date_err_msg = false
@@ -691,11 +779,11 @@ selectEndAttribute(attribute: ViewAttributes,int_btn_type?:string){
     this.endSelctedObject = undefined
     this.finalEndSelctedAttribute = undefined
     this.ruleObjectText = ""
+    this.emptySelectedObject = false
   }else{
     this.endSelectedAttribute = undefined
   }
    this.changeAlreadyExistent.emit()
-  this.emptySelectedObject = false
   this.endDateReference = undefined
   this.endTimeReference = undefined
   this.end_date_err_msg = false

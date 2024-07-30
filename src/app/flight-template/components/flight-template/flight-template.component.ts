@@ -5,13 +5,6 @@ import { FlightTemplate } from '../../models/FlightTemplate';
 import { REQUIRED_ATTRIBUTES } from '../../models/RequiredAttributes';
 import { Router } from '@angular/router';
 
-interface PageEvent {
-  first: number;
-  rows: number;
-  page: number;
-  pageCount: number;
-}
-
 @Component({
   selector: 'app-flight-template',
   templateUrl: './flight-template.component.html',
@@ -45,13 +38,25 @@ export class FlightTemplateComponent implements OnInit{
     this.refreshTable()
   }
 
-  addPage(event : PageEvent) {
+  addPage() {
     if(this.page >= this.max_page) return;
     this.page+=1;
+     console.log(this.page)
     this.refreshTable();
   }
 
   goToNewTemplatePage(){
     this.router.navigate(['/home/flightTemplates/create']);
   }
+
+  deleteTemplate(template : FlightTemplate){
+    this.flightTemplateService.delteTemplate(template.name).subscribe((reponse) =>{
+      this.refreshTable();
+    })
+  }
+
+  navigateToEdit(templateName: string){
+    this.router.navigate(['home/flightTemplates/update', templateName]);
+  }
+
 }

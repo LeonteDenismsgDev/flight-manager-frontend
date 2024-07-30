@@ -22,6 +22,7 @@ export class DisplyObjectPanelComponent{
   }
 
   getObjectAttributes(obj: object){
+     console.log(obj)
     return Object.keys(obj)
    }
    
@@ -30,9 +31,10 @@ export class DisplyObjectPanelComponent{
    }
    
    getObjectDate(attr_name : string){
-     let date  = this.objectAttributes[attr_name]["value"]["date"] as Date
-     let time = this.objectAttributes[attr_name]["value"]["time"] as Date
-     const hours = time.getHours();
+     console.log(this.objectAttributes)
+     let date : Date  = new Date(this.objectAttributes[attr_name]["value"]["date"])
+     let time : Date = new Date(this.objectAttributes[attr_name]["value"]["time"])
+     const hours = time.getHours()
      const minutes = time.getMinutes();
      const seconds = time.getSeconds()
      const year = date.getFullYear();

@@ -27,10 +27,14 @@ export class AttributePanelComponent{
   operation : string = "Save Attribute"
   @Output()
   attributeChanges = new EventEmitter<any>()
+  @Output()
+  updateSeelected = new EventEmitter<ViewAttributes>()
   attributTypes :string[] =["text","number","precision_number","object","date","user","company","array"]
   display_name_error: boolean =  false
   display_description_error : boolean = false
   display_type_error : boolean = false
+  display_array_error : boolean = false
+  incorrect_attr_name = false
   @Input ()
   selectedAttribute: ViewAttributes | null = null
   child_defaultValue : any
@@ -43,15 +47,21 @@ export class AttributePanelComponent{
       this.display_name_error =  false
       this.display_description_error  = false
       this.display_type_error  = false
+      this.incorrect_attr_name =false
   }
 
   reciveValue($event :any){
+    this.display_array_error = false
     this.child_defaultValue = $event
    }
 
    saveAttribute(){
     if(this.name ===  null || this.name === ""){
       this.display_name_error = true
+    }else{
+      const hasNumber = /\d/;
+      const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>-]/;
+      this.incorrect_attr_name =  hasNumber.test(this.name ?? "") || hasSpecialChar.test(this.name ?? "");
     }
     if( this.description === null || this.description === ""){
       this.display_description_error = true
@@ -59,10 +69,11 @@ export class AttributePanelComponent{
     if(this.type === null || this.type === ""){
       this.display_type_error = true
     }
-    if(typeof this.defaultValue === "object" && this.type === "object"){
+    if(this.type === "array" && (this.child_defaultValue === null || this.child_defaultValue === undefined)){
+      this.display_array_error = true
     }
 
-    if(!this.display_description_error && !this.display_name_error && !this.display_type_error){
+    if(!this.display_description_error && !this.incorrect_attr_name && !this.display_name_error && !this.display_type_error && !this.display_array_error){
       if(this.isGlobal == null){
         this.isGlobal = false
       }
@@ -91,12 +102,29 @@ export class AttributePanelComponent{
           this.selectedAttribute?.editable ?? true,
           this.isGlobal as boolean
         )
+        if(this.selectedAttribute?.id !== ""){
         this.flightTemplateService.updateAttribute(updatedAttribute).subscribe((response:string) =>{
           this.attributeChanges.emit(response)
         })
         this.attributeChanges.emit("edit_attribute")
+        }else{
+          updatedAttribute.name = this.toAttributeName(this.name ?? "")
+          this.updateSeelected.emit(updatedAttribute)
+        }
       }
       this.child_defaultValue = undefined
     }
    }
+   toAttributeName(name: string): string {
+    const words = name.split(/[\s-_]+/);
+    let attributeName = "";
+    for (let wordNumber = 0; wordNumber < words.length; wordNumber++) {
+      if (wordNumber === 0) {
+        attributeName += words[wordNumber].toLowerCase();
+      } else {
+        attributeName += words[wordNumber].charAt(0).toUpperCase() + words[wordNumber].slice(1).toLowerCase();
+      }
+    }
+    return attributeName;
+  }
 }

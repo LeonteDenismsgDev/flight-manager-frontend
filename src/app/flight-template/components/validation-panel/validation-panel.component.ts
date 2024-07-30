@@ -33,7 +33,10 @@ this.changeAlreadyExistent.emit()
 
 sendType(): string{
   let defValue : any = this.selectedAttribute?.defaultValue
+  if(defValue !== null){
   return defValue["of"]
+  }
+  return ""
 }
 
 attributeTypePanel(): string{

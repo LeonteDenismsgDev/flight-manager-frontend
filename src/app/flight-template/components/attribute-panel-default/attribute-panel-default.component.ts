@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnChanges, SimpleChanges, Output, booleanAttribute } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, SimpleChanges, Output, booleanAttribute, OnInit } from '@angular/core';
 import { every, throwIfEmpty } from 'rxjs';
 
 
@@ -75,9 +75,10 @@ this.update_attribute = false
 }
 
 ngOnChanges(changes: SimpleChanges): void {
-  console.log(this.slectedType)
   if(changes['superDefaultValue']){
-   this.updateValues(this.superDefaultValue)
+    if(this.superDefaultValue !== undefined){
+      this.updateValues(this.superDefaultValue)
+    }
   }
   else if(changes["slectedType"]){
    this.backToInit()
@@ -102,24 +103,26 @@ backToInit(){
 
 updateValues(value : any){
   let obj_value = undefined
-  if( this.slectedType === "text" && value!==undefined){
+  if( this.slectedType === "text" && value!==undefined && value!== null){
     this.attr_text_value = String(value)
     obj_value = this.attr_text_value
   }
-  if(this.slectedType === "number" && value!==undefined){
+  if(this.slectedType === "number" && value!==undefined && value !== null){
     this.attr_number_value = Number(value)
     obj_value = this.attr_number_value
   }
-  if(this.slectedType === "precision_number" && value!==undefined){
+  if(this.slectedType === "precision_number" && value!==undefined && value !== null){
     this.attr_precision_value = Number(value)
     obj_value = this.attr_precision_value
   }
   if(this.slectedType === "date" && value!==undefined){
+     if(value["date"]!== undefined && value["time"]!= undefined){
       this.attr_date_value= new Date(String(value["date"]))
       this.att_time_value= new Date(String(value["time"]))
     obj_value = {
       "date": this.attr_date_value,
       "time": this.att_time_value
+    }
   }
   }
   if(this.slectedType === "object" && value!==undefined){
@@ -130,7 +133,10 @@ updateValues(value : any){
     this.arrayContent = value["values"]
     this.slctType = value["of"]
     this.sp_DefaultValue = undefined
-
+    obj_value ={
+        of:this.slctType,
+        values:this.arrayContent
+      }
   }
   this.defaultValue.emit(obj_value)
 }
@@ -139,14 +145,20 @@ addAttribute(event: Event){
  if(this.attr_object_value === ""){
   this.object_input_err = "Name should not be empty"
  }else{
+  const hasNumber = /\d/;
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>-]/;
+   let isValidName : boolean =  hasNumber.test(this.attr_object_value) || hasSpecialChar.test(this.attr_object_value);
+  if(isValidName){
+    this.object_input_err ="The name should not have  numbres or special charcetrs  beside _"
+  }else{
   if(this.objectAttributes[this.attr_object_value] !== undefined){
     this.object_input_err = "There is already an attribute  with this name"
   }else{
-  if( this.childValue === undefined || this.slctType === "" || this.slctType === null){
+  if( this.childValue === undefined || this.slctType === "" || this.slctType === null || this.childValue === null || this.childValue === ""){
     if(this.slctType === "" || this.slctType === null){
         this.type_value_error_msg = "Unselected attribute type"
     }else{
-      if(this.childValue ===  undefined){
+      if(this.childValue ===  undefined || this.childValue === null || this.childValue ===""){
         this.type_value_error_msg = "Empty value for attribute"
       }
     }
@@ -161,6 +173,7 @@ addAttribute(event: Event){
   this.childValue=undefined
   this.object_input_err = undefined
   this.type_value_error_msg = undefined
+  }
   }
   }
   }
@@ -210,11 +223,6 @@ reciveValue($event :any){
 addValueToArray(){
   if( this.childValue !== undefined && this.childValue !== null){
   this.arrayContent= [...this.arrayContent, this.childValue]
-  console.log(this.childValue)
-  console.log({
-    of:this.slctType,
-    values:this.arrayContent
-  })
   this.defaultValue.emit(
     {
       of:this.slctType,

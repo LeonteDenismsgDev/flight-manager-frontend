@@ -21,6 +21,11 @@ export const OBJECTS_VALIDATION_ATTRIBUTES={
             name:"name",
             label:"Name",
             type:"text"
+        },
+        {
+            name:"fleet",
+            label:"Fleet",
+            type:"number"
         }
     ]
 }

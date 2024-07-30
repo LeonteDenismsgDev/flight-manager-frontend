@@ -39,7 +39,6 @@ initDisplayArray(){
       })
     }else{
       if(this.slectedType === "array"){
-        console.log(this.contentArray)
         this.displyArray = []
         this.contentArray.forEach((element) => {
             let message = this.arrayMessage(element)

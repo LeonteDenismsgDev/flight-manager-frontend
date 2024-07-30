@@ -1,7 +1,9 @@
+<p *ngIf="template_name_err">*The name should not be empty</p>
 <div class="widget-content">
-    <input type="text" pInputText [(ngModel)]="value" class="template-title" />
-    <p-button label="Success" [raised]="true"/>
+    <input type="text" pInputText oninput="" [(ngModel)]="value" placeholder="Template Name" class="template-title" />
+    <p-button (onClick)="regiseterTemplate()" [label]="getPageScope()" [raised]="true"/>
 </div>
+<p *ngIf="attributes_err">*You should chose at last one attribute</p>
 <div class="widget-content template-container">
     <div id="attributes-widget">
         <div id="widget-header">
@@ -41,14 +43,15 @@
                 </div>
                 <ul class="list-none flex flex-column gap-2 p-0 m-0" *ngIf="selectedAttributes.length>0">
                     <li *ngFor="let attribute of selectedAttributes" class="p-2 border-round shadow-1">
-                       <div (click)="selectAttribute(attribute, false)">
-                        <div class="collapsible">
+                       <div>
+                        <div class="collapsible" (click)="selectAttribute(attribute, false)">
                             <p>{{attribute.label}}</p>
                             <button (click)="toggle($event)" class="collapsible-button">+</button>
                             <button (click)="unselectAttribute(attribute)" class="unselect_button">X</button>
                         </div>
                         <div class="collapsible-content">
                             <p>{{attribute.description}}</p>
+                            <p-button (onClick)="selectAttribute(attribute,true)" class="edit_attr_btn" *ngIf="attribute.editable" icon="pi pi-pencil"/>
                         </div>
                        </div>
                     </li>
@@ -57,7 +60,7 @@
         </div>
     </div>
     <div class="functinal-widget">
-        <app-attribute-panel  (attributeChanges)="attributeChanges($event)" [operation]="operation" *ngIf="createAttribute === true" [name]="selectedAttribute?.label" [type]="selectedAttribute?.type" [description]="selectedAttribute?.description" [defaultValue]="this.selectedAttribute?.defaultValue" [isRequired]="this.selectedAttribute?.required" [isGlobal]="this.selectedAttribute?.globalVisibility" [selectedAttribute]="selectedAttribute"></app-attribute-panel>
+        <app-attribute-panel (updateSeelected)="updateSelected($event)"  (attributeChanges)="attributeChanges($event)" [operation]="operation" *ngIf="createAttribute === true" [name]="selectedAttribute?.label" [type]="selectedAttribute?.type" [description]="selectedAttribute?.description" [defaultValue]="this.selectedAttribute?.defaultValue" [isRequired]="this.selectedAttribute?.required" [isGlobal]="this.selectedAttribute?.globalVisibility" [selectedAttribute]="selectedAttribute"></app-attribute-panel>
         <app-validation-panel (changeAlreadyExistent)="changeExistent()" [alreadExistentRule]="alreadExistentRule" (rmvRule)="removeRule($event)" (addRule)="addValidationRule($event)" [attributesValidations]="validationRules" *ngIf="selectedAttribute && createAttribute === false" [selectedAttribute]="selectedAttribute" [selectedAttributes]="selectedAttributes"></app-validation-panel>
     </div>
 </div>

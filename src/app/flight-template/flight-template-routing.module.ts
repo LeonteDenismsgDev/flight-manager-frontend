@@ -11,6 +11,9 @@ const routes: Routes = [
   {
     path:'create',
     component:CreateTemplateComponent
+  },{
+    path:'update/:id',
+    component:CreateTemplateComponent
   }
 ];
 
