@@ -3,7 +3,7 @@
         <h1>Airports</h1>
         <div class="airportInput">
             <p>Search:</p>
-            <input>
+            <input [(ngModel)]="filter" (ngModelChange)="search()">
             <p-button [style]="{'align-self':'center'}" (onClick)="showAddDialog()">Add new Airport </p-button>
         </div>
     </div>

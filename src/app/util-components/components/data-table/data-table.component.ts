@@ -26,8 +26,8 @@ export class DataTableComponent {
   callback(){
     this.onRowClick.emit(this.selectedData);
     if(!this.toggleable){
-      this.selectedData = null;
-      this.cdr.detectChanges();
+      this.selectedData = {};
+      this.cdr.markForCheck();
     }
   }
 

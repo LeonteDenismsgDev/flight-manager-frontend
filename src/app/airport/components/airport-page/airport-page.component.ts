@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AirportService } from '../../services/airport.service';
 import { Airport } from '../../models/Airport';
+import { AirportRequest } from '../../models/AirportRequest';
+import { AirportResponse } from '../../models/AirportResponse';
 
 @Component({
   selector: 'app-airport-page',
@@ -9,9 +11,10 @@ import { Airport } from '../../models/Airport';
 })
 export class AirportPageComponent implements OnInit{
   headers=["ICAO Code","IATA Code","Name","Location"];
-  keys=["icao","iata","name","location"]
+  keys=["icao","iata","airportName","location"]
   data:Airport[] = [];
   addAirport:boolean = false;
+  filter_empty:boolean = true;
 
   submitEnabled:boolean = false;
   icao:string = ""
@@ -23,13 +26,12 @@ export class AirportPageComponent implements OnInit{
   max_page:number = 5;
   size:number = 10;
   size_options:number[] = [10,20,30];
+  filter:string = "";
 
   constructor(private service:AirportService){}
 
   ngOnInit(){
-    this.service.getList().subscribe((response:Airport[])=>{
-      this.data = response;
-    })
+    this.refreshTable()
   }
 
   showAddDialog(){
@@ -73,6 +75,23 @@ export class AirportPageComponent implements OnInit{
   }
 
   refreshTable(){
+    let request = new AirportRequest(this.page,this.size,this.filter);
+    this.service.getFilteredList(request).subscribe((data:AirportResponse)=>{
+      console.log(data);
+      this.data=data.page;
+      this.max_page = Math.ceil(data.max_airports/((this.page+1)*this.size))
+    })
+  }
+
+  search(){
+    this.filter = this.filter.trim();
     
+    if(this.filter != ""){
+      this.page = 0;
+      this.refreshTable();
+    }
+    else{
+      this.refreshTable();
+    }
   }
 }

@@ -2,7 +2,7 @@ import { Airport } from "./Airport";
 
 export class AirportResponse{
     constructor(
-        page:Airport[],
-        max_airports: number
+        public page:Airport[],
+        public max_airports: number
     ){}
 }
