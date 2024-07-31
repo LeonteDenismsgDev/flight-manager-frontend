@@ -6,7 +6,7 @@
 </div>
 <div class="flightTemplateWrapper">
     <div class="wrapperHeader"> 
-        <button (click)="removePage()" class="view-button" [disabled] = "!(page >= 0)" > < </button>
+        <button (click)="removePage()" class="view-button" [disabled] = "page == 0" > < </button>
         <button (click)="addPage()" class="view-button" [disabled] = "!(page<(max_page-1))"> > </button>
     
     </div>
