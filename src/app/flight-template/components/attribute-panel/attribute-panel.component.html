@@ -1,36 +1,36 @@
 <div class="attr_panel">
-<p *ngIf="display_name_error" class="err_msg">*Empty attribute name</p>
-<p *ngIf="incorrect_attr_name" class="err_msg">*Name should not contain speacial charcater beside _v</p>
-<input class="input_attribute element" (input)="changeStatus()" placeholder="New Attribute" [(ngModel)]="name"/>
-<div class="element">
-<label class="check_label" for="isRequired">Required</label>
-<p-checkbox 
-    id="isRequired"
-    [binary]="true"
-    [(ngModel)]="isRequired"
-    inputId="binary" />
-<label class="check_label" for="isGlobal">Global</label>
-<p-checkbox
-    [(ngModel)]="isGlobal"
-    id="isGlobal"
-    [binary]="true" 
-    inputId="binary" />
-</div>
-<p *ngIf="display_description_error" class="err_msg">*Empty attribute description</p>
-<input (input)="changeStatus()" class="input_attribute attr_desc element" placeholder="Description" [(ngModel)]="description"/>
-<p *ngIf="display_type_error" class="err_msg">*Select an attribute type</p>
-<p *ngIf="display_array_error" class="err_msg">*The array should have a type an an element</p>
-<div class="element">
-<label for="attributes">Attribute type</label>
-<p-dropdown 
-    (onChange)="changeStatus()"
-    [(ngModel)]="type" 
-    class="attributes"
-    [options]="attributTypes" 
-    placeholder="Select the type" 
-/>
-</div>
-<app-attribute-panel-default [attributTypes]="attributTypes" [slectedType]="type" (defaultValue)="reciveValue($event)" [superDefaultValue]="defaultValue"></app-attribute-panel-default>
-<p-button (onClick)="saveAttribute()" class="submitt-attr-btn"> {{operation}} </p-button>
+    <p *ngIf="display_name_error" class="err_msg">*Empty attribute name</p>
+    <p *ngIf="incorrect_attr_name" class="err_msg">*Name should not contain speacial charcater beside _v</p>
+    <input class="input_attribute element" (input)="changeStatus()" placeholder="New Attribute" [(ngModel)]="name"/>
+    <div class="element">
+        <label class="check_label" for="isRequired">Required</label>
+        <p-checkbox 
+            id="isRequired"
+            [binary]="true"
+            [(ngModel)]="isRequired"
+            inputId="binary" />
+        <label class="check_label" for="isGlobal">Global</label>
+        <p-checkbox
+            [(ngModel)]="isGlobal"
+            id="isGlobal"
+            [binary]="true" 
+            inputId="binary" />
+    </div>
+    <p *ngIf="display_description_error" class="err_msg">*Empty attribute description</p>
+    <input (input)="changeStatus()" class="input_attribute attr_desc element" placeholder="Description" [(ngModel)]="description"/>
+    <p *ngIf="display_type_error" class="err_msg">*Select an attribute type</p>
+    <p *ngIf="display_array_error" class="err_msg">*The array should have a type an an element</p>
+    <div class="element">
+        <label for="attributes">Attribute type</label>
+        <p-dropdown 
+            (onChange)="changeStatus()"
+            [(ngModel)]="type" 
+            class="attributes"
+            [options]="attributTypes" 
+            placeholder="Select the type" 
+        />
+    </div>
+    <app-attribute-panel-default [attributTypes]="attributTypes" [slectedType]="type" (defaultValue)="reciveValue($event)" [superDefaultValue]="defaultValue"></app-attribute-panel-default>
+    <p-button (onClick)="saveAttribute()" class="submitt-attr-btn"> {{operation}} </p-button>
 </div>
 

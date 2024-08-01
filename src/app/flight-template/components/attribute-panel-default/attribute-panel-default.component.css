@@ -43,6 +43,15 @@ background-color: transparent;
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+
+.array-element{
+    margin-bottom: 10px;
+    display: flex;
+    gap:20px;
+    align-items: flex-start;
+    flex-direction: row;
     margin-top: 10px;
 }
 
@@ -51,7 +60,9 @@ background-color: transparent;
 }
 
 .array_label{
-    margin-right: 1%;
+    margin-right: 2%;
+    margin-top:0;
+    margin-bottom:0;
 }
 
 .err_msg{
@@ -104,4 +115,8 @@ border-bottom-color: dimgray;
 .btn{
 background-color: transparent;
 height: 8px ;
+}
+
+app-display-array-panel{
+    width:30%;
 }

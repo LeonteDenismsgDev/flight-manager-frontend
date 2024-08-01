@@ -1,15 +1,15 @@
-.obj_attr_edt{
-    margin-left: 70%;
-}
-
-.obj_attr_ed{
-    margin-left: 86%;
-}
 
 .element {
     display: flex;
     flex-direction: row;
     padding: 1%;
+    justify-content: space-between;
+}
+
+.elementBtns{
+    display:inline-flex;
+    flex-direction: row;
+    gap:10px;
 }
 
 .element:hover{

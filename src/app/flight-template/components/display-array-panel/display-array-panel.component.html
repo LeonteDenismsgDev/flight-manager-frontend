@@ -1,5 +1,5 @@
-<p-tag class="tag" *ngFor="let elemnt  of getIndexArray()">
-<div [innerHTML]="getIndexElement(elemnt)"></div>    
+<p-tag class="tag" *ngFor="let elemnt  of getIndexArray()" >
+<div [innerHTML]="getIndexElement(elemnt)" [ngStyle]= "{'padding':'10px'}"></div>    
 <p-button *ngIf="ediatble" class="btn" (click)="removeElement(elemnt)" icon="pi pi-times" [rounded]="true" [text]="true" severity="danger " />
-<p-button *ngIf="ediatble" (click)="editElemnt(elemnt)" icon="pi pi-pencil" [rounded]="true" [text]="true" />
+<p-button *ngIf="ediatble" (click)="editElemnt(elemnt)" icon="pi pi-pencil" [rounded]="true" [text]="true" [ngStyle]= "{'padding-right':'10px'}"/>
 </p-tag>

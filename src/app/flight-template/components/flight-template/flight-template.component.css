@@ -1,8 +1,9 @@
 .flightTemplateWrapper {
     padding: 5px;
-    display: flex;
-    flex-direction: row;
-     width: 100%;
+    display: inline-block;
+     width: 100vw;
+     height: 65vh;
+     overflow-y: auto;
   }
   
   .grid {
@@ -14,7 +15,7 @@
   .card-rows {
     margin: 10px;
     height: 22pc;
-    width: 22%;
+    width: 23%;
   }
 
 .attr-rep{
@@ -78,4 +79,19 @@
 .right_page_alignement{
     margin-left: auto;
     padding: 10px;
+}
+
+.templateFooter{
+    display: inline-block !important;
+}
+
+.wrapperHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding:0 5%;
+}
+
+:disabled{
+    color:lightgray;
 }
