@@ -1,9 +1,7 @@
-<p *ngIf="template_name_err">*The name should not be empty</p>
 <div class="widget-content">
-    <input type="text" pInputText oninput="" [(ngModel)]="value" placeholder="Template Name" class="template-title" />
+    <input type="text" pInputText [(ngModel)]="value" placeholder="Template Name" class="template-title" />
     <p-button (onClick)="regiseterTemplate()" [label]="getPageScope()" [raised]="true"/>
 </div>
-<p *ngIf="attributes_err">*You should chose at last one attribute</p>
 <div class="widget-content template-container">
     <div id="attributes-widget">
         <div id="widget-header">
@@ -20,21 +18,26 @@
             </div>
         </div>
         <div class="widget-content">
-            <div class="attributes-list">
+            <div class="attributes-list-wrapper">
                 <button (click)="newAttribute()" class="new-button">New</button>
-                <ul class="list-none flex flex-column gap-2 p-0 m-0">
-                    <li *ngFor="let attribute of attributeList" class="p-2 border-round shadow-1" pDraggable
-                        (onDragStart)="dragStart(attribute)" (onDragEnd)="dragEnd()">
-                        <div class="collapsible">
-                            <p>{{attribute.label}}</p><button (click)="toggle($event)"class="collapsible-button">+</button>
-                        </div>
-                        <div class="collapsible-content">
-                            <p>{{attribute.description}}</p>
-                            <p-button (onClick)="selectAttribute(attribute,true)" class="edit_attr_btn" *ngIf="attribute.editable" icon="pi pi-pencil"/>
-                            <p-button (onClick)="deleteAttribute(attribute)" class="edit_attr_btn" *ngIf="attribute.editable">Delete Attribute</p-button>
-                        </div>
-                    </li>
-                </ul>
+                <div class="attribute-list">
+                    <ul class="list-none flex flex-column gap-2 p-0 m-0">
+                        <li *ngFor="let attribute of attributeList" class="p-2 border-round shadow-1" pDraggable
+                            (onDragStart)="dragStart(attribute)" (onDragEnd)="dragEnd()">
+                            <div class="collapsible">
+                                <p>{{attribute.label}}</p><button (click)="toggle($event)"class="collapsible-button">+</button>
+                            </div>
+                            <div class="collapsible-content">
+                                <p>{{attribute.description}}</p>
+                                <div class="collapsible-button-container">
+                                    <p-button (onClick)="selectAttribute(attribute,true)" class="edit_attr_btn " *ngIf= "attribute.editable" icon="pi pi-pencil"/>
+                                    <p-button (onClick)="deleteAttribute(attribute)" class="edit_attr_btn" *ngIf= "attribute.editable" icon="pi pi-trash"/>
+                                </div>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="slected-zone flex-column" pDroppable (onDrop)="drop()">
                 <div class="select-label" *ngIf="selectedAttributes.length===0">
@@ -51,7 +54,10 @@
                         </div>
                         <div class="collapsible-content">
                             <p>{{attribute.description}}</p>
-                            <p-button (onClick)="selectAttribute(attribute,true)" class="edit_attr_btn" *ngIf="attribute.editable" icon="pi pi-pencil"/>
+
+                            <div class = "collapsible-button-container">
+                                <p-button (onClick)="selectAttribute(attribute,true)" class="edit_attr_btn" *ngIf="attribute.editable" icon="pi pi-pencil"/>
+                            </div>
                         </div>
                        </div>
                     </li>
