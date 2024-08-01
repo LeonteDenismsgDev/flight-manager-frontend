@@ -80,7 +80,7 @@
                 placeholder="Select the type"
             />
         </div>
-        <app-display-array-panel [ediatble]="true" (editEvent)="editValueFromArray($event)" (removeEvent)="removeValueFromArray($event)"  [slectedType]="slctType" [contentArray]="arrayContent"></app-display-array-panel>
+        <app-display-array-panel [ediatble]="true" (editEvent)="editValueFromArray($event)" (removeEvent)="removeValueFromArray($event)"  [slectedType]="slctType" [contentArray]="arrayContent" [ngStyle]="{'align-items':'center'}"></app-display-array-panel>
         <div class="array-element">
             <app-attribute-panel-default  class="array_label" (defaultValue)="reciveValue($event)" [slectedType]="slctType" [attributTypes]="attributTypes" [superDefaultValue]="sp_DefaultValue" [clearInputs]="inputs_clear" ></app-attribute-panel-default> 
             <p-button *ngIf="childValue && !ckeckPredefinedType()" (click)="addValueToArray()" icon="pi pi-plus" />
