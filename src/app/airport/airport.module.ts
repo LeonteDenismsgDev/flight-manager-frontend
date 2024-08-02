@@ -8,10 +8,12 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
+import { AirportDialogComponent } from './components/airport-dialog/airport-dialog.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 
 @NgModule({
-  declarations:[AirportPageComponent],
+  declarations:[AirportPageComponent, AirportDialogComponent],
   imports: [
     CommonModule,
     AirportRoutingModule,
@@ -19,7 +21,8 @@ import { DropdownModule } from 'primeng/dropdown';
     ButtonModule,
     DialogModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    InputSwitchModule
 ]
 })
 export class AirportModule { }

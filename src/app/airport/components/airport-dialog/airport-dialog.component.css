@@ -1,0 +1,90 @@
+.airportInput{
+    display: flex;
+    gap:10px;
+}
+
+.airportInput input{
+    height:30px;
+    align-self: center;
+}
+
+.addAirportDialogBody{
+    height:40vh;
+    width:23vw;
+    display: flex;
+    flex-direction: column;
+    gap:7px;
+    margin-bottom: 20px;
+    
+}
+
+
+.airportCode{
+    width: 50%;
+    display: inline-flex;
+    justify-content: space-between;
+    
+}
+.airportCode input{
+    height: 30px;
+    align-self: center;
+}
+
+.dialogEntry{
+    display: flex;
+    gap:10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dialogEntry input{
+    height: 30px;
+    align-self: center;
+    width:70%;
+}
+
+.dialogEntry p-button{
+    align-self: center;
+    justify-self: center;
+}
+
+.newKey{
+    width: 25% !important;
+}
+
+.contactKey{
+    width: calc(75% - 60px) !important;
+    justify-self: flex-end !important;
+}
+
+.deleteButt{
+    background-color: red;
+    padding:4px;
+    border-color: red;
+    width:30px;
+    height:30px;
+}
+
+.acceptButt{
+    background-color: rgb(36, 233, 6);
+    padding:4px;
+    border-color: rgb(36, 233, 6);
+    width: 30px !important;
+    height:30px;
+}
+
+.contactValueBtnCombo{
+    display: flex;
+    gap:10px;
+}
+
+.contactValueBtnCombo > .contactKey{
+    width: 100% !important;
+}
+
+.addContactModeCombo{
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center; 
+    gap:10px;
+}

@@ -7,7 +7,7 @@
             <p-button [style]="{'align-self':'center'}" (onClick)="showAddDialog()">Add new Airport </p-button>
         </div>
     </div>
-        <app-data-table [headers]="headers" [viewData]="data" [keys]="keys"></app-data-table>
+        <app-data-table [headers]="headers" [viewData]="data" [keys]="keys" (onRowClick) = "onRowClick($event)"></app-data-table>
     <div class="airportFooter">
         <span class="mx-1 text-color right_page_alignement">Items per page: </span>
         <div>    
@@ -24,33 +24,7 @@
                 >>></button>
         </div>
 </div>
-    <p-dialog [modal]="true" [draggable]="false" (onHide)="abortAddAirport()" header="Add new airport" [(visible)]="addAirport">
-        <div class="addAirportDialogBody">
-            <div class="dialogEntry">
-                <div class="airportCode">
-                    <p>ICAO:</p>
-                    <input [(ngModel)]="icao" (ngModelChange)="refreshSubmitState()">
-                </div>
-                <div class="airportCode">
-                    <p>IATA:</p>
-                    <input [(ngModel)]="iata" (ngModelChange)="refreshSubmitState()">
-                </div>
-            </div>
-            <div class="dialogEntry">
-                <p>Name:</p>
-                <input [(ngModel)]="name" (ngModelChange)="refreshSubmitState()">
-            </div>
-            <div class="dialogEntry">
-                <p>Location:</p>
-                <input [(ngModel)]="location" (ngModelChange)="refreshSubmitState()">
-            </div>
-            <div class="dialogEntry">
-                <p>Email:</p>
-                <input [(ngModel)]="email" (ngModelChange)="refreshSubmitState()">
-            </div>
-            <div class="dialogEntry">
-                <p-button [style]="{'align-self':'center', 'justify-self':'center'}" [disabled]="!submitEnabled" (onClick)="submit()">Add Airport</p-button>
-            </div>
-        </div>
+    <p-dialog [modal]="true" [draggable]="false" header="Add new airport" [(visible)]="addAirport" (onHide)="destroyDialog()">
+        <app-airport-dialog [data]="selectedAirport" [mode]="mode"></app-airport-dialog>
     </p-dialog>
 </div>

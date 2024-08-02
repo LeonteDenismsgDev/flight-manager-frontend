@@ -16,12 +16,10 @@ export class AirportPageComponent implements OnInit{
   addAirport:boolean = false;
   filter_empty:boolean = true;
 
-  submitEnabled:boolean = false;
-  icao:string = ""
-  iata:string = ""
-  name:string = ""
-  email:string= ""
-  location:string = ""
+  selectedAirport:Airport|null = null;
+
+  mode:string = "save";
+
   page:number = 0;
   max_page:number = 5;
   size:number = 10;
@@ -36,29 +34,6 @@ export class AirportPageComponent implements OnInit{
 
   showAddDialog(){
     this.addAirport = true;
-  }
-
-  refreshSubmitState(){
-    this.submitEnabled = this.name.trim() != "" &&
-                        this.iata.trim() != "" &&
-                        this.icao.trim() != "" &&
-                        this.email.trim()!= "" &&
-                        this.location.trim() != "";
-  }
-
-  submit(){
-    let sendData:Airport = new Airport(this.icao,this.iata,this.name,this.location,{"email":this.email});
-    this.service.submitAirport(sendData).subscribe(()=>{
-      this.addAirport = false;
-    });
-  }
-
-  abortAddAirport(){
-    this.icao = "";
-    this.iata = "";
-    this.name = "";
-    this.email= "";
-    this.location = "";
   }
 
   addPage(){
@@ -93,5 +68,18 @@ export class AirportPageComponent implements OnInit{
     else{
       this.refreshTable();
     }
+  }
+
+  onRowClick(airport:Airport){
+    this.service.getOneAirport(airport.icao).subscribe((data:Airport)=>{
+      this.selectedAirport = JSON.parse(JSON.stringify(data));
+      this.mode = "edit";
+      this.showAddDialog();
+    });
+  }
+
+  destroyDialog(){
+    this.selectedAirport = null;
+    this.mode = "save";
   }
 }

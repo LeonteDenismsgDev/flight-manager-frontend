@@ -23,4 +23,12 @@ export class AirportService {
   getFilteredList(request:AirportRequest){
     return this.http.post<AirportResponse>(environment.apiUrl+"airport/filter",request)
   }
+
+  editAirport(icao:string,airport:Airport){
+    return this.http.post<string>(environment.apiUrl+"airport/update?icao="+icao,airport);
+  }
+
+  getOneAirport(icao:string){
+    return this.http.get<Airport>(environment.apiUrl+"airport/get?icao="+icao);
+  }
 }

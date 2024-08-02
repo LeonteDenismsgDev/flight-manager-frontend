@@ -4,6 +4,8 @@ export class Airport{
         public iata:string,
         public airportName:string,
         public location:string,
-        public contactData:Object
+        public contactData:{
+            [key:string]:string
+        }
     ){}
 }
