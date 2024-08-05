@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { AirportDialogComponent } from './components/airport-dialog/airport-dialog.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { CheckboxModule} from 'primeng/checkbox'
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     DialogModule,
     FormsModule,
     DropdownModule,
-    InputSwitchModule
+    InputSwitchModule,
+    CheckboxModule
 ]
 })
 export class AirportModule { }

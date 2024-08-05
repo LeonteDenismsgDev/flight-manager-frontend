@@ -1,3 +1,5 @@
+@import "primeicons/primeicons.css";
+
 .airportInput{
     display: flex;
     gap:10px;
@@ -87,4 +89,39 @@
     justify-content: flex-end; 
     align-items: center; 
     gap:10px;
+}
+
+.deleteAirportBtn button{
+    align-self:center;
+    justify-self:center;
+    background-color: red !important;
+    padding:4px;
+    border-color: red;
+    color:white;
+    font-family: 'Inter var';
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-size:16px;
+    font-weight: 400;
+}
+
+::ng-deep{
+    .deleteAirportBtn.p-button:hover{
+        background-color: #d70000 !important;
+        border-color: #d70000 !important;
+    }
+
+    .deleteAirportBtn.p-button{
+        background-color: red !important;
+        border-color: red !important;
+        width:100%;
+    }
+
+    .addAirportBtn.p-button{
+        width: 100%;
+    }
+}
+
+.smallFooterDeleteText{
+    color:#ff5757;
+    font-size: 13px;
 }

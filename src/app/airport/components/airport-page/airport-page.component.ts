@@ -82,4 +82,10 @@ export class AirportPageComponent implements OnInit{
     this.selectedAirport = null;
     this.mode = "save";
   }
+
+  closeDialog(){
+    this.addAirport = false;
+    this.selectedAirport = null;
+    this.refreshTable();
+  }
 }

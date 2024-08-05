@@ -31,4 +31,8 @@ export class AirportService {
   getOneAirport(icao:string){
     return this.http.get<Airport>(environment.apiUrl+"airport/get?icao="+icao);
   }
+
+  deleteAirport(icao:string){
+    return this.http.delete<string>(environment.apiUrl+"airport/delete?icao="+icao);
+  }
 }
