@@ -1,0 +1,60 @@
+<div class="addAirportDialogBody">
+    <div class="dialogEntry">
+        <div class="airportCode">
+            <p>ICAO:</p>
+            <input [(ngModel)]="icao" (ngModelChange)="refreshSubmitState()">
+        </div>
+        <div class="airportCode">
+            <p>IATA:</p>
+            <input [(ngModel)]="iata" (ngModelChange)="refreshSubmitState()">
+        </div>
+    </div>
+    <div class="dialogEntry">
+        <p>Name:</p>
+        <input [(ngModel)]="name" (ngModelChange)="refreshSubmitState()">
+    </div>
+    <div class="dialogEntry">
+        <p>Location:</p>
+        <input [(ngModel)]="location" (ngModelChange)="refreshSubmitState()">
+    </div>
+    <div class="dialogEntry">
+        <p>Email:</p>
+        <input [(ngModel)]="email" (ngModelChange)="refreshSubmitState()">
+    </div>
+    <div *ngFor="let key of contactKeys">
+        <div class="dialogEntry" *ngIf="key != 'email'">
+            <p>{{key[0].toLocaleUpperCase() + key.slice(1)}}:</p>
+            <div class = "contactValueBtnCombo">
+                <input [(ngModel)]="contactData[key]" (ngModelChange)="refreshSubmitState()" class = "contactKey">
+                <div *ngIf="key != 'email'">
+                    <button pButton  icon="pi pi-trash" class = "deleteButt" (click)="deleteContactData(key)"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dialogEntry"*ngIf="mode == 'edit' && addContactMode">
+        <input [(ngModel)]="newKey" (ngModelChange)="refreshSubmitState()" class = "newKey">
+        <div class="contactValueBtnCombo">
+            <input [(ngModel)]="newValue" (ngModelChange)="refreshSubmitState()" class = "contactKey">
+            <button pButton  icon="pi pi-check" class = "acceptButt" (click)="acceptContactData()"></button>
+        </div>
+    </div>
+    <div class="dialogEntry" style="margin-bottom: 10px !important;">
+        <button pButton class="addAirportBtn" [disabled]="!submitEnabled" (click)="submit()" *ngIf="mode == 'save'" label = "Add Airport" icon="pi pi-plus"></button>
+        <p-button [style]="{'align-self':'center', 'justify-self':'center'}" [disabled]="!submitEnabled" (onClick)="submit()" *ngIf="mode == 'edit'">Edit Airport</p-button>
+        
+        <div *ngIf="mode == 'edit'" class="addContactModeCombo">
+            <p>Add contact mode</p>
+            <p-inputSwitch [(ngModel)]="addContactMode"></p-inputSwitch>
+        </div>
+    </div>
+    <div class="dialogEntry" *ngIf="mode == 'edit'">
+        <button pButton [disabled] ="!acknowledged" class="deleteAirportBtn" label="Delete Airport" icon = "pi pi-exclamation-triangle" (click) = "deleteAirport()"></button>
+    </div>
+    <div class="dialogEntry" style="justify-content: flex-start;align-items: center;"*ngIf="mode=='edit'">
+        <p-checkbox [(ngModel)] = "acknowledged"
+        [binary]="true" 
+        inputId="binary"></p-checkbox>
+        <p class="smallFooterDeleteText">I acknowledge that the action is not reversible</p>
+    </div>
+</div>
