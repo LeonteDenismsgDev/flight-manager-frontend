@@ -6,7 +6,7 @@ import { CompanyDataModel } from '../../models/CompanyDataModel';
 @Component({
   selector: 'app-company-page',
   templateUrl: './company-page.component.html',
-  styleUrls: ['./company-page.component.css']
+  styleUrls: ['./company-page.component.scss']
 })
 export class CompanyPageComponent implements OnInit{
   data:CompanyDataModel[]=[]
@@ -14,6 +14,9 @@ export class CompanyPageComponent implements OnInit{
   newCompanyName:string="";
   newCompanyEmail:string="";
   saveEnabled:boolean = false;
+  deleteCompanyDialog:boolean = false;
+  acknowledgment:boolean=false;
+  selectedCompany:CompanyDataModel=new CompanyDataModel("",0,[],0);
 
   constructor(private service:CompanyService, private cdr:ChangeDetectorRef){}
 
@@ -56,7 +59,12 @@ export class CompanyPageComponent implements OnInit{
   }
 
   deleteCompany(company:CompanyDataModel){
-    this.service.deleteCompany(company.name).subscribe(
+    this.deleteCompanyDialog = true;
+    this.selectedCompany = company;
+  }
+
+  deleteCompany1(){
+    this.service.deleteCompany(this.selectedCompany.name).subscribe(
       ()=>{
         this.refresh();
       }

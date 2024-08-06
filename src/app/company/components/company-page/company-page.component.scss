@@ -65,3 +65,29 @@
     margin:0;
     display: inline-block;
 }
+
+
+::ng-deep{
+    .deleteCompanyBtn{
+        background-color: red;
+        border-color: rgb(255, 0, 0);
+        width: 100%;
+    }
+    .deleteCompanyBtn:hover{
+        background-color: #d70000;
+        border-color: #d70000;
+    }
+}
+
+.ackDiv{
+    display: flex;
+    gap:10px;
+    align-items: center;
+    justify-items: flex-start;
+}
+
+.ackDiv p{
+    color:#ff5757;
+    font-style: italic;
+    font-size:13px;
+}

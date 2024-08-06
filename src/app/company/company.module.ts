@@ -12,6 +12,7 @@ import { ManageCompanyComponent } from './components/manage-company/manage-compa
 import { PanelModule } from 'primeng/panel';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MyCompanyComponent } from './components/my-company/my-company.component';
+import { CheckboxModule} from 'primeng/checkbox'
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MyCompanyComponent } from './components/my-company/my-company.component
     ButtonModule,
     DialogModule,
     PanelModule,
-    InputSwitchModule
+    InputSwitchModule,
+    CheckboxModule
   ]
 })
 export class CompanyModule { }

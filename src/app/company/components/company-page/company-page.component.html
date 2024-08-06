@@ -1,7 +1,7 @@
 <div class="companyPageWrapper">
     <div class="companyPageHeader">
         <h1>Company list</h1>
-        <p-button label="Create a new company" class="createCompanyButton" (click)="initNewCompany()"></p-button>
+        <p-button label="Create a new company" class="createCompanyButton" (click)="initNewCompany()" icon="pi pi-plus"></p-button>
     </div>
     <div class="grid">
         <div class="card-rows" *ngFor="let company of data">
@@ -15,7 +15,7 @@
                 </div>
                 <ng-template pTemplate="footer">
                     <div>
-                        <p-button label="Delete" (click)="deleteCompany(company)" />
+                        <button pButton label="Delete" (click)="deleteCompany(company)" icon="pi pi-exclamation-triangle" class="deleteCompanyBtn"></button>
                     </div>
                 </ng-template>
             </p-card>
@@ -29,8 +29,18 @@
             <div class="createCompanyInput">
                 <p>Email:</p> <input pInputText [(ngModel)]="newCompanyEmail" (change)="refreshSaveState()">
             </div>
-            <p-button label="Create" (click)="createNewCompany()" [disabled]="!saveEnabled"></p-button>
+            <p-button label="Create" (click)="createNewCompany()" [disabled]="!saveEnabled" icon="pi pi-plus"></p-button>
             
         </div>
+    </p-dialog>
+    <p-dialog [(visible)]="deleteCompanyDialog" [modal]="true" [draggable]="false" header="Warning" [style]="{'width':'28%'}">
+        <p>Are you sure you want to delete the company {{selectedCompany.name}}?</p>
+        <div class = "ackDiv">
+            <p-checkbox
+            [(ngModel)]="acknowledgment"
+            [binary]="true"
+            inputId="binary"/><p>I acknowledge that this action is irreversible and take responsability for any damages that should occour after any mistaken deletion of the aforementioned company</p>
+        </div>
+        <button pButton label="Delete" icon="pi pi-exclamation-triangle" (click)="deleteCompany1()" class="deleteCompanyBtn" [disabled]="!acknowledgment"></button>
     </p-dialog>
 </div>
