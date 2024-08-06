@@ -1,1 +1,9 @@
-<p>plane-page works!</p>
+<div class="planePageWrapper">
+    <div class="planeHeaderContainer">
+        <h1>Planes</h1>
+        <button pButton label="Add new plane" icon="pi pi-plus" (click) = "redirectToCreatePlane()" class="createPlaneBtn"></button>
+    </div>
+    <div class="planeTableWrapper">
+        <app-data-table [headers]="headers" [keys]="keys" [viewData]="data"></app-data-table>
+    </div>
+</div>
