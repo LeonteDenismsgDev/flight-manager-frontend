@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { EditUserRequest } from 'src/app/user/models/EditUserRequest';
 import { UserDataRequest } from 'src/app/user/models/UserDataRequest';
@@ -8,16 +8,20 @@ import { UserDataService } from '../../services/user-data.service';
 import { DialogData } from '../../models/dialogData';
 import { EditUserRequestAdmin } from '../../models/editUserRequestAdmin';
 import { SecurityService } from '../../services/security.service';
+import { Company } from 'src/app/company/models/company';
+import { CompanyService } from 'src/app/company/services/company.service';
 
 @Component({
   selector: 'app-standalone-settings',
   templateUrl: './standalone-settings.component.html',
   styleUrls: ['./standalone-settings.component.scss']
 })
-export class StandaloneSettingsComponent {
+export class StandaloneSettingsComponent implements OnInit{
   
   @Input() data:DialogData = new DialogData("","","","","","",[],false);
   @Input() editMode:boolean = false;
+  companies: Company[] = [];
+  selectedCompany: Company|null = null;
 
   addingContact:boolean=false;
 
@@ -48,11 +52,20 @@ export class StandaloneSettingsComponent {
   passwordChangeRequested:boolean=false;
   
 
-  constructor(private userDataService:UserDataService, private editModeService:EditModeService, private cdr:ChangeDetectorRef, private securityService:SecurityService){}
+  constructor(private userDataService:UserDataService, private editModeService:EditModeService, private cdr:ChangeDetectorRef, private securityService:SecurityService, private companyService:CompanyService){}
+
+  ngOnInit(): void {
+    this.companyService.getDataAdmin().subscribe((data:Company[])=>{
+      this.companies = data;
+    })
+    this.companies.forEach((c:Company)=>{
+      if(this._company == c.name){
+        this.selectedCompany = c;
+      }
+    })
+  }
 
   onEditSwitch() {
-    // this.editMode = !this.editMode;
-    console.log(this.data.role)
     if(!this.editMode){
       this.revertChanges();
       this.abortAddContact();
@@ -68,12 +81,13 @@ export class StandaloneSettingsComponent {
     }
     this.addingContact = false;
     this.cdr.markForCheck();
-    console.log(this.data)
   }
 
   onSaveButton(event:Event){
     this.refreshSaveState();
     if(!this.saveEnabled) return;
+    if(this.selectedCompany == null) return;
+    this.data.company = this.selectedCompany.name;
     let c_map:{[key:string]:string} = {}
     for(let i = 0; i < this.data.contactData.length; i++){
       let key = this.data.contactData[i].key;
@@ -113,7 +127,7 @@ export class StandaloneSettingsComponent {
       this.data.lastName !== this._lastName ||
       this.data.address !== this._address ||
       !this.compareMaps(this.data.contactData,this._contactData)) ||
-      this.data.company  !== this._company || 
+      this.selectedCompany != null && this.selectedCompany.name  !== this._company || 
       this.data.role !== this._role ||
       this.data.enabled !== this._enabled;
   }

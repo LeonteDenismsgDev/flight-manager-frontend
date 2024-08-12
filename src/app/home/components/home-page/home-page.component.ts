@@ -1,9 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { filter } from 'rxjs/operators';
 import { LoginService } from 'src/app/security/services/login.service';
+import { RefreshUser } from 'src/app/user/models/RefreshUser';
 import { Role } from 'src/app/user/models/role';
+import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
+import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,7 +17,7 @@ import { Role } from 'src/app/user/models/role';
 export class HomePageComponent implements OnInit{
   items: MenuItem[] | undefined;
 
-  constructor(private router: Router, public loginService:LoginService) {}
+  constructor(private router: Router, public loginService:LoginService, private userService:UserService) {}
 
   determineAccess(roleList:Role[]){
     let currentRole:string|null = localStorage.getItem("role");
@@ -35,11 +39,22 @@ export class HomePageComponent implements OnInit{
       { label: 'Planes', icon: 'airplanemode_on', route: '/home/planes',hasAccess:this.determineAccess([Role.ad,Role.cm]) },
       { label: 'Airports', icon: 'connecting_airports', route: '/home/airports',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
       { label: 'Itineraries', icon: 'mode_of_travel', route: '/home/itineraries',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
-      { label: 'Employees', icon: 'transfer_within_a_station', route: '/home/employees',hasAccess:this.determineAccess([Role.cm]) },
       { label: 'My Company', icon: 'ssid_chart', route:'/home/company/mycompany',hasAccess:this.determineAccess([Role.cr,Role.fm])},
       { label: 'Companies', icon: 'ssid_chart', route: '/home/company/admin',hasAccess:this.determineAccess([Role.ad]) },
       { label: 'Manage Company', icon: 'ssid_chart', route: '/home/company/manage',hasAccess:this.determineAccess([Role.cm]) }
     ]
+    this.router.events.pipe(
+      filter(event=>event instanceof NavigationEnd)
+    ).subscribe((event)=>{
+      this.refreshUser();
+    })
+  }
+
+  refreshUser(){
+    this.userService.getCurrentUser().subscribe((data:RefreshUser)=>{
+      localStorage.setItem("username",data.username);
+      localStorage.setItem("role",data.role);
+    })
   }
 
   logout(){

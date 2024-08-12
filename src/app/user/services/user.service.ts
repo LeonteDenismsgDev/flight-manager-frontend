@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import {FilterOptions} from '../models/FilterOptions'
 import { UserDataResponse } from '../models/UserDataResponse';
 import { UserTableResponse } from '../models/UserTableResponse';
+import { RefreshUser } from '../models/RefreshUser';
 
 @Injectable({
     providedIn: 'root'
@@ -25,4 +26,9 @@ url:string=environment.apiUrl;
       };
       return this.httpClient.post<UserTableResponse>(`${this.url}view/users?page=${page}&size=${size}`, filterOptions);
   }
+
+  getCurrentUser(){
+    return this.httpClient.get<RefreshUser>(environment.apiUrl+"view/current");
+  }
+
 }
