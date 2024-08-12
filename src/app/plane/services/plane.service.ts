@@ -15,6 +15,10 @@ export class PlaneService {
       return this.http.get<Plane[]>(environment.apiUrl+"plane/view/all");
   }
 
+  getCompanyPlanes(){
+      return this.http.get<Plane[]>(environment.apiUrl+"plane/view/company");
+  }
+
   getOnePlane(tailNumber:string){
       return this.http.get<Plane>(environment.apiUrl+"plane/view?registrationNumber="+tailNumber);
   }

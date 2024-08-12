@@ -1,0 +1,102 @@
+<div class="updatePanel">
+    <p-panel header="Update the plane">
+        <div class="createPlaneWrapper">
+                <ng-template pTemplate="header">
+                    <h2 style="margin:0">New Plane Setup</h2>
+                </ng-template>
+                <p-tabView>
+                    <p-tabPanel header="General Information">
+                        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index" (ngModelChange)="refreshSaveState()" >
+                            <div class="stepperContent">
+                                <div class="planeParamEntry">
+                                    <p>Tail Number</p><input pInputText [(ngModel)] = "registrationNumber" (ngModelChange)="refreshSaveState()" >
+                                </div>
+                                <div class="planeParamEntry">
+                                    <p>Manufacturer</p><input pInputText [(ngModel)] = "manufacturer" (ngModelChange)="refreshSaveState()" >
+                                </div>
+                                <div class="planeParamEntry">
+                                    <p>Model</p><input pInputText [(ngModel)] = "model" (ngModelChange)="refreshSaveState()" >
+                                </div>
+                                <div class="bringbtnDown">
+                                    <div class="planeParamEntry">
+                                        <p>Manufacture Year</p><p-inputNumber [useGrouping]="false" [(ngModel)] = "manufactureYear" (ngModelChange)="refreshSaveState()"  [min]="1900" mode="decimal" [max]="2030"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-tabPanel>
+                    <p-tabPanel header="Technical Informations">
+                        <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index" let-prevCallback="prevCallback">
+                            <div class="stepperContent">
+                                <div class="planeParamEntry">
+                                    <p>Range</p><p-inputNumber  [(ngModel)] = "range" (ngModelChange)="refreshSaveState()" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" km" mode="decimal" />
+                                </div>
+                                <div class="planeParamEntry">
+                                    <p>Cruising Speed</p><p-inputNumber  [(ngModel)] = "cruisingSpeed" (ngModelChange)="refreshSaveState()" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" km/h" mode="decimal" />
+                                </div>
+                                <div class="planeParamEntry">
+                                    <p>Wing Span</p><p-inputNumber [(ngModel)] = "wingspan" (ngModelChange)="refreshSaveState()" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" m" mode="decimal"/>
+                                </div>
+                                <div class="planeParamEntry">
+                                    <p>Length</p><p-inputNumber [(ngModel)] = "length" (ngModelChange)="refreshSaveState()" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" m" mode="decimal"/>
+                                </div>
+                                <div class="bringbtnDown">
+                                    <div class="planeParamEntry">
+                                        <p>Height</p><p-inputNumber  [(ngModel)] = "height" (ngModelChange)="refreshSaveState()"  [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" m" mode="decimal" />
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-tabPanel>
+                    <p-tabPanel header="Company Information">
+                        <ng-template pTemplate="content" let-index="index" let-prevCallback="prevCallback">
+                            <div class="stepperContent">
+                                <div class="planeParamEntry" style="justify-content: flex-start;gap:20px; width:100%;">
+                                    <p>Company:</p>
+                                    <div class="spacer">
+                                        <p-dropdown
+                                        [options]="companies"
+                                        optionLabel="name"
+                                        [filter]="true"
+                                        filterBy="name"
+                                        [(ngModel)]= "selectedCompany"
+                                        (ngModelChange)="refreshSaveState()"
+                                        placeHolder="Select a company"
+                                        class="companyDropDown"
+                                        />
+                                        <p-panel *ngIf="selectedCompany" header="Selected company: {{selectedCompany.name}}" class="companyPanel">
+                                            <div class="companyData">
+                                                <p>Name:</p><p>{{selectedCompany.name}}</p>
+                                            </div>
+                                            <div class="companyData">
+                                                <p>Fleet:</p><p>{{selectedCompany.fleet}}</p>
+                                            </div>
+                                            <div class="companyData">
+                                                <p>Crew:</p><p> {{selectedCompany.crews}}</p>
+                                            </div>
+                                        </p-panel>
+                                    </div>
+                                </div>
+                                <div class="bringbtnDown">
+                                    <div></div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </p-tabPanel>
+                </p-tabView>
+        </div>
+        <div class = planeParamEntry>
+            <div class = "ackDiv" *ngIf="ackCheckView">
+                <p-checkbox
+                [(ngModel)]="ackCheck"
+                [binary]="true"
+                inputId="binary"/><p>I acknowledge that this action is irreversible and take responsability for any damages that should occour after any mistaken deletion of the aforementioned company</p>
+            </div>
+        </div>
+        <div class="planeParamEntry" style="justify-content: center;gap:50px;">
+            <button pButton label="Go back" icon="pi pi-arrow-left" (click)="onHideTrigger.emit()"></button>
+            <button pButton label="Update Plane" icon="pi pi-pencil" class = "addPlaneBtn" [disabled]= "!submitEnabled" (click)="submit()"></button>
+            <button pButton label="Delete Plane" icon="pi pi-exclamation-triangle" (click)="delete1()" class="deletePlaneBtn" [disabled]="!ackCheck"></button>
+        </div>
+    </p-panel>
+</div>

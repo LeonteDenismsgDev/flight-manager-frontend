@@ -9,7 +9,7 @@ export class Plane{
         public manufactureYear:number,
         public range:number,
         public cruisingSpeed:number,
-        public wingSpan:number,
+        public wingspan:number,
         public length:number,
         public height:number,
         public company:Company,

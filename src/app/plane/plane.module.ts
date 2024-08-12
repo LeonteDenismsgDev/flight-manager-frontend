@@ -5,22 +5,40 @@ import { PlaneRoutingModule } from './plane-routing.module';
 import { PlanePageComponent } from './components/plane-page/plane-page.component';
 import { UtilComponentsModule } from "../util-components/util-components.module";
 import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
 import { CreatePlaneComponent } from './components/create-plane/create-plane.component';
 import { StepperModule} from 'primeng/stepper'
 import { PanelModule } from 'primeng/panel';
-
+import { FormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { CardModule } from 'primeng/card';
+import { UpdatePlaneComponent } from './components/update-plane/update-plane.component';
+import { TabViewModule } from 'primeng/tabview';
+import { DialogModule } from 'primeng/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { CheckboxModule } from 'primeng/checkbox'
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
-  declarations: [PlanePageComponent, CreatePlaneComponent],
+  declarations: [PlanePageComponent,CreatePlaneComponent, UpdatePlaneComponent],
   imports: [
     CommonModule,
     PlaneRoutingModule,
     UtilComponentsModule,
     ButtonModule,
-    FormsModule,
     PanelModule,
-    StepperModule
-]
+    StepperModule,
+    FormsModule,
+    InputTextModule,
+    InputNumberModule,
+    DropdownModule,
+    CardModule,
+    TabViewModule,
+    DialogModule,
+    MatIconModule,
+    CheckboxModule,
+    DynamicDialogModule
+],
 })
 export class PlaneModule { }
