@@ -110,6 +110,14 @@ export class ManageCompanyComponent implements OnInit{
     if(!this.editMode){
       this.revert();
       this.refreshSaveState();
+      this.abortAddContact();
     }
   }
+
+  abortAddContact(){
+    this.addingContact = false;
+    this.newContactKey = "";
+    this.newContactValue = "";
+  }
+  
 }
