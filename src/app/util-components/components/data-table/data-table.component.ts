@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-data-table',
@@ -13,7 +13,7 @@ export class DataTableComponent {
   @Output() onRowClick= new EventEmitter<any>();
 
   selectedData!: any;
-  constructor(private cdr:ChangeDetectorRef){}
+  constructor(private appRef:ApplicationRef){}
 
   getFieldValue(item: any, key: string): any{
     if(key === "email"){
@@ -23,12 +23,14 @@ export class DataTableComponent {
     }
   }
 
-  callback(){
-    this.onRowClick.emit(this.selectedData);
-    if(!this.toggleable){
-      this.selectedData = {};
-      this.cdr.markForCheck();
-    }
+  autoDeselect(){
+    this.selectedData = null;
+    this.appRef.tick();
+  }
+  
+  callback(event:any){
+    if(event.data == null) return;
+    this.onRowClick.emit(event.data);
   }
 
 }

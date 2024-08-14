@@ -1,1 +1,14 @@
-<p>plane-page works!</p>
+<div class="planePageWrapper">
+    <div class="planeHeaderContainer">
+        <h1>Planes</h1>
+        <button pButton label="Add new plane" icon="pi pi-plus" (click) = "redirectToCreatePlane()" class="createPlaneBtn"></button>
+    </div>
+    <div class="planeTableWrapper">
+        <app-data-table [headers]="headers" [keys]="keys" [viewData]="data" (onRowClick)="redirectToUpdatePlane($event)" #planeTable></app-data-table>
+    </div>
+    <p-dialog [modal]="true" [draggable]="false" [visible] = "updatePlane" header="Update the plane">
+        <ng-template pTemplate="headless">
+        <app-update-plane (onHideTrigger)="abortUpdate()" [tailNumber] = "selectedPlane.registrationNumber" #updateDialog></app-update-plane>
+    </ng-template>
+    </p-dialog>
+</div>

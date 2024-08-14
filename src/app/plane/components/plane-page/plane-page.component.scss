@@ -1,0 +1,36 @@
+.planePageWrapper{
+    padding:0 2%;
+    display:flex;
+    flex-direction: column;
+    gap:20px;   
+    height:100%;
+}
+
+
+
+.planePageWrapper h1{
+    margin-bottom:0;
+}
+
+.planeTableWrapper{
+    height:65%;
+    overflow-y: auto;
+}
+
+.planeHeaderContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+::ng-deep{
+    .createPlaneBtn{
+        background-color: #1AD95D;
+        border-color: #1AD95D;
+    }
+
+    .createPlaneBtn:hover{
+        background-color: #129862;
+        border-color: #129862;
+    }
+}
