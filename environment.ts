@@ -1,3 +1,3 @@
 export const environment={
-  apiUrl:'http://localhost:8080/flymanager/'
+    apiUrl:'http://localhost:8080/flymanager/',
 }

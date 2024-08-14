@@ -1,1 +1,30 @@
-<p>airport-page works!</p>
+<div class="airportMainContainer">
+    <div class="airportHeader">
+        <h1>Airports</h1>
+        <div class="airportInput">
+            <p>Search:</p>
+            <input [(ngModel)]="filter" (ngModelChange)="search()">
+            <p-button [style]="{'align-self':'center'}" (onClick)="showAddDialog()" label = "Add new Airport" icon="pi pi-plus"> </p-button>
+        </div>
+    </div>
+        <app-data-table [headers]="headers" [viewData]="data" [keys]="keys" (onRowClick) = "onRowClick($event)"></app-data-table>
+    <div class="airportFooter">
+        <span class="mx-1 text-color right_page_alignement">Items per page: </span>
+        <div>    
+            <button class="round-button" 
+                [disabled] = "page === 0" 
+                (click) = "removePage()"
+                ><<</button>
+            <p-dropdown [options]="size_options" 
+                [(ngModel)] = "size"
+                (onChange)="refreshTable()"/>
+            <button class="round-button"
+                [disabled]="page >= max_page"
+                (click) = "addPage()"
+                >>></button>
+        </div>
+</div>
+    <p-dialog [modal]="true" [draggable]="false" header="Add new airport" [(visible)]="addAirport" (onHide)="destroyDialog()">
+        <app-airport-dialog [data]="selectedAirport" [mode]="mode" (endDialog)="closeDialog()"></app-airport-dialog>
+    </p-dialog>
+</div>
