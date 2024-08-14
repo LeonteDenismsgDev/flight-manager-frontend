@@ -71,7 +71,6 @@ export class UserPageComponent {
       const value = data.contactData[key];
       this.dialogUserData.contactData.push({key,value})
     });
-    console.log(this.dialogUserData)
   }
 
   turnOffEditMode(){
