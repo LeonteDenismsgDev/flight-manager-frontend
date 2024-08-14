@@ -14,7 +14,7 @@
                     <input pInputText [(ngModel)]="newContactKey" class="newKey" [disabled]="!editMode"><input pInputText [(ngModel)]="newContactValue" class="newValue" [disabled]="!editMode">
                 </div>
                 <div class="buttons">
-                    <button pButton  icon="pi pi-trash" class = "deleteButt"></button>
+                    <button pButton  icon="pi pi-trash" class = "deleteButt" (click)="abortAddContact()"></button>
                     <button pButton icon="pi pi-check" class = "acceptButt" (click)="addContact()"></button>
                 </div>
             </div>

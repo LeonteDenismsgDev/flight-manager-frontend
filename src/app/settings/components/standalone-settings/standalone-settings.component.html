@@ -57,7 +57,17 @@
             </div>
             <div class="security">
                 <p class = "securityKey">Company</p>
-                <input type="text" [(ngModel)]="data.company" [disabled]="!editMode" (input)="refreshSaveState()" pInputText/>
+                <p-dropdown
+                                [options]="companies"
+                                optionLabel="name"
+                                [filter]="true"
+                                filterBy="name"
+                                [(ngModel)]="selectedCompany"
+                                placeholder="Select a company"
+                                [style]="{height:'30px'}"
+                                (ngModelChange)="refreshSaveState()"
+                                appendTo="body"
+                                />
             </div>
             <div class="security">
                 <p class = "securityKey" style="font-weight: bold;">Reset password</p>
