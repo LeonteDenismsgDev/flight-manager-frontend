@@ -1,0 +1,69 @@
+.createPlaneWrapper{
+    width:100%;
+    height: 100%;
+    display:flex;
+    justify-content: center;
+    padding-top:2%;
+}
+
+.planeParamEntry{
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+
+::ng-deep{
+    .addPlaneBtn{
+        background-color: #1AD95D;
+        border-color: #1AD95D;
+    }
+
+    .addPlaneBtn:hover{
+        background-color: #129862;
+        border-color: #129862;
+    }
+    .planeParamEntry input{
+        height:30px;
+    }
+
+    .p-dropdown{
+        min-width: 13vw!important;
+    }
+
+    .companyPanel.addPlaneBtn{
+        margin-left:20px;
+        margin-right:30px;
+        min-width: 13vw;
+    }
+}
+
+.stepperContent{
+    height:38vh;
+    display:flex;
+    flex-direction: column;
+}
+
+.bringbtnDown{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow:2;
+}
+
+.companyData{
+    display:flex;
+    justify-content: space-between;
+}
+
+.companyData p{
+    margin:8px 0;
+}
+
+.spacer{
+    display:flex;
+    justify-content: space-between;
+    flex:2;
+}

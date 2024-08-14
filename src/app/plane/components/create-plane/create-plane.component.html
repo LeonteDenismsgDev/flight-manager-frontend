@@ -1,0 +1,97 @@
+<div class="createPlaneWrapper">
+    <p-panel>
+        <ng-template pTemplate="header">
+            <h2 style="margin:0">New Plane Setup</h2>
+        </ng-template>
+        <p-stepper [linear]="true">
+            <p-stepperPanel header="General Information">
+                <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index">
+                    <div class="stepperContent">
+                        <div class="planeParamEntry">
+                            <p>Tail Number</p><input pInputText [(ngModel)] = "registrationNumber" (ngModelChange)="updateGeneralState()">
+                        </div>
+                        <div class="planeParamEntry">
+                            <p>Manufacturer</p><input pInputText [(ngModel)] = "manufacturer" (ngModelChange)="updateGeneralState()">
+                        </div>
+                        <div class="planeParamEntry">
+                            <p>Model</p><input pInputText [(ngModel)] = "model" (ngModelChange)="updateGeneralState()">
+                        </div>
+                        <div class="bringbtnDown">
+                            <div class="planeParamEntry">
+                                <p>Manufacture Year</p><p-inputNumber [useGrouping]="false" [(ngModel)] = "manufactureYear" (ngModelChange)="updateGeneralState()" [min]="1900" mode="decimal" [max]="2030"/>
+                            </div>
+                            <div class="planeParamEntry" style="justify-content: flex-end;">
+                                <p-button (onClick)="nextCallback.emit()" label="Next" icon="pi pi-arrow-right" iconPos="right" [disabled]="!generalCompleted"/>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-stepperPanel>
+            <p-stepperPanel header="Technical Informations">
+                <ng-template pTemplate="content" let-nextCallback="nextCallback" let-index="index" let-prevCallback="prevCallback">
+                    <div class="stepperContent">
+                        <div class="planeParamEntry">
+                            <p>Range</p><p-inputNumber  [(ngModel)] = "range" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" km" mode="decimal" (ngModelChange)="updateTechnicalState()"/>
+                        </div>
+                        <div class="planeParamEntry">
+                            <p>Cruising Speed</p><p-inputNumber  [(ngModel)] = "cruisingSpeed" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" km/h" mode="decimal" (ngModelChange)="updateTechnicalState()"/>
+                        </div>
+                        <div class="planeParamEntry">
+                            <p>Wing Span</p><p-inputNumber [(ngModel)] = "wingspan" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" m" mode="decimal"(ngModelChange)="updateTechnicalState()"/>
+                        </div>
+                        <div class="planeParamEntry">
+                            <p>Length</p><p-inputNumber [(ngModel)] = "length" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" m" mode="decimal"(ngModelChange)="updateTechnicalState()"/>
+                        </div>
+                        <div class="bringbtnDown">
+                            <div class="planeParamEntry">
+                                <p>Height</p><p-inputNumber  [(ngModel)] = "height" [useGrouping]="false" minFractionDigits="1" maxFractionDigits="2" suffix=" m" mode="decimal" (ngModelChange)="updateTechnicalState()"/>
+                            </div>
+                            <div class="planeParamEntry">
+                                <p-button label="Previous" (onClick)="prevCallback.emit()" icon="pi pi-arrow-left"/><p-button label="Next" icon="pi pi-arrow-right" iconPos="right" (onClick)="nextCallback.emit()" [disabled]="!technicalCompleted"/>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-stepperPanel>
+            <p-stepperPanel header="Company Information">
+                <ng-template pTemplate="content" let-index="index" let-prevCallback="prevCallback">
+                    <div class="stepperContent">
+                        <div class="planeParamEntry" style="justify-content: flex-start;gap:20px; width:100%;">
+                            <p>Company:</p>
+                            <div class="spacer">
+                                <p-dropdown
+                                [options]="companies"
+                                optionLabel="name"
+                                [filter]="true"
+                                filterBy="name"
+                                [(ngModel)]="selectedCompany"
+                                placeHolder="Select a company"
+                                class="companyDropDown"
+                                (ngModelChange)="updateCompanyState()"
+                                />
+                                <p-panel *ngIf="selectedCompany" header="Selected company: {{selectedCompany.name}}" class="companyPanel">
+                                    <div class="companyData">
+                                        <p>Name:</p><p>{{selectedCompany.name}}</p>
+                                    </div>
+                                    <div class="companyData">
+                                        <p>Fleet:</p><p>{{selectedCompany.fleet}}</p>
+                                    </div>
+                                    <div class="companyData">
+                                        <p>Crew:</p><p> {{selectedCompany.crews}}</p>
+                                    </div>
+                                </p-panel>
+                            </div>
+                        </div>
+                        <div class="bringbtnDown">
+                            <div></div>
+                            <div class="planeParamEntry">
+                                <p-button label="Previous" (onClick)="prevCallback.emit()" icon="pi pi-arrow-left"/>
+                                <button pButton label="Add plane" icon="pi pi-plus" class = "addPlaneBtn" [disabled]="!submitEnabled" (click)="submit()"></button>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </p-stepperPanel>
+        </p-stepper>
+    </p-panel>
+</div>

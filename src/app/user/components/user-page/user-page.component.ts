@@ -5,6 +5,7 @@ import { UserDataResponse } from '../../models/UserDataResponse';
 import { DialogData } from 'src/app/settings/models/dialogData';
 import { StandaloneSettingsComponent } from 'src/app/settings/components/standalone-settings/standalone-settings.component';
 import { UserTableResponse } from '../../models/UserTableResponse';
+import { DataTableComponent } from 'src/app/util-components/components/data-table/data-table.component';
 
 @Component({
   selector: 'app-user-page',
@@ -51,6 +52,11 @@ export class UserPageComponent {
         if(usersList.usersCount > 0){
           this.user_list = usersList.page;
           this.max_users = usersList.usersCount;
+          this.max_page = Math.ceil(usersList.usersCount/((this.page+1)*this.size));
+          if(this.max_users <= this.size)
+          {
+            this.max_page = 0;
+          }
         }
       }
     )
@@ -75,6 +81,7 @@ export class UserPageComponent {
 
   turnOffEditMode(){
     this.dialog.edit();
+    this.abortUpdate();
   }
 
   changePaginator(){
@@ -95,9 +102,20 @@ export class UserPageComponent {
           this.user_list = usersList.page;
           this.max_users = usersList.usersCount;
           this.max_page = Math.ceil(usersList.usersCount/((this.page+1)*this.size));
+          if(this.max_users <= this.size)
+            {
+              this.max_page = 0;
+            }
         }
       }
     )
+  }
+
+  @ViewChild('planeTable') tableChild!:DataTableComponent;
+  
+  abortUpdate(){
+    this.visibleDialog = false;
+    this.tableChild.autoDeselect();
   }
 
   removePage(){
