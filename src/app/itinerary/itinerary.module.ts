@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { ItineraryRoutingModule } from './itinerary-routing.module';
 import { ItineraryPageComponent } from './components/itinerary-page/itinerary-page.component';
+import { CalendarModule } from 'primeng/calendar';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { ItineraryPageComponent } from './components/itinerary-page/itinerary-pa
   ],
   imports: [
     CommonModule,
-    ItineraryRoutingModule
+    ItineraryRoutingModule,
+    CalendarModule,
+    FormsModule
   ]
 })
 export class ItineraryModule { }

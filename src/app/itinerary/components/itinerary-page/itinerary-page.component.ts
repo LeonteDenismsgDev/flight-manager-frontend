@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./itinerary-page.component.css']
 })
 export class ItineraryPageComponent {
+  time?:Date;
 
+  onTime(){
+    console.log(this.time);
+  }
 }
