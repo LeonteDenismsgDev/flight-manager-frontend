@@ -129,6 +129,7 @@
             [showIcon]="true" 
             [showOnFocus]="false" 
             inputId="rule.name + 'date_input'"
+            appendTo="body"
             />
             <p-calendar 
             [(ngModel)]="timeReference"
@@ -136,6 +137,7 @@
             [showIcon]="true" 
             [timeOnly]="true" 
             inputId="rule.name + 'time_input'"
+            appendTo="body"
             >
             <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
                 <i class="pi pi-user pointer-events-none" (click)="clickCallBack($event)"></i>
@@ -143,7 +145,7 @@
             </p-calendar>
         </diV>
             <div class="dropdown">
-                <button class="dropbtn">
+                <button pButton class="dropbtn">
                   <p *ngIf="selectedAttribute != undefined; else buttonIconTemplate">{{selectedAttribute.label}}</p>
                   <ng-template #buttonIconTemplate>
                     <p *ngIf="finalSelectedAttribute; else btnTemplate">{{finalSelectedAttribute}}</p>
@@ -156,7 +158,9 @@
                   <p (click)="selectAttribute(attribute)" *ngFor="let attribute of filteredAttributes">{{attribute.label}}</p>
                 </div>
               </div>
-              <p-button (onClick)="addRule()" class="add_validation" icon="pi pi-check" />
+              <p-button (onClick)="addRule()" class="add_validation">
+                <i class ="pi pi-check"></i>
+              </p-button>
         </div>
     </div>
     <div *ngSwitchCase="'interval'" class="validation-op">

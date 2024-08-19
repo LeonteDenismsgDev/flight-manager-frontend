@@ -6,7 +6,7 @@ import { retry } from 'rxjs';
 @Component({
   selector: 'app-validation-rule',
   templateUrl: './validation-rule.component.html',
-  styleUrls: ['./validation-rule.component.css']
+  styleUrls: ['./validation-rule.component.scss']
 })
 export class ValidationRuleComponent implements OnInit, OnChanges{
   @Input()

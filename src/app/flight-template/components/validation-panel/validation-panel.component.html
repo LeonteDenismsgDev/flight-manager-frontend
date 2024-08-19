@@ -1,11 +1,11 @@
 <div class="validation-section">
     <p class="validation-header" *ngIf="selectedAttribute">{{getAttribute("label")}}:{{getAttribute("type")}}</p>
     <ng-container [ngSwitch]="attributeTypePanel()"> 
-        <div *ngSwitchCase="'predefined_object'" class="flex-column">
-        <button (click)="chnage_selcted(attribute)" class="attribute-btn" *ngFor="let attribute of getObjectAttributes()" class="object_attribute">{{attribute.label}}</button>
+        <div *ngSwitchCase="'predefined_object'" class="btn-container">
+        <button pButton (click)="chnage_selcted(attribute)" class="attribute-btn" *ngFor="let attribute of getObjectAttributes()" class="object_attribute"[label]="attribute.label"></button>
         </div>
-        <div *ngSwitchCase="'object'" class="flex-column">
-            <button (click)="chnage_selcted(attribute)" class="attribute-btn" *ngFor="let attribute of getObjectAttributes()" class="object_attribute">{{attribute}}</button>
+        <div *ngSwitchCase="'object'" class="btn-container">
+            <button pButton (click)="chnage_selcted(attribute)" class="attribute-btn" *ngFor="let attribute of getObjectAttributes()" class="object_attribute" [label]="attribute"></button>
             </div>
         <div *ngSwitchCase="'base_attribute'" class="validation-op">
         <div *ngFor=" let rule of getValidations()" class="validation-rule">

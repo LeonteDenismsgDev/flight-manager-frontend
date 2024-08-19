@@ -1,0 +1,22 @@
+.tag{
+    margin-left: 1%;
+}
+
+.obj-content{
+    margin-left: 2%;
+}
+
+.btn{
+    margin:4%;
+}
+
+::ng-deep{
+    .p-tag{
+        height:40px;
+    }
+    .btn>.p-button{
+        height:30px;
+        width: 30px;
+        margin-top:0;
+    }
+}

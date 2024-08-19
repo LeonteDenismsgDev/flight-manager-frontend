@@ -53,6 +53,8 @@
     display: flex;
     outline: none;
     font-weight: 450;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .validation-input{
@@ -175,7 +177,12 @@ li{
 .slected-zone{
     margin-top:10px;
     width: 100%;
-    height:100%;
+    height:60vh;
+    overflow-y:auto;
+    border-radius: 10px;
+    border-style: dashed;
+    border-width: 2.5px;
+    border-color: dimgray;
 }
 
 
@@ -248,10 +255,7 @@ li{
 }
 
 .select-label{
-    border-radius: 10px;
-    border-style: dashed;
-    border-width: 2.5px;
-    border-color: dimgray;
+    
     padding: 30%;
     font-weight: bold;
     color: dimgray;
@@ -260,4 +264,32 @@ li{
 
 .upload-icon{
     font-size: large;
+}
+
+.btn-collapsible-div{
+    display: flex;
+    align-items: center;
+    gap:10px;
+}
+
+::ng-deep{
+    .btn-collapsible-div > .p-button{
+        margin-top:0 !important;
+        background-color: transparent;
+        border-color: transparent;
+        color:black
+    }
+
+    .btn-collapsible-div > .p-button:hover{
+        background-color: #62bcd5;
+        border-color: #62bcd5;
+        color:white
+    }
+    .search-input:focus{
+        outline: none;
+    }
+}
+
+.image-filed > i:hover{
+    cursor: pointer;
 }

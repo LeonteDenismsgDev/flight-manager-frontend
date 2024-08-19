@@ -5,9 +5,9 @@
 <div class="widget-content template-container">
     <div id="attributes-widget">
         <div id="widget-header">
-            <p id="widget-label">Attributes</p>
+            <p id="widget-label" style="color:#3c1b83; font-size:25px; margin:0px; margin-top:10px;">Attributes</p>
             <div class="image-filed">
-                <i class="pi pi-search search-button"></i>
+                <i class="pi pi-search" style="padding:12px 12px 14px 10px;"></i>
                 <input
                 [(ngModel)]="searchText"
                 (keydown)="serchAttribute($event)"
@@ -49,8 +49,11 @@
                        <div>
                         <div class="collapsible" (click)="selectAttribute(attribute, false)">
                             <p>{{attribute.label}}</p>
-                            <button (click)="toggle($event)" class="collapsible-button">+</button>
-                            <button (click)="unselectAttribute(attribute)" class="unselect_button">X</button>
+
+                            <div class="btn-collapsible-div">
+                                <button pButton (click)="toggle($event)" icon="pi pi-plus"></button>
+                                <button pButton (click)="unselectAttribute(attribute)" icon="pi pi-times"></button>
+                            </div>
                         </div>
                         <div class="collapsible-content">
                             <p>{{attribute.description}}</p>
