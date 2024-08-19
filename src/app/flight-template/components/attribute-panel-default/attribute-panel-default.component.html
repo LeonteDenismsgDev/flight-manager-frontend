@@ -2,7 +2,7 @@
     <input
         pInputText
         type="text"
-        (onInput)="changeValue()" 
+        (ngModelChange)="changeValue()" 
         [(ngModel)]="attr_text_value" 
         *ngSwitchCase="'text'"
         placeholder="Default Value"
