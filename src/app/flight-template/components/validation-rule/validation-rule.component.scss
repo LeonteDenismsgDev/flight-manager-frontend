@@ -1,4 +1,5 @@
-.dropbtn {
+::ng-deep{
+  .dropbtn {
     padding: 1%;
     font-size: 16px;
     border: none;
@@ -9,7 +10,26 @@
     align-items: flex-start;
     margin-left: 20%;
   }
+  .p-button{
+    margin-top:5px;
+    background-color: #62bcd5;
+    border-color: #62bcd5;
+}
+  .p-button:hover{
+    background-color: #3c1b83;
+    border-color: #3c1b83;
+  }
 
+  .p-calendar>button{
+    margin: 0!important;
+  }
+}
+
+
+.widget-content{
+  display:flex;
+  align-items: center;
+}
   .rmv_tag_btn{
     background-color: aliceblue;
     border-color: transparent;
@@ -46,6 +66,14 @@
     display: block;
   }
   
+  ::ng-deep{
+    .removeRuleButton{
+      margin-left:30px;
+      height:30px;
+      width:30px;
+    }
+  }
+
   .dropdown-content a:hover {background-color: #ddd;}
   
   .dropdown:hover .dropdown-content {display: block;}

@@ -13,10 +13,16 @@
 ::ng-deep{
     .p-tag{
         height:40px;
+        background-color: #62bcd5;
     }
     .btn>.p-button{
         height:30px;
         width: 30px;
         margin-top:0;
+    }
+
+    .btn>.p-button:hover{
+        background-color: white;
+        border-color: white;
     }
 }

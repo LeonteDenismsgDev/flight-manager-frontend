@@ -154,10 +154,20 @@ selectAttribute(attribute : ViewAttributes, enableCreate: boolean):void{
 }
 
 toggle(event : Event) : void{
+  
  const toggleButton = event.target as HTMLElement;
  const collasible = toggleButton.parentElement;
  if(parent){
-  const collapsibleContent = collasible?.nextElementSibling as HTMLElement;
+  var collapsibleContent = collasible?.nextElementSibling as HTMLElement;
+  if(collapsibleContent == null){
+    collapsibleContent = collasible as HTMLElement;
+  }
+  if(collapsibleContent.className != "collapsible-content"){
+    while(!collapsibleContent.classList.contains("collapsible")){
+      collapsibleContent = collapsibleContent?.parentElement as HTMLElement;
+    }
+    collapsibleContent = collapsibleContent?.nextElementSibling as HTMLElement;
+  }
   if(collapsibleContent){
     if(collapsibleContent.style.display === "flex"){
       collapsibleContent.style.display = "none"

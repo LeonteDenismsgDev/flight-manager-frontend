@@ -68,9 +68,9 @@
                 />
             </div>
             <app-attribute-panel-default (defaultValue)="reciveValue($event)" [slectedType]="slctType" [attributTypes]="attributTypes" [superDefaultValue]="sp_DefaultValue"></app-attribute-panel-default>
-            <div class="element">
-                <p-button *ngIf="update_attribute=== false" icon="pi pi-plus" (click)="addAttribute($event)" class="add_btn btn" [ngStyle]="{'margin-bottom':'25px'}" [raised]="true" label="Add"/>
-                <p-button *ngIf="update_attribute=== true" icon="pi pi-pencil" (click)="updateAttr()" class="add_btn btn" [raised]="true"/>
+            <div class="element" style="height: 50px; margin-bottom: 0;">
+                <p-button *ngIf="update_attribute=== false" icon="pi pi-plus" (click)="addAttribute($event)" class="add_btn" [ngStyle]="{'margin-bottom':'25px'}" [raised]="true" label="Add"/>
+                <p-button *ngIf="update_attribute=== true" icon="pi pi-pencil" (click)="updateAttr()" class="add_btn" [raised]="true"/>
             </div>
         </div>
     </div>
