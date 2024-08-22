@@ -3,6 +3,7 @@ import { SecurityService } from '../../services/security.service';
 import { UserDataService } from '../../services/user-data.service';
 import { UserDataRequest } from 'src/app/user/models/UserDataRequest';
 import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
+import { UserSecurity } from 'src/app/security/services/user-security';
 
 @Component({
   selector: 'app-security',
@@ -11,7 +12,7 @@ import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
 })
 export class SecurityComponent implements OnInit{
   role:string = "";
-  username:string|null=localStorage.getItem("username");
+  username:string|null=UserSecurity.getItem("username");
   company:string="";
   passwordOK:boolean = false;
   mainRegex= new RegExp('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\W{!_}]).+$');
@@ -27,7 +28,7 @@ export class SecurityComponent implements OnInit{
   ngOnInit(){
     this.userService.getUserData(new UserDataRequest(this.username)).subscribe((userDataResponse:UserDataResponse)=>{
       this.role = userDataResponse.role;
-      localStorage.setItem("role",this.role);
+      UserSecurity.setItem("role",this.role);
       this.company = userDataResponse.company;
     }); 
   }

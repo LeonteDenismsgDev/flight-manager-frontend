@@ -5,6 +5,7 @@ import { UserDataRequest } from 'src/app/user/models/UserDataRequest';
 import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
 import { EditModeService } from 'src/app/settings/services/edit-mode.service';
 import { UserDataService } from 'src/app/settings/services/user-data.service';
+import { UserSecurity } from 'src/app/security/services/user-security';
 
 @Component({
   selector: 'app-general',
@@ -13,7 +14,7 @@ import { UserDataService } from 'src/app/settings/services/user-data.service';
 })
 export class GeneralComponent implements OnInit{
 
-  username=localStorage.getItem("username");
+  username=UserSecurity.getItem("username");
   editMode:boolean=false;
   addingContact:boolean=false;
 
@@ -75,7 +76,7 @@ export class GeneralComponent implements OnInit{
   onSaveButton(event:Event){
     this.refreshSaveState();
     if(!this.saveEnabled) return;
-    let username = localStorage.getItem("username");
+    let username = UserSecurity.getItem("username");
     let c_map:{[key:string]:string} = {}
     for(let i = 0; i < this.contactData.length; i++){
       let key = this.contactData[i].key;

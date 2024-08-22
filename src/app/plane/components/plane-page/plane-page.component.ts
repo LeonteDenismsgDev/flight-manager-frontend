@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Role } from 'src/app/user/models/role';
 import { UpdatePlaneComponent } from '../update-plane/update-plane.component';
 import { DataTableComponent } from 'src/app/util-components/components/data-table/data-table.component';
+import { UserSecurity } from 'src/app/security/services/user-security';
 
 async function sleep(ms:number){
   return new Promise((resolve)=>{setTimeout(resolve,ms)});
@@ -33,7 +34,7 @@ export class PlanePageComponent implements OnInit{
   }
 
   isAdmin(){
-    return localStorage.getItem("role") == Role.ad;
+    return UserSecurity.getItem("role") == Role.ad;
   }
 
   refreshTable(){
