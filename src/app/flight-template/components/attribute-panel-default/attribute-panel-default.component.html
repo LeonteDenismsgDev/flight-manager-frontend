@@ -1,5 +1,12 @@
 <ng-container [ngSwitch]="slectedType" id="def_value_pan">
-    <input (input) ="changeValue()" [(ngModel)]="attr_text_value" class="txt-input" *ngSwitchCase="'text'" type="text" placeholder="Default Value"/>
+    <input
+        pInputText
+        type="text"
+        (ngModelChange)="changeValue()" 
+        [(ngModel)]="attr_text_value" 
+        *ngSwitchCase="'text'"
+        placeholder="Default Value"
+    />
     <p-inputNumber 
         (onInput)="changeValue()"
         [(ngModel)] = "attr_number_value"
@@ -21,69 +28,69 @@
         [maxFractionDigits]="5" />
     <div class="date_attr" *ngSwitchCase="'date'">
         <p-calendar
-        (onSelect)=" changeValue()"
-        [(ngModel)]="attr_date_value"
-        placeholder="Date"
-        class="date_inp"
-        [showIcon]="true" 
-        [showOnFocus]="false" 
-        inputId="buttondisplay" />
+            (onSelect)=" changeValue()"
+            [(ngModel)]="attr_date_value"
+            placeholder="Date"
+            class="date_inp"
+            [showIcon]="true" 
+            [showOnFocus]="false" 
+            inputId="buttondisplay" />
         <p-calendar 
-        (onSelect)=" changeValue()"
-        [(ngModel)]="att_time_value"
-        placeholder="Time"
-        class="date_inp"
-        [showIcon]="true" 
-        [timeOnly]="true" 
-        inputId="templatedisplay">
+            (onSelect)=" changeValue()"
+            [(ngModel)]="att_time_value"
+            placeholder="Time"
+            class="date_inp"
+            [showIcon]="true" 
+            [timeOnly]="true" 
+            inputId="templatedisplay">
             <ng-template pTemplate="inputicon" let-clickCallBack="clickCallBack">
                 <i class="pi pi-user pointer-events-none" (click)="clickCallBack($event)"></i>
             </ng-template>
-    </p-calendar>
+        </p-calendar>
     </div>
     <div class="obj-panel" *ngSwitchCase="'object'">
         <div class="obj_bord">
-    <p>Object Structure</p>
-    <app-disply-object-panel [diplsyButtons]="true" (changeAttribute)="updateAttribute($event)" (childDataChange)="deleteAttribute($event)" [objectAttributes]="objectAttributes"></app-disply-object-panel>
-    <div class="element">
-        <p class="divider divider_left"></p><p class="divider-text">Input</p><p class="divider divider_right"></p>
-    </div>
-    <p class="err_msg" *ngIf="object_input_err">*{{object_input_err}}</p>
-    <p class="err_msg" *ngIf="type_value_error_msg">*{{type_value_error_msg}}</p>
-    <div class="element obj_form">
-    <input class="txt-input" [disabled]="readonly" (input)="updateState()" [(ngModel)]="attr_object_value"/>
-    <p-dropdown 
-        (onChange)="updateState()"
-        class="element"
-        [(ngModel)] = "slctType"
-        [options]="attributTypes" 
-        placeholder="Select the type"
-    />
-    </div>
-    <app-attribute-panel-default (defaultValue)="reciveValue($event)" [slectedType]="slctType" [attributTypes]="attributTypes" [superDefaultValue]="sp_DefaultValue"></app-attribute-panel-default>
-    <div class="element">
-    <p-button *ngIf="update_attribute=== false" icon="pi pi-plus" (click)="addAttribute($event)" class="add_btn btn" [raised]="true"/>
-    <p-button *ngIf="update_attribute=== true" icon="pi pi-pencil" (click)="updateAttr()" class="add_btn btn" [raised]="true"/>
-    </div>
-    </div>
+            <p>Object Structure</p>
+            <app-disply-object-panel [diplsyButtons]="true" (changeAttribute)="updateAttribute($event)" (childDataChange)="deleteAttribute($event)" [objectAttributes]="objectAttributes"></app-disply-object-panel>
+            <div class="element">
+                <p class="divider divider_left"></p><p class="divider-text">Input</p><p class="divider divider_right"></p>
+            </div>
+            <p class="err_msg" *ngIf="object_input_err">*{{object_input_err}}</p>
+            <p class="err_msg" *ngIf="type_value_error_msg">*{{type_value_error_msg}}</p>
+            <div class="element obj_form">
+                <input class="txt-input" [disabled]="readonly" (input)="updateState()" [(ngModel)]="attr_object_value"/>
+                <p-dropdown 
+                    (onChange)="updateState()"
+                    class="element"
+                    [(ngModel)] = "slctType"
+                    [options]="attributTypes" 
+                    placeholder="Select the type"
+                />
+            </div>
+            <app-attribute-panel-default (defaultValue)="reciveValue($event)" [slectedType]="slctType" [attributTypes]="attributTypes" [superDefaultValue]="sp_DefaultValue"></app-attribute-panel-default>
+            <div class="element" style="height: 50px; margin-bottom: 0;">
+                <p-button *ngIf="update_attribute=== false" icon="pi pi-plus" (click)="addAttribute($event)" class="add_btn" [ngStyle]="{'margin-bottom':'25px'}" [raised]="true" label="Add"/>
+                <p-button *ngIf="update_attribute=== true" icon="pi pi-pencil" (click)="updateAttr()" class="add_btn" [raised]="true"/>
+            </div>
+        </div>
     </div>
     <p *ngSwitchCase="'user'"> {{changeValue()}} Empty default user reference</p>
     <p *ngSwitchCase="'company'"> {{changeValue()}} Empty default company reference</p>
     <div *ngSwitchCase="'array'">
         <div class="element">
-        <p class="array_label"> Array  of</p>
-            <p-dropdown 
-            (click)="changeArrayType()"
-            class="element"
-            [(ngModel)] = "slctType"
-            [options]="attributTypes" 
-            placeholder="Select the type"
-        />
+            <p class="array_label"> Array  of</p>
+                <p-dropdown 
+                (click)="changeArrayType()"
+                class="element"
+                [(ngModel)] = "slctType"
+                [options]="attributTypes" 
+                placeholder="Select the type"
+            />
         </div>
-        <app-display-array-panel [ediatble]="true" (editEvent)="editValueFromArray($event)" (removeEvent)="removeValueFromArray($event)"  [slectedType]="slctType" [contentArray]="arrayContent"></app-display-array-panel>
-        <div class="element">
-        <app-attribute-panel-default  class="array_label" (defaultValue)="reciveValue($event)" [slectedType]="slctType" [attributTypes]="attributTypes" [superDefaultValue]="sp_DefaultValue" [clearInputs]="inputs_clear" ></app-attribute-panel-default> 
-        <button *ngIf="childValue && !ckeckPredefinedType()" (click)="addValueToArray()">Add</button>
+        <app-display-array-panel [ediatble]="true" (editEvent)="editValueFromArray($event)" (removeEvent)="removeValueFromArray($event)"  [slectedType]="slctType" [contentArray]="arrayContent" [ngStyle]="{'align-items':'center'}"></app-display-array-panel>
+        <div class="array-element">
+            <app-attribute-panel-default  class="array_label" (defaultValue)="reciveValue($event)" [slectedType]="slctType" [attributTypes]="attributTypes" [superDefaultValue]="sp_DefaultValue" [clearInputs]="inputs_clear" ></app-attribute-panel-default> 
+            <p-button *ngIf="childValue && !ckeckPredefinedType()" (click)="addValueToArray()" icon="pi pi-plus" />
         </div>  
     </div>
     <p *ngSwitchDefault>You haven't chose the type of the attribute</p>

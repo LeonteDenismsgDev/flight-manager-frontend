@@ -3,11 +3,12 @@ import { ViewAttributes } from '../../models/Attribute';
 import { FlightTemplateService } from '../../services/flight-template.service';
 import { ActivatedRoute } from '@angular/router';
 import { FlightTemplate, UpdateFlightTemplate } from '../../models/FlightTemplate';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-template',
   templateUrl: './create-template.component.html',
-  styleUrls: ['./create-template.component.css']
+  styleUrls: ['./create-template.component.scss']
 })
 export class CreateTemplateComponent {
 templateEditName : string | null = null
@@ -26,7 +27,7 @@ templateEditName : string | null = null
  template_name_err : boolean =  false
  attributes_err : boolean = false
 
- constructor(private flightTemplateService:FlightTemplateService, private route:  ActivatedRoute){}
+ constructor(private flightTemplateService:FlightTemplateService, private route:  ActivatedRoute, private messageService:MessageService){}
 
  resetErrors(){
   this.template_name_err = false
@@ -95,9 +96,11 @@ this.flightTemplateService.getTemplate(templateName).subscribe((response:FlightT
 regiseterTemplate(){
   if(this.value ===""){
     this.template_name_err = true
+    this.messageService.add({severity:'error',summary:'Error',detail:'The name should not be empty', life:1000})
   }
   if(this.selectedAttributes.length === 0){
-    this.attributes_err = true
+    this.attributes_err = true;
+    this.messageService.add({severity:'error',summary:'Error',detail:'You should chose at last one attribute', life:1000})
   }
   if(!this.template_name_err && !this.attributes_err){
   if(this.templateEditName === null){
@@ -151,15 +154,25 @@ selectAttribute(attribute : ViewAttributes, enableCreate: boolean):void{
 }
 
 toggle(event : Event) : void{
+  
  const toggleButton = event.target as HTMLElement;
  const collasible = toggleButton.parentElement;
  if(parent){
-  const collapsibleContent = collasible?.nextElementSibling as HTMLElement;
+  var collapsibleContent = collasible?.nextElementSibling as HTMLElement;
+  if(collapsibleContent == null){
+    collapsibleContent = collasible as HTMLElement;
+  }
+  if(collapsibleContent.className != "collapsible-content"){
+    while(!collapsibleContent.classList.contains("collapsible")){
+      collapsibleContent = collapsibleContent?.parentElement as HTMLElement;
+    }
+    collapsibleContent = collapsibleContent?.nextElementSibling as HTMLElement;
+  }
   if(collapsibleContent){
-    if(collapsibleContent.style.display === "block"){
+    if(collapsibleContent.style.display === "flex"){
       collapsibleContent.style.display = "none"
     }else{
-      collapsibleContent.style.display = "block"
+      collapsibleContent.style.display = "flex"
     }
   }
  }

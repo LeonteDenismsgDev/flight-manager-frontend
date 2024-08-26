@@ -23,6 +23,7 @@ import { AttributePanelDefaultComponent } from './components/attribute-panel-def
 import { DisplyObjectPanelComponent } from './components/disply-object-panel/disply-object-panel.component';
 import { DisplayArrayPanelComponent } from './components/display-array-panel/display-array-panel.component';
 import { RouterModule } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { RouterModule } from '@angular/router';
     DragDropModule,
     PanelModule,
     TagModule,
-    RouterModule
+    RouterModule,
+    InputTextModule
   ]
 })
 export class FlightTemplateModule { }

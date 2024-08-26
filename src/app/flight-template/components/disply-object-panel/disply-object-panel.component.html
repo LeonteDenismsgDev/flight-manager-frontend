@@ -2,27 +2,35 @@
     <ng-container [ngSwitch]="getObjectType(attr)">
         <div *ngSwitchCase="'date'">
             <p>{{attr}} : {{getObjectDate(attr)}}</p>
-            <button *ngIf="diplsyButtons" class="obj_attr_edt attr_btn" (click)="editAttribute(attr)">Edit</button>
-            <button  *ngIf="diplsyButtons" class="attr_btn" (click)="removeAttribute(attr)">X</button>
+            <div class="elementBtns">
+                <p-button [disabled]="!diplsyButtons" (click)="editAttribute(attr)" icon="pi pi-pencil"></p-button>
+                <p-button [disabled]="!diplsyButtons" (click)="removeAttribute(attr)"icon="pi pi-trash"/>
+            </div>
         </div>
         <div *ngSwitchCase="'object'" class="obj_elem">
              <app-disply-object-panel [diplsyButtons]="false" [objectAttributes]="getObjectValue(attr)"></app-disply-object-panel>
             <div class="element">
-             <button *ngIf="diplsyButtons" class="obj_attr_ed attr_btn" (click)="editAttribute(attr)">Edit</button>
-            <button *ngIf="diplsyButtons" (click)="removeAttribute(attr)" class="attr_btn">X</button>
+                <div class="elementBtns">
+                <p-button [disabled]="!diplsyButtons" (click)="editAttribute(attr)" icon="pi pi-pencil"></p-button>
+                <p-button [disabled]="!diplsyButtons" (click)="removeAttribute(attr)"icon="pi pi-trash"/>
+            </div>
             </div>
         </div>
         <div *ngSwitchCase="'array'" class="obj_elem">
-            <app-display-array-panel [ediatble]="false"  [slectedType]="getArrayType(attr)" [contentArray]="getArrayList(attr)"></app-display-array-panel>
            <div class="element">
-            <button *ngIf="diplsyButtons" class="obj_attr_ed attr_btn" (click)="editAttribute(attr)">Edit</button>
-           <button *ngIf="diplsyButtons" (click)="removeAttribute(attr)" class="attr_btn">X</button>
+            <app-display-array-panel [ediatble]="false"  [slectedType]="getArrayType(attr)" [contentArray]="getArrayList(attr)"></app-display-array-panel>
+            <div class="elementBtns">
+                <p-button [disabled]="!diplsyButtons" (click)="editAttribute(attr)" icon="pi pi-pencil"></p-button>
+                <p-button *ngIf="diplsyButtons" (click)="removeAttribute(attr)"icon="pi pi-trash"/>
+            </div>
            </div>
        </div>
         <div *ngSwitchDefault class="element">
             <p>{{attr}} : {{getObjectValue(attr)}}</p>
-            <button *ngIf="diplsyButtons" class="obj_attr_edt attr_btn" (click)="editAttribute(attr)">Edit</button>
-            <button *ngIf="diplsyButtons" (click)="removeAttribute(attr)" class="attr_btn">X</button>
+            <div class="elementBtns">
+                <p-button [disabled]="!diplsyButtons" (click)="editAttribute(attr)" icon="pi pi-pencil"></p-button>
+                <p-button [disabled]="!diplsyButtons" (click)="removeAttribute(attr)"icon="pi pi-trash"/>
+            </div>
         </div>
     </ng-container>       
 </div>

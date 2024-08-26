@@ -17,6 +17,11 @@
     margin-bottom: 15px;
 }
 
+
+*:focus {
+    outline: none;
+}
+
 .check_label{
     margin-left:20%;
     margin-right: 5px;

@@ -2,12 +2,6 @@
     width: 100%;
 }
 
-.attribute-btn{
-    height: 60px;
-    font-size: 20px;
-    background-color: aquamarine;
-}
-
 .validation-rule{
     margin-bottom: 10px;
     margin-left: 15px;
@@ -59,5 +53,22 @@
     border-top-style: solid;
     border-top-width: 1px;
     border-top-color: dimgray;
-    height: 900px;
   }
+
+::ng-deep{
+  .attribute-btn{
+    height: 60px !important;
+    width:100% !important;
+}
+}
+
+.validation-section{
+  height:60vh;
+  overflow: auto;
+}
+
+.btn-container{
+  display:flex;
+  flex-direction: column;
+  gap:10px;
+}

@@ -6,7 +6,7 @@ import { OBJECTS_VALIDATION_ATTRIBUTES } from '../../models/ObjectValidationAttr
 @Component({
   selector: 'app-validation-panel',
   templateUrl: './validation-panel.component.html',
-  styleUrls: ['./validation-panel.component.css']
+  styleUrls: ['./validation-panel.component.scss']
 })
 export class ValidationPanelComponent{
 @Input()

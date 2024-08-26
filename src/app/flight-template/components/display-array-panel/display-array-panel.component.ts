@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 @Component({
   selector: 'app-display-array-panel',
   templateUrl: './display-array-panel.component.html',
-  styleUrls: ['./display-array-panel.component.css']
+  styleUrls: ['./display-array-panel.component.scss']
 })
 export class DisplayArrayPanelComponent implements OnInit, OnChanges{
 @Input()
