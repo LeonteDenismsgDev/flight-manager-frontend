@@ -1,5 +1,4 @@
 import { ApplicationRef, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Time } from 'src/app/itinerary/models/time';
 
 @Component({
   selector: 'app-data-table',
