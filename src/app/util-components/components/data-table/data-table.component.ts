@@ -1,4 +1,5 @@
 import { ApplicationRef, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Time } from 'src/app/itinerary/models/time';
 
 @Component({
   selector: 'app-data-table',
@@ -18,9 +19,8 @@ export class DataTableComponent {
   getFieldValue(item: any, key: string): any{
     if(key === "email"){
         return item["contactData"].email
-    }else{
-      return item[key]
     }
+    return item[key]
   }
 
   autoDeselect(){
