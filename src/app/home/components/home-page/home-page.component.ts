@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { filter } from 'rxjs/operators';
 import { LoginService } from 'src/app/security/services/login.service';
+import { UserSecurity } from 'src/app/security/services/user-security';
 import { RefreshUser } from 'src/app/user/models/RefreshUser';
 import { Role } from 'src/app/user/models/role';
 import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
@@ -20,7 +21,7 @@ export class HomePageComponent implements OnInit{
   constructor(private router: Router, public loginService:LoginService, private userService:UserService) {}
 
   determineAccess(roleList:Role[]){
-    let currentRole:string|null = localStorage.getItem("role");
+    let currentRole:string|null = UserSecurity.getItem("role");
     let found:boolean = false;
     roleList.forEach((role)=>{
       if(currentRole == role){
@@ -38,7 +39,7 @@ export class HomePageComponent implements OnInit{
       { label: 'Flights', icon: 'flight_takeoff', route: '/home/flights', hasAccess:this.determineAccess([Role.ad,Role.fm,Role.cm])},
       { label: 'Planes', icon: 'airplanemode_on', route: '/home/planes',hasAccess:this.determineAccess([Role.ad,Role.cm]) },
       { label: 'Airports', icon: 'connecting_airports', route: '/home/airports',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
-      { label: 'Itineraries', icon: 'mode_of_travel', route: '/home/itineraries',hasAccess:this.determineAccess([Role.ad, Role.cm]) },
+      { label: 'Itineraries', icon: 'mode_of_travel', route: '/home/itineraries',hasAccess:this.determineAccess([Role.cr]) },
       { label: 'My Company', icon: 'ssid_chart', route:'/home/company/mycompany',hasAccess:this.determineAccess([Role.cr,Role.fm])},
       { label: 'Companies', icon: 'ssid_chart', route: '/home/company/admin',hasAccess:this.determineAccess([Role.ad]) },
       { label: 'Manage Company', icon: 'ssid_chart', route: '/home/company/manage',hasAccess:this.determineAccess([Role.cm]) }
@@ -52,14 +53,14 @@ export class HomePageComponent implements OnInit{
 
   refreshUser(){
     this.userService.getCurrentUser().subscribe((data:RefreshUser)=>{
-      localStorage.setItem("username",data.username);
-      localStorage.setItem("role",data.role);
+      UserSecurity.setItem("username",data.username);
+      UserSecurity.setItem("role",data.role);
     })
   }
 
   logout(){
     this.loginService.logout();
-    localStorage.clear();
+    UserSecurity.clear();
     this.router.navigate(['/login']);
   }
 

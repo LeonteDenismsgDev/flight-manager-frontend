@@ -10,13 +10,6 @@
     margin: 0;
 }
 
-app-data-table{
-    border:solid 0.5px lightgray;
-    margin-top:1%;
-    max-height: 80%;
-    overflow: auto;
-}
-
 .airportHeader{
     display: flex;
     justify-content: space-between;
