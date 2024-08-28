@@ -1,0 +1,16 @@
+.itineraryPageWrapper{
+    width:100vw;
+    height:85vh;
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    padding:20px;
+}
+
+.itineraryPageWrapper h1{
+    margin:0;
+}
+
+::ng-deep{
+
+}

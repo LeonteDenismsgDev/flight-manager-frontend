@@ -1,2 +1,9 @@
-<p>itinerary-page works!</p>
-<p-calendar timeOnly="true" [(ngModel)]="time" (ngModelChange)="onTime()"></p-calendar>
+<div class="itineraryPageWrapper">
+    <div style="display: flex; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <mat-icon fontIcon="mode_of_travel" style="height:50px;font-size: 50px;width: 50px;"></mat-icon>
+            <h1>Itineraries</h1>
+        </div>
+    </div>
+    <app-data-table [headers]="headers" [keys]="keys" [viewData]="data" #itineraryTable (onRowClick)="show($event)"></app-data-table>
+</div>

@@ -1,0 +1,28 @@
+<div class="main-content">
+    <div class="divided-content">
+
+        <div class="departure-arrival-combo">
+            <p>Flight Number Reference: {{selectedItinerary?.flightNumber}}</p>
+            <p>Crew ID: {{selectedItinerary?.crewNumber}}</p>
+        </div><br>
+        <p>Company Operating The Flight: {{company?.name}}</p>
+    </div>
+    <p-divider><span>Departure and Arrival</span></p-divider>
+    <div class="departure-arrival-combo">    
+        <div class="departure">
+            <h3>Departure</h3>
+            <p>Departure: {{selectedItinerary?.departure}}</p>
+            <p>Scheduled Departure Time: {{expectedDepartureTime}}</p>
+            <p>Departure Delay: +{{selectedItinerary?.lateDepartureMinutes}} minutes</p>
+            <p>Actual Departure Time: {{actualDepartureTime}}</p>
+        </div>
+        <p-divider layout="vertical"></p-divider>
+        <div class="arrival">
+            <h3>Arrival</h3>
+            <p>Arrival: {{selectedItinerary?.arrival}}</p>
+            <p>Scheduled Arrival Time: {{expectedArrivalTime}}</p>
+            <p>Arrival Delay: +{{selectedItinerary?.lateArrivalMinutes}} minutes</p>
+            <p>Actual Arrival Time: {{actualArrivalTime}}</p>
+        </div>
+    </div>
+</div>
