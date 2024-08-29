@@ -85,6 +85,7 @@ export class UserPageComponent {
   }
 
   changePaginator(){
+    this.page = 0;
     this.refreshTable()
   }
 

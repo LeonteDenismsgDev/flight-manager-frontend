@@ -6,6 +6,8 @@ import { Role } from 'src/app/user/models/role';
 import { UpdatePlaneComponent } from '../update-plane/update-plane.component';
 import { DataTableComponent } from 'src/app/util-components/components/data-table/data-table.component';
 import { UserSecurity } from 'src/app/security/services/user-security';
+import { PlaneRequest } from '../../models/PlaneRequest';
+import { PlaneResponse } from '../../models/PlaneResponse';
 
 async function sleep(ms:number){
   return new Promise((resolve)=>{setTimeout(resolve,ms)});
@@ -24,6 +26,14 @@ export class PlanePageComponent implements OnInit{
   headers:string[]=["Tail Number","Manufacturer","Model","Manufacture Year", "Company"];
   keys: string[]=["registrationNumber","manufacturer","model","manufactureYear","companyName"];
 
+  size:number = 10;
+  page:number = 0;
+  filter:string = "";
+
+  size_options=[10,20,30];
+  max_page:number = 0;
+  max_planes:number = 0;
+
   updatePlane:boolean = false;
   selectedPlane!:Plane; 
 
@@ -39,11 +49,16 @@ export class PlanePageComponent implements OnInit{
 
   refreshTable(){
     if(this.isAdmin()){
+      let request = new PlaneRequest(this.page,this.size,this.filter);
       this.data = []
-      this.service.getAllPlanes().subscribe((data:Plane[])=>{
-        data.forEach((plane:Plane)=>{plane.companyName = plane.company.name});
-        this.data = data;
-        this.cdr.detectChanges();
+      this.service.getAllPlanesFiltered(request).subscribe((data:PlaneResponse)=>{
+        data.page.forEach((plane:Plane)=>{plane.companyName = plane.company.name});
+        this.data = data.page;
+        this.max_planes = data.max_planes;
+        this.max_page = Math.ceil(data.max_planes/((this.page+1)*this.size))
+        if(this.max_planes <=  this.size){
+          this.max_page = 0;
+        }
       })
     }
     else{
@@ -71,5 +86,27 @@ export class PlanePageComponent implements OnInit{
   abortUpdate(){
     this.updatePlane = false;
     this.tableChild.autoDeselect();
+  }
+
+  addPage(){
+    if(this.page >= this.max_page) return;
+    this.page++;
+    this.refreshTable();
+  }
+
+  removePage(){
+    if(this.page == 0) return;
+    this.page--;
+    this.refreshTable();
+  }
+
+  changePaginator(){
+    this.page = 0;
+    this.refreshTable();
+  }
+
+  changeFilter(){
+    this.page = 0;
+    this.refreshTable();
   }
 }
