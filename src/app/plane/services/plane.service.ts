@@ -17,6 +17,10 @@ export class PlaneService {
     return this.http.post<PlaneResponse>(environment.apiUrl+"plane/view/filtered", request)
   }
 
+  getCompanyPlanesFiltered(request:PlaneRequest){
+    return this.http.post<PlaneResponse>(environment.apiUrl+"plane/view/company",request);
+  }
+
   getAllPlanes(){
       return this.http.get<Plane[]>(environment.apiUrl+"plane/view/all");
   }
