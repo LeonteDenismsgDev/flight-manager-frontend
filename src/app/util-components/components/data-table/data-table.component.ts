@@ -10,6 +10,7 @@ export class DataTableComponent {
   @Input() headers: string[] = [];
   @Input() keys: string[] = [];
   @Input() toggleable: boolean = false;
+  @Input() height: string = "50vh";
   @Output() onRowClick= new EventEmitter<any>();
 
   selectedData!: any;
@@ -18,9 +19,8 @@ export class DataTableComponent {
   getFieldValue(item: any, key: string): any{
     if(key === "email"){
         return item["contactData"].email
-    }else{
-      return item[key]
     }
+    return item[key]
   }
 
   autoDeselect(){

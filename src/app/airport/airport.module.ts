@@ -11,6 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AirportDialogComponent } from './components/airport-dialog/airport-dialog.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { CheckboxModule} from 'primeng/checkbox'
+import { InputTextModule } from 'primeng/inputtext';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { CheckboxModule} from 'primeng/checkbox'
     FormsModule,
     DropdownModule,
     InputSwitchModule,
-    CheckboxModule
+    CheckboxModule,
+    InputTextModule
 ]
 })
 export class AirportModule { }

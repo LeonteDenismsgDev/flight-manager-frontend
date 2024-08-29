@@ -47,7 +47,7 @@ const routes: Routes = [
         path:'itineraries',
         loadChildren:()=>import('./../itinerary/itinerary.module').then(m=>m.ItineraryModule),
         canActivate:[masterGuard],
-        data:{activeGuards:[Role.ad, Role.cm]}
+        data:{activeGuards:[Role.cr]}
       },
       {
         path:'employees',

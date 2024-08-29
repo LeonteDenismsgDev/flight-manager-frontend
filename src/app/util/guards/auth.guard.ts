@@ -1,8 +1,9 @@
 import { CanActivateFn } from '@angular/router';
+import { UserSecurity } from 'src/app/security/services/user-security';
 
 export const authGuard: CanActivateFn = (route, state) => {
-  //update localStorage call here: 
-  return localStorage.getItem("token") != "" &&
-          localStorage.getItem("username") != "" &&
-          localStorage.getItem("role") != "";
+  //update UserSecurity call here: 
+  return UserSecurity.getItem("token") != "" &&
+          UserSecurity.getItem("username") != "" &&
+          UserSecurity.getItem("role") != "";
 };
