@@ -62,10 +62,16 @@ export class PlanePageComponent implements OnInit{
       })
     }
     else{
-      this.service.getCompanyPlanes().subscribe((data:Plane[])=>{
-        data.forEach((plane:Plane)=>{plane.companyName = plane.company.name});
-        this.data = data;
-        this.cdr.detectChanges();
+      let request = new PlaneRequest(this.page,this.size,this.filter);
+      this.data = []
+      this.service.getCompanyPlanesFiltered(request).subscribe((data:PlaneResponse)=>{
+        data.page.forEach((plane:Plane)=>{plane.companyName = plane.company.name});
+        this.data = data.page;
+        this.max_planes = data.max_planes;
+        this.max_page = Math.ceil(data.max_planes/((this.page+1)*this.size))
+        if(this.max_planes <=  this.size){
+          this.max_page = 0;
+        }
       })
     }
   }
