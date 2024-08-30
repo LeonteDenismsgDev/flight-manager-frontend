@@ -23,7 +23,7 @@
                 (click) = "addPage()"
                 >>></button>
         </div>
-</div>
+    </div>
     <p-dialog [modal]="true" [draggable]="false" header="Add new airport" [(visible)]="addAirport" (onHide)="destroyDialog()">
         <app-airport-dialog [data]="selectedAirport" [mode]="mode" (endDialog)="closeDialog()"></app-airport-dialog>
     </p-dialog>

@@ -1,9 +1,29 @@
 <div class="itineraryPageWrapper">
-    <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center;">
             <mat-icon fontIcon="mode_of_travel" style="height:50px;font-size: 50px;width: 50px;"></mat-icon>
             <h1>Itineraries</h1>
         </div>
+        <p-floatLabel>
+        <input pInputText [(ngModel)]="filter" (ngModelChange)="changePaginator()"/>
+        <label for="filter">Filter by flight number</label>
+        </p-floatLabel>
     </div>
     <app-data-table [headers]="headers" [keys]="keys" [viewData]="data" #itineraryTable (onRowClick)="show($event)"></app-data-table>
+    <div class="airportFooter">
+        <span class="mx-1 text-color right_page_alignement">Items per page: </span>
+        <div>    
+            <button class="round-button" 
+                [disabled] = "page === 0" 
+                (click) = "removePage()"
+                ><<</button>
+            <p-dropdown [options]="size_options" 
+                [(ngModel)] = "size"
+                (onChange)="changePaginator()"/>
+            <button class="round-button"
+                [disabled]="page >= max_page"
+                (click) = "addPage()"
+                >>></button>
+        </div>
+    </div>
 </div>

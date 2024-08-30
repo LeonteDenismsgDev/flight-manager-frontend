@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Itinerary } from '../models/itinerary';
 import { environment } from 'environment';
+import { GetItinerary } from '../models/GetItinerary';
+import { ItineraryResponse } from '../models/ItineraryResponse';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +26,9 @@ export class ItineraryService {
 
   update(id:string, itinerary:Itinerary){
     return this.http.post<string>(environment.apiUrl+"itinerary/update?id="+id,itinerary);
+  }
+
+  getFiltered(request:GetItinerary){
+    return this.http.post<ItineraryResponse>(environment.apiUrl+"itinerary/view/filtered",request);
   }
 }
