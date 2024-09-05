@@ -4,6 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { filter } from 'rxjs/operators';
 import { LoginService } from 'src/app/security/services/login.service';
+import { UserSecurity } from 'src/app/security/services/user-security';
 import { RefreshUser } from 'src/app/user/models/RefreshUser';
 import { Role } from 'src/app/user/models/role';
 import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
@@ -20,7 +21,7 @@ export class HomePageComponent implements OnInit{
   constructor(private router: Router, public loginService:LoginService, private userService:UserService) {}
 
   determineAccess(roleList:Role[]){
-    let currentRole:string|null = localStorage.getItem("role");
+    let currentRole:string|null = UserSecurity.getItem("role");
     let found:boolean = false;
     roleList.forEach((role)=>{
       if(currentRole == role){
@@ -52,14 +53,14 @@ export class HomePageComponent implements OnInit{
 
   refreshUser(){
     this.userService.getCurrentUser().subscribe((data:RefreshUser)=>{
-      localStorage.setItem("username",data.username);
-      localStorage.setItem("role",data.role);
+      UserSecurity.setItem("username",data.username);
+      UserSecurity.setItem("role",data.role);
     })
   }
 
   logout(){
     this.loginService.logout();
-    localStorage.clear();
+    UserSecurity.clear();
     this.router.navigate(['/login']);
   }
 

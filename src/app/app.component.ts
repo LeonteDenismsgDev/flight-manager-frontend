@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserSecurity } from './security/services/user-security';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent  implements OnInit{
     
   }
   ngOnInit(){
-    if(!localStorage.getItem('token')){
+    if(!UserSecurity.getItem('token')){
       this.router.navigate(['/login'])
     }
   }
