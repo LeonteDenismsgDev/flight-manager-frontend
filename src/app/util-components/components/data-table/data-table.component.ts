@@ -18,9 +18,8 @@ export class DataTableComponent {
   getFieldValue(item: any, key: string): any{
     if(key === "email"){
         return item["contactData"].email
-    }else{
-      return item[key]
     }
+    return item[key]
   }
 
   autoDeselect(){

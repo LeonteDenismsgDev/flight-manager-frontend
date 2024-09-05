@@ -1,7 +1,7 @@
 <div class="companyPageWrapper">
     <div class="companyPageHeader">
         <h1>Company list</h1>
-        <p-button label="Create a new company" class="createCompanyButton" (click)="initNewCompany()" icon="pi pi-plus"></p-button>
+        <button pButton label="Create a new company" class="createCompanyButton green" (click)="initNewCompany()" icon="pi pi-plus"></button>
     </div>
     <div class="grid">
         <div class="card-rows" *ngFor="let company of data">
@@ -15,7 +15,7 @@
                 </div>
                 <ng-template pTemplate="footer">
                     <div>
-                        <button pButton label="Delete" (click)="deleteCompany(company)" icon="pi pi-exclamation-triangle" class="deleteCompanyBtn"></button>
+                        <button pButton label="Delete" (click)="deleteCompany(company)" icon="pi pi-exclamation-triangle" class="red deleteCompanyBtn"></button>
                     </div>
                 </ng-template>
             </p-card>
@@ -41,6 +41,6 @@
             [binary]="true"
             inputId="binary"/><p>I acknowledge that this action is irreversible and take responsability for any damages that should occour after any mistaken deletion of the aforementioned company</p>
         </div>
-        <button pButton label="Delete" icon="pi pi-exclamation-triangle" (click)="deleteCompany1()" class="deleteCompanyBtn" [disabled]="!acknowledgment"></button>
+        <button pButton label="Delete" icon="pi pi-exclamation-triangle" (click)="deleteCompany1()" class="red deleteCompanyBtn" [disabled]="!acknowledgment"></button>
     </p-dialog>
 </div>

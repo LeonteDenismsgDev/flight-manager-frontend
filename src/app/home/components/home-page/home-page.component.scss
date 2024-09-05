@@ -56,4 +56,23 @@
     .p-dialog-header-icons>.p-button{
         background-color: transparent !important;
     }
+
+    .green.p-button{
+        background-color: #1AD95D;
+        border-color: #1AD95D;
+    }
+
+    .green.p-button:hover{
+        background-color: #129862;
+        border-color: #129862;
+    }
+
+    .red{
+        background-color: red;
+        border-color: rgb(255, 0, 0);
+    }
+    .red:hover{
+        background-color: #d70000;
+        border-color: #d70000;
+    }
 }
