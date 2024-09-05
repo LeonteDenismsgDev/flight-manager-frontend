@@ -6,6 +6,7 @@ import { LoginRequest } from '../../models/login-request';
 import { LoginService } from '../../services/login.service';
 import { LoginResponse } from '../../models/login-response';
 import { MessageService } from 'primeng/api';
+import { UserSecurity } from '../../services/user-security';
 
 @Component({
   selector: 'app-login',
@@ -29,14 +30,14 @@ onLogin(){
   const username = this.loginForm.get('userName')?.value;
   const password = this.loginForm.get('password')?.value;
   const loginRequest = new LoginRequest(username, password);
-  // localStorage.setItem("token","aaaa");
+  // UserSecurity.setItem("token","aaaa");
   // this.router.navigate(['/home']);
   this.service.login(loginRequest).subscribe((loginResponse:LoginResponse) =>{
     //check if token is null or blank
     if(!!loginResponse.token?.trim()){
-      localStorage.setItem("token",`Bearer ${loginResponse.token}`);
-      localStorage.setItem("username",loginResponse.username);
-      localStorage.setItem("role",loginResponse.role);
+      UserSecurity.setItem("token",`Bearer ${loginResponse.token}`);
+      UserSecurity.setItem("username",loginResponse.username);
+      UserSecurity.setItem("role",loginResponse.role);
       this.messageService.add({severity:'success',summary:'Logged in',detail:'Log in successfull', life:1000})
       this.router.navigate(['/home']);
     }
