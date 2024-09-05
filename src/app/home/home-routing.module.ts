@@ -70,6 +70,10 @@ const routes: Routes = [
       {
         path:'settings',
         loadChildren:()=>import('./../settings/settings.module').then(m=>m.SettingsModule),
+      },
+      {
+        path:'employee',
+        loadChildren:()=>import('./../employee/employee.module').then(m=>m.EmployeeModule)
       }
     ]
   },
