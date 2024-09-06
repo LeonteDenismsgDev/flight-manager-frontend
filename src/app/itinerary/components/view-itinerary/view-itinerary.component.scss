@@ -1,0 +1,51 @@
+.divided-content{
+    padding:10px;
+}
+
+.divided-content p{
+    margin:0;
+}
+
+.main-content{
+    width:50vw;
+    height:50vh;
+}
+
+.departure-arrival-combo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.departure-arrival-combo h3{
+    margin-top:0;
+}
+
+.departure{
+    display: flex;
+    flex-direction: column;
+    gap:32px;
+    padding:10px;
+}
+
+.departure p{
+    margin:0;
+}
+
+.departure h3{
+    margin:0;
+}
+
+.arrival{
+    display: flex;
+    flex-direction: column;
+    gap:32px;
+    padding:10px;
+}
+
+.arrival p{
+    margin:0;
+}
+
+.arrival h3{
+    margin:0;
+}

@@ -1,10 +1,29 @@
 <div class="planePageWrapper">
     <div class="planeHeaderContainer">
         <h1>Planes</h1>
-        <button pButton label="Add new plane" icon="pi pi-plus" (click) = "redirectToCreatePlane()" class="createPlaneBtn"></button>
+
+        <div style="display: flex; gap:20px;">
+            <input pInputText [(ngModel)]="filter" (ngModelChange)="changeFilter()">
+            <button pButton label="Add new plane" icon="pi pi-plus" (click) = "redirectToCreatePlane()" class="createPlaneBtn"></button>
+        </div>
     </div>
-    <div class="planeTableWrapper">
+    <div>
         <app-data-table [headers]="headers" [keys]="keys" [viewData]="data" (onRowClick)="redirectToUpdatePlane($event)" #planeTable></app-data-table>
+        <div class="planesFooter">
+            <span class="mx-1 text-color right_page_alignement">Items per page: </span>
+            <div>    
+                <button class="round-button" 
+                    [disabled] = "page === 0" 
+                    (click) = "removePage()"
+                    ><<</button>
+                <p-dropdown [options]="size_options" 
+                    [(ngModel)] = "size"
+                    (onChange)="changePaginator()"/>
+                <button class="round-button"
+                    [disabled]="page >= max_page"
+                    (click) = "addPage()"
+                    >>></button>
+            </div>
     </div>
     <p-dialog [modal]="true" [draggable]="false" [visible] = "updatePlane" header="Update the plane">
         <ng-template pTemplate="headless">

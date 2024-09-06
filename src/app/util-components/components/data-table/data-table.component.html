@@ -1,5 +1,5 @@
 <div class="card" id="table-card">
-    <p-table [value]="viewData" id="data-table" selectionMode="single"  [(selection)]="selectedData" (onRowSelect)="callback($event)">
+    <p-table [value]="viewData" id="data-table" selectionMode="single"  [(selection)]="selectedData" (onRowSelect)="callback($event)" [scrollable]="true" scrollHeight="60vh">
     <ng-template pTemplate="header">
         <tr>
             <th *ngFor="let col of headers">
