@@ -1,0 +1,37 @@
+.itineraryPageWrapper{
+    width:100vw;
+    height:85vh;
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    padding:20px;
+}
+
+.itineraryPageWrapper h1{
+    margin:0;
+}
+
+.airportFooter{
+    width:100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top:2%;
+}
+
+.round-button {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 15px 15px; 
+    transition: background-color 0.3s;
+    margin:0 5px;
+}
+
+.round-button:hover {
+    background-color: lightgray;
+}
+
+input{
+    height:30px;
+}

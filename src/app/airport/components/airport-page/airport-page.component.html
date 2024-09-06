@@ -4,7 +4,7 @@
         <div class="airportInput">
             <p>Search:</p>
             <input pInputText [(ngModel)]="filter" (ngModelChange)="search()">
-            <button pButton [style]="{'align-self':'center'}" (onClick)="showAddDialog()" label = "Add new Airport" icon="pi pi-plus" class="green"> </button>
+            <button pButton [style]="{'align-self':'center'}" (click)="showAddDialog()" label = "Add new Airport" icon="pi pi-plus" class="green"> </button>
         </div>
     </div>
         <app-data-table [headers]="headers" [viewData]="data" [keys]="keys" (onRowClick) = "onRowClick($event)"></app-data-table>
@@ -23,7 +23,7 @@
                 (click) = "addPage()"
                 >>></button>
         </div>
-</div>
+    </div>
     <p-dialog [modal]="true" [draggable]="false" header="Add new airport" [(visible)]="addAirport" (onHide)="destroyDialog()">
         <app-airport-dialog [data]="selectedAirport" [mode]="mode" (endDialog)="closeDialog()"></app-airport-dialog>
     </p-dialog>
