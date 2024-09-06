@@ -19,6 +19,7 @@ import { DialogModule } from 'primeng/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { CheckboxModule } from 'primeng/checkbox'
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [PlanePageComponent,CreatePlaneComponent, UpdatePlaneComponent],
@@ -38,7 +39,8 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
     DialogModule,
     MatIconModule,
     CheckboxModule,
-    DynamicDialogModule
+    DynamicDialogModule,
+    PaginatorModule
 ],
 })
 export class PlaneModule { }

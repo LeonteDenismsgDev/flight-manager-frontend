@@ -40,6 +40,12 @@
 
 
 ::ng-deep{
+    .p-datatable{
+    border:solid 0.5px lightgray;
+    margin-top:1%;
+    overflow: auto;
+    }
+
     .header .p-button{
         margin-top:5px;
         margin-left:10px
@@ -75,4 +81,7 @@
         background-color: #d70000;
         border-color: #d70000;
     }
+}
+
+.data-table{
 }

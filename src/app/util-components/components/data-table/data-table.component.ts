@@ -10,6 +10,7 @@ export class DataTableComponent {
   @Input() headers: string[] = [];
   @Input() keys: string[] = [];
   @Input() toggleable: boolean = false;
+  @Input() height: string = "50vh";
   @Output() onRowClick= new EventEmitter<any>();
 
   selectedData!: any;
