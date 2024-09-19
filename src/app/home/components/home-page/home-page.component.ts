@@ -42,7 +42,8 @@ export class HomePageComponent implements OnInit{
       { label: 'Itineraries', icon: 'mode_of_travel', route: '/home/itineraries',hasAccess:this.determineAccess([Role.cr]) },
       { label: 'My Company', icon: 'ssid_chart', route:'/home/company/mycompany',hasAccess:this.determineAccess([Role.cr,Role.fm])},
       { label: 'Companies', icon: 'ssid_chart', route: '/home/company/admin',hasAccess:this.determineAccess([Role.ad]) },
-      { label: 'Manage Company', icon: 'ssid_chart', route: '/home/company/manage',hasAccess:this.determineAccess([Role.cm]) }
+      { label: 'Manage Company', icon: 'ssid_chart', route: '/home/company/manage',hasAccess:this.determineAccess([Role.cm]) },
+      { label: 'Manage Employees', icon: 'people_alt', route: '/home/employee', hasAccess:this.determineAccess([Role.cm])}
     ]
     this.router.events.pipe(
       filter(event=>event instanceof NavigationEnd)
