@@ -3,6 +3,7 @@
     <div class="loginBtns">
             <p-button label="Logout" size="small" (onClick)="logout()" class="navbarButton" icon="pi pi-sign-out"/>
             <p-button label="My account" size="small" (onClick)="myAccount()" class="navbarButton" icon="pi pi-user"/>
+            <button pButton label="Export Data" size="small" class="navbarButton" icon="pi pi-file-export" (click)="exportPageTrigger()"></button>
     </div>
 </header>
 <p-tabMenu [model]="items" class="no-border">

@@ -1,0 +1,82 @@
+<div class="export_wrapper">
+    <span>Please choose the kind of data you want to export:</span>
+    <p-floatLabel>
+        <p-dropdown appendTo="body" [options]="typeList" [(ngModel)]="selectedType" 
+        (ngModelChange)="changeDataType()"></p-dropdown>
+        <label>Please choose</label>
+    </p-floatLabel>
+    <span>Select the range:</span>
+    <div style="display: flex; padding-top:10px">
+        <div style="width: 33%;">
+            <p-radioButton
+            name="range"
+            value="All"
+            [(ngModel)]="selectionType"
+            (ngModelChange)="changeFilterSelector()"
+            inputId="selection1"
+            />
+            <span for="selection1">All</span>
+        </div>
+        <div style="width: 33%;">
+            <p-radioButton
+            name="range"
+            value="Ranged"
+            [(ngModel)]="selectionType"
+            (ngModelChange)="changeFilterSelector()"
+            inputId="selection2"
+            />
+            <label for="selection1">Ranged</label>
+        </div>
+        <div *ngIf="selectedType != 'Airports'">
+            <p-radioButton
+            name="range"
+            value="Filter"
+            [(ngModel)]="selectionType"
+            (ngModelChange)="changeFilterSelector()"
+            inputId="selection2"
+            />
+            <label for="selection1">Filter</label>
+        </div>
+    </div>
+    <div *ngIf="selectionType=='Ranged'" style="display: flex;">
+        <p-floatLabel>
+            <input pInputText type="number"
+            class="rangedInputs"
+            [(ngModel)]="selectedMin" 
+            (ngModelChange)="changeAllSelection()"/>
+            <label>Min:0</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText type="number" 
+            class="rangedInputs"
+            [(ngModel)]="selectedMax" 
+            (ngModelChange)="changeAllSelection()"
+            />
+            <label>Max:{{maxElements}}</label>
+        </p-floatLabel>
+    </div>
+    <span *ngIf="averageSelection">Selected elements: {{averageSelection}}</span>
+    <div *ngIf="selectionType=='Filter'" style="padding-top:10px">
+        <div [ngSwitch]="selectedType">
+            <div *ngSwitchCase="'Users'">
+                <app-user-export (trigger)="changeFilterSelection($event)"/>
+            </div>
+            <div *ngSwitchCase="'Planes'">
+                <app-plane-export (trigger)="changeFilterSelection($event)"/>
+            </div>
+            <div *ngSwitchCase="'Airports'">
+                Airports
+            </div>
+            <div *ngSwitchCase="'Flights'">
+                Flights
+            </div>
+            <div *ngSwitchCase="'Companies'">
+                <app-company-export (trigger)="changeFilterSelection($event)"></app-company-export>
+            </div>
+            <div *ngSwitchCase="'Templates'">
+                Templates
+            </div>
+        </div>
+    </div>
+    <button pButton class="green" label="Export" icon="pi pi-file-export" [disabled]="!exportable" (click)="send()"></button>
+</div>

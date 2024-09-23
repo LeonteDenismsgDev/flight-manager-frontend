@@ -1,0 +1,11 @@
+.user-export-wrapper{
+    display:flex;
+    flex-direction: column;
+    gap:30px;
+}
+
+::ng-deep{
+    .p-multiselect{
+        width:50%;
+    }
+}

@@ -1,0 +1,31 @@
+<div class="company-export-wrapper">
+    <div>
+        <span>Fleet size</span>
+        <div class="input">
+            <p-floatLabel>
+                <input pInputText type="number" [(ngModel)]="selMinFleet" (ngModelChange)="changeSelection()" min="0">
+                <label>Minimum: 0</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input pInputText type="number" [(ngModel)]="selMaxFleet" (ngModelChange)="changeSelection()" [max]="maxFleet">
+                <label>Maximum: {{maxFleet}}</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <div>
+        <span>Crew size</span>
+        <div class="input">
+            <p-floatLabel>
+                <input pInputText type="number" [(ngModel)]="selMinCrew" (ngModelChange)="changeSelection()">
+                <label>Minimum: 0</label>
+            </p-floatLabel>
+            <p-floatLabel>
+                <input pInputText type="number" [(ngModel)]="selMaxCrew" (ngModelChange)="changeSelection()">
+                <label>Maximum: {{maxCrew}}</label>
+            </p-floatLabel>
+        </div>
+    </div>
+    <span class="small-text">Leave one measure empty to select the upper or lower limit.<br> 
+        Leaving both empty will work as an all range so it wont export.
+    </span>
+</div>

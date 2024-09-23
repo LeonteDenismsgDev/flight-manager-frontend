@@ -70,6 +70,12 @@ const routes: Routes = [
       {
         path:'settings',
         loadChildren:()=>import('./../settings/settings.module').then(m=>m.SettingsModule),
+      },
+      {
+        path:'export',
+        loadChildren:()=>import('./../export/export.module').then(m=>m.ExportModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad]}
       }
     ]
   },
