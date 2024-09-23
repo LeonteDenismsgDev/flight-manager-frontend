@@ -72,6 +72,10 @@ const routes: Routes = [
         loadChildren:()=>import('./../settings/settings.module').then(m=>m.SettingsModule),
       },
       {
+        path:'employee',
+        loadChildren:()=>import('./../employee/employee.module').then(m=>m.EmployeeModule)
+      },
+      {
         path:'export',
         loadChildren:()=>import('./../export/export.module').then(m=>m.ExportModule),
         canActivate:[masterGuard],
