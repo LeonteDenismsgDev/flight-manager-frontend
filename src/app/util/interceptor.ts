@@ -10,6 +10,9 @@ export class Interceptor implements HttpInterceptor{
     intercept(request: HttpRequest<any>,next:HttpHandler): Observable<HttpEvent<any>>{
         return next.handle(request).pipe(
             catchError((error:HttpErrorResponse)=>{
+                if(error.status == 401 && error.url=="http://localhost:8080/flymanager/view/current"){
+                    return throwError(error);
+                }
                 if(error.status != 200){
                 this.messageService.add({severity:'error',summary:error.name,detail:error.error,life:10000});
                 }
