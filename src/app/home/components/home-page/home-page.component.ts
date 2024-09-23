@@ -51,7 +51,6 @@ export class HomePageComponent implements OnInit{
     ).subscribe((event)=>{
       this.refreshUser();
     })
-    this.exportPageTrigger();
   }
 
   refreshUser(){
