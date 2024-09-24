@@ -30,4 +30,8 @@ export class CompanyService {
   editCompany(oldName:string,request:UpdateCompany){
     return this.http.post<string>(environment.apiUrl+"company/update?name="+request.name,request);
   }
+
+  getMaxCompanies(){
+    return this.http.get<number>(environment.apiUrl+"company/export-data");
+  }
 }

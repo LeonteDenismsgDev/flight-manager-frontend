@@ -8,6 +8,7 @@ import { ButtonModule } from 'primeng/button';
 import {MatIconModule} from '@angular/material/icon';
 import { DialogModule} from 'primeng/dialog';
 import { UserModule } from '../user/user.module';
+import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 @NgModule({
   declarations: [
     HomePageComponent
@@ -19,7 +20,11 @@ import { UserModule } from '../user/user.module';
     ButtonModule,
     MatIconModule,
     DialogModule,
-    UserModule
+    UserModule,
+    DynamicDialogModule
+  ],
+  providers:[
+    DialogService
   ]
 })
 export class HomeModule { }

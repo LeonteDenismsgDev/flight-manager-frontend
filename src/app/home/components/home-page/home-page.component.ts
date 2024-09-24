@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { filter } from 'rxjs/operators';
+import { ExportComponent } from 'src/app/export/components/export/export.component';
 import { LoginService } from 'src/app/security/services/login.service';
 import { UserSecurity } from 'src/app/security/services/user-security';
 import { RefreshUser } from 'src/app/user/models/RefreshUser';
 import { Role } from 'src/app/user/models/role';
-import { UserDataResponse } from 'src/app/user/models/UserDataResponse';
 import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
@@ -17,8 +17,9 @@ import { UserService } from 'src/app/user/services/user.service';
 })
 export class HomePageComponent implements OnInit{
   items: MenuItem[] | undefined;
+  ref:DynamicDialogRef|undefined;
 
-  constructor(private router: Router, public loginService:LoginService, private userService:UserService) {}
+  constructor(private router: Router, public loginService:LoginService, private userService:UserService, private dialogService:DialogService) {}
 
   determineAccess(roleList:Role[]){
     let currentRole:string|null = UserSecurity.getItem("role");
@@ -67,5 +68,14 @@ export class HomePageComponent implements OnInit{
 
   myAccount(){
     this.router.navigate(['/home/settings/general']);
+  }
+
+  exportPageTrigger(){
+    this.ref = this.dialogService.open(ExportComponent,{
+      header:'Export Data',
+      contentStyle:{
+        'padding-bottom':'15px'
+      }
+    })
   }
 }

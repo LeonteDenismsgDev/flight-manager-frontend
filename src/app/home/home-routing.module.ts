@@ -74,6 +74,12 @@ const routes: Routes = [
       {
         path:'employee',
         loadChildren:()=>import('./../employee/employee.module').then(m=>m.EmployeeModule)
+      },
+      {
+        path:'export',
+        loadChildren:()=>import('./../export/export.module').then(m=>m.ExportModule),
+        canActivate:[masterGuard],
+        data:{activeGuards:[Role.ad]}
       }
     ]
   },

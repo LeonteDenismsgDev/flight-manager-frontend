@@ -1,0 +1,20 @@
+.plane-export-wrapper{
+    display:flex;
+    gap:10px;
+    flex-direction:column
+}
+
+.plane-export-wrapper span{
+    margin-bottom: 15px;
+}
+
+.input-split{
+    display:flex;
+    gap:10px;
+}
+
+::ng-deep{
+    .input-split .p-inputtext{
+        width:95%;
+    }
+}

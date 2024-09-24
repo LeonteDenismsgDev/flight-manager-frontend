@@ -1,0 +1,34 @@
+<div class="plane-export-wrapper">
+    <span>Model and manufacturer</span>
+    <div class="input-split">
+        <p-floatLabel>
+            <input pInputText [(ngModel)]="selectedManufacturer" (ngModelChange)="sendSelection()"/>
+            <label>Manufacturer</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText [(ngModel)]="selectedModel" (ngModelChange)="sendSelection()"/>
+            <label>Model</label>
+        </p-floatLabel>
+    </div>
+    <span>Manufacture year</span>
+    <div class="input-split">
+        <p-floatLabel>
+            <input pInputText type="number" [(ngModel)]="selectedMinYear" min="1900" [max]="selectedMaxYear" (ngModelChange)="sendSelection()">
+            <label>Min. year:1900</label>
+        </p-floatLabel>
+        <p-floatLabel>
+            <input pInputText type="number" [(ngModel)]="selectedMaxYear" [min]="selectedMinYear" max="2100" (ngModelChange)="sendSelection()">
+            <label>Max. year:2100</label>
+        </p-floatLabel>
+    </div>
+    <span>Associated company</span>
+    <p-floatLabel>
+        <p-dropdown 
+            appendTo="body" 
+            [(ngModel)]="selectedCompany"
+            (ngModelChange)="sendSelection()"
+            [options]="companyList"
+            />
+        <label>Select the company</label>
+    </p-floatLabel>
+</div>
